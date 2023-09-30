@@ -36,7 +36,12 @@ Route::get('/admin',[AdminController::class,'index'])
 
 Route::get('/pacientes',[PacientesController::class,'index'])->name('pacientes.index');
 Route::get('/search-paciente',[PacientesController::class,'search'])->name('pacientes.search');
+
 Route::post('/pacientes',[PacientesController::class,'store'])->name('pacientes.store');
+
 Route::delete('/pacientes/{paciente}',[PacientesController::class,'destroy'])->name('pacientes.destroy');
+
 Route::get('/pacientes/{paciente}',[PacientesController::class,'show'])->name('pacientes.show');
+
 Route::get('/pacientes/edit/{paciente}',[PacientesController::class,'edit'])->name('pacientes.edit');
+Route::put('/pacientes/{paciente}',[PacientesController::class,'update'])->name('pacientes.update');

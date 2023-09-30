@@ -45,4 +45,15 @@ class PacientesController extends Controller
     public function edit(Paciente $paciente){
         return view('pacientes.edit',compact('paciente'));
     }
+
+    public function update(Request $request,  Paciente $paciente){
+        $paciente->nom_paciente = $request->nom_paciente;
+        $paciente->apep_paciente = $request->apep_paciente;
+        $paciente->apem_paciente = $request->apem_paciente;
+        $paciente->fono = $request->fono;
+        $paciente->fecha_nacimiento = $request->fecha_nacimiento;
+        $paciente->corp_tea = $request->corp_tea;
+        $paciente->save();
+        return redirect()->route('pacientes.edit',compact('paciente'));
+    }
 }
