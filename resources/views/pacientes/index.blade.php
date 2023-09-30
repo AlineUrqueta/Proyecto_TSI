@@ -65,8 +65,8 @@
                             </div>
                         </div>
 
+                        <a class='btn btn-primary text-white' href="{{route('pacientes.edit',$paciente->rut_paciente)}}">Editar</a>
 
-                        <button class='btn btn-primary'>Editar</button>
                     </td>
                 </tr>
                 @endforeach

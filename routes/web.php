@@ -39,3 +39,4 @@ Route::get('/search-paciente',[PacientesController::class,'search'])->name('paci
 Route::post('/pacientes',[PacientesController::class,'store'])->name('pacientes.store');
 Route::delete('/pacientes/{paciente}',[PacientesController::class,'destroy'])->name('pacientes.destroy');
 Route::get('/pacientes/{paciente}',[PacientesController::class,'show'])->name('pacientes.show');
+Route::get('/pacientes/edit/{paciente}',[PacientesController::class,'edit'])->name('pacientes.edit');
