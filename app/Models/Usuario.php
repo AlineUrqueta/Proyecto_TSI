@@ -13,6 +13,12 @@ class Usuario extends Model implements AuthenticatableContract
     use Authenticatable;
     use HasFactory;
 
+    protected $table = 'usuarios';
+    protected $primaryKey = 'email';
+    protected $keyType = 'string';
+    public $incrementing = false;
+    public $timestamps = false;
+
 
     
 }
