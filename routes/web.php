@@ -45,3 +45,7 @@ Route::get('/pacientes/{paciente}',[PacientesController::class,'show'])->name('p
 
 Route::get('/pacientes/edit/{paciente}',[PacientesController::class,'edit'])->name('pacientes.edit');
 Route::put('/pacientes/{paciente}',[PacientesController::class,'update'])->name('pacientes.update');
+
+Route::get('/admin/usuario',[AdminController::class,'showUsuario'])->name('admin.showUsuario');
+Route::get('/admin/profesional',[AdminController::class,'showProfesional'])->name('admin.showProfesional');
+Route::get('/admin/especialidad',[AdminController::class,'showEspecialidad'])->name('admin.showEspecialidad');
