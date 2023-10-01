@@ -15,7 +15,7 @@
                     @csrf
                     @method('put')
                     <div class='m-3'>
-                        <input type="text" placeholder='RUT' id='rut_paciente' name='rut_paciente' class="form-control" value="{{$paciente->rut_paciente}}">
+                        <input type="text" placeholder='RUT' id='rut_paciente' name='rut_paciente' class="form-control" value="{{$paciente->rut_paciente}}" disabled>
                     </div>
                     <div class='m-3'>
                         <input type="text" placeholder='Nombre' id='nom_paciente' name='nom_paciente' class="form-control" value="{{$paciente->nom_paciente}}">

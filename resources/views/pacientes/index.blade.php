@@ -89,22 +89,23 @@
                     @csrf
 
                     <div class='m-3'>
-                        <input type="text" placeholder='Rut' id='rut_paciente' name='rut_paciente' class="form-control">
+                        <input type="text" placeholder='Rut' id='rut_paciente' name='rut_paciente' class="form-control" value="{{ old('rut_paciente') }}" >
+                        <small class = "ms-2"> Formato: 9999999-K</small>
                     </div>
                     <div class='m-3'>
-                        <input type="text" placeholder='Nombre' id='nom_paciente' name='nom_paciente' class="form-control">
-                    </div>
-
-                    <div class='m-3'>
-                        <input type="text" placeholder='Apellido Paterno' id='apep_paciente' name='apep_paciente' class="form-control">
+                        <input type="text" placeholder='Nombre' id='nom_paciente' name='nom_paciente' class="form-control" value="{{ old('nom_paciente') }}">
                     </div>
 
                     <div class='m-3'>
-                        <input type="text" placeholder='Apellido Materno' id='apem_paciente' name='apem_paciente' class="form-control">
+                        <input type="text" placeholder='Apellido Paterno' id='apep_paciente' name='apep_paciente' class="form-control" value="{{ old('apep_paciente') }}">
                     </div>
 
                     <div class='m-3'>
-                        <input type="text" placeholder='Celular' id='fono' name='fono' class="form-control">
+                        <input type="text" placeholder='Apellido Materno' id='apem_paciente' name='apem_paciente' class="form-control" value="{{ old('apem_paciente') }}">
+                    </div>
+
+                    <div class='m-3'>
+                        <input type="text" placeholder='Celular' id='fono' name='fono' class="form-control" value="{{ old('fono') }}">
                     </div>
 
                     <div class='m-3'>
@@ -116,7 +117,7 @@
                     </div>
 
                     <div class='m-3'>
-                        <input type="date" placeholder='Fecha de nacimiento' id='fecha_nacimiento' name='fecha_nacimiento' class="form-control">
+                        <input type="date" placeholder='Fecha de nacimiento' id='fecha_nacimiento' name='fecha_nacimiento' class="form-control" value="{{ old('fecha_nacimiento') }}">
                     </div>
 
 
@@ -143,6 +144,7 @@
                         </ul>
                     </div>
                     @endif
+
                 </div>
             </div>
 
