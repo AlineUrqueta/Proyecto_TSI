@@ -109,8 +109,8 @@
                     </div>
 
                     <div class='m-3'>
-                        <select class="custom-select custom-select-lg mb-3 form-control" id='corp_tea' name='corp_tea'>
-                            <option selected>¿Pertenece a la Corporación TEA?</option>
+                        <select class="custom-select custom-select-lg mb-3 form-control" id='corp_tea' name='corp_tea' >
+                            <option value="">¿Pertenece a la Corporación TEA?</option>
                             <option value="0">Si pertenece</option>
                             <option value="1">No pertenece</option>
                         </select>

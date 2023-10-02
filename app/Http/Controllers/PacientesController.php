@@ -47,7 +47,7 @@ class PacientesController extends Controller
         return view('pacientes.edit',compact('paciente'));
     }
 
-    public function update(Request $request,  Paciente $paciente){
+    public function update(PacienteRequest $request,  Paciente $paciente){
         $paciente->nom_paciente = $request->nom_paciente;
         $paciente->apep_paciente = $request->apep_paciente;
         $paciente->apem_paciente = $request->apem_paciente;

@@ -25,7 +25,7 @@ class PacienteRequest extends FormRequest
     {   
         $fecha_actual = Carbon::now();
         return [
-            'rut_paciente' => 'required|unique:pacientes|regex:/^[0-9Kk-]+$/|min:8|max:10',
+            'rut_paciente' => 'sometimes|required|unique:pacientes|regex:/^[0-9\-]+$/|min:8|max:10',
             'nom_paciente' => 'required|min:3|max:50',
             'apep_paciente' => 'required|min:4|max:50',
             'apem_paciente' => 'required|min:4|max:50',
@@ -39,7 +39,7 @@ class PacienteRequest extends FormRequest
         return [
             'rut_paciente.required' => 'Indique RUT',
             'rut_paciente.unique' => 'El RUT ya se encuentra registrado',
-            'rut_paciente.regex' => 'El RUT no es válido (debe contener - ) ',
+            'rut_paciente.regex' => 'RUT con guión y sin puntos',
             'rut_paciente.min' => 'El RUT debe tener minimo 9 dígitos',
             'rut_paciente.max' => 'El RUT debe tener máximo 10 dígitos',
             'nom_paciente.required' => 'Indique su nombre',
