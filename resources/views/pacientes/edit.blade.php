@@ -3,7 +3,7 @@
 @section('contenido')
 <div class="row mt-5 ">
 
-    <div class="col-5 mx-auto">
+    <div class="col-md-5 col-sm-12 mx-auto ">
         <div class="card" style="width: 45rem; height: auto;">
             <div class="card-header text-center">
                 <h4>Editar Paciente</h4>
@@ -15,7 +15,7 @@
                     @csrf
                     @method('put')
                     <div class='m-3'>
-                        <input type="text" placeholder='RUT' id='rut_paciente' name='rut_paciente' class="form-control" value="{{$paciente->rut_paciente}}">
+                        <input type="text" placeholder='RUT' id='rut_paciente' name='rut_paciente' class="form-control" value="{{$paciente->rut_paciente}}" disabled>
                     </div>
                     <div class='m-3'>
                         <input type="text" placeholder='Nombre' id='nom_paciente' name='nom_paciente' class="form-control" value="{{$paciente->nom_paciente}}">

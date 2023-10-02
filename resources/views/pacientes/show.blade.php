@@ -58,7 +58,7 @@
                 <td>Nombre y apellido del médico</td>
             </tr>
             <tr>
-                <th scope="row">1</th>
+                <th scope="row">3</th>
                 <td>09-03-2022 16:00</td>
                 <td>Psiquiatra</td>
                 <td>Nombre y apellido del médico</td>

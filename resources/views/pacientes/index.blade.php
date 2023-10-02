@@ -2,7 +2,7 @@
 @section('title','Mantenedor de pacientes')
 @section('contenido')
 <div class="row mt-5">
-    <div class="col-7">
+    <div class="col-sm-12 col-md-7 mb-sm-5 order-md-first order-sm-last">
         <form action="{{route('pacientes.search')}}" method="GET">
             @csrf
             <div class="row mb-4">
@@ -77,7 +77,7 @@
 
     </div>
 
-    <div class="col-5">
+    <div class="col-md-5  mb-sm-5 order-md-last order-sm-first">
         <div class="card" style="width: 45rem; height: auto;">
             <div class="card-header text-center">
                 <h4>Registro de Pacientes</h4>
@@ -89,34 +89,35 @@
                     @csrf
 
                     <div class='m-3'>
-                        <input type="text" placeholder='Rut' id='rut_paciente' name='rut_paciente' class="form-control">
+                        <input type="text" placeholder='Rut' id='rut_paciente' name='rut_paciente' class="form-control" value="{{ old('rut_paciente') }}" >
+                        <small class = "ms-2"> Formato: 9999999-K</small>
                     </div>
                     <div class='m-3'>
-                        <input type="text" placeholder='Nombre' id='nom_paciente' name='nom_paciente' class="form-control">
-                    </div>
-
-                    <div class='m-3'>
-                        <input type="text" placeholder='Apellido Paterno' id='apep_paciente' name='apep_paciente' class="form-control">
+                        <input type="text" placeholder='Nombre' id='nom_paciente' name='nom_paciente' class="form-control" value="{{ old('nom_paciente') }}">
                     </div>
 
                     <div class='m-3'>
-                        <input type="text" placeholder='Apellido Materno' id='apem_paciente' name='apem_paciente' class="form-control">
+                        <input type="text" placeholder='Apellido Paterno' id='apep_paciente' name='apep_paciente' class="form-control" value="{{ old('apep_paciente') }}">
                     </div>
 
                     <div class='m-3'>
-                        <input type="text" placeholder='Celular' id='fono' name='fono' class="form-control">
+                        <input type="text" placeholder='Apellido Materno' id='apem_paciente' name='apem_paciente' class="form-control" value="{{ old('apem_paciente') }}">
                     </div>
 
                     <div class='m-3'>
-                        <select class="custom-select custom-select-lg mb-3 form-control" id='corp_tea' name='corp_tea'>
-                            <option selected>¿Pertenece a la Corporación TEA?</option>
+                        <input type="text" placeholder='Celular' id='fono' name='fono' class="form-control" value="{{ old('fono') }}">
+                    </div>
+
+                    <div class='m-3'>
+                        <select class="custom-select custom-select-lg mb-3 form-control" id='corp_tea' name='corp_tea' >
+                            <option value="">¿Pertenece a la Corporación TEA?</option>
                             <option value="0">Si pertenece</option>
                             <option value="1">No pertenece</option>
                         </select>
                     </div>
 
                     <div class='m-3'>
-                        <input type="date" placeholder='Fecha de nacimiento' id='fecha_nacimiento' name='fecha_nacimiento' class="form-control">
+                        <input type="date" placeholder='Fecha de nacimiento' id='fecha_nacimiento' name='fecha_nacimiento' class="form-control" value="{{ old('fecha_nacimiento') }}">
                     </div>
 
 
@@ -143,6 +144,7 @@
                         </ul>
                     </div>
                     @endif
+
                 </div>
             </div>
 

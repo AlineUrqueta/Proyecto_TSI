@@ -2,7 +2,7 @@
 @section('title','Mantenedor de profesionales')
 @section('contenido')
 <div class="row mt-5">
-    <div class="col-12">
+    <div class="col-sm-12 col-md-8  order-md-first order-sm-last">
         <form action="">
             {{-- @csrf --}}
             <div class="row mb-4">
@@ -74,8 +74,8 @@
 
     </div>
 
-    <div class="col-12">
-        <div class="card" style="width: 45rem; height: auto;">
+    <div class="col-md-4  mb-sm-5 order-md-last order-sm-first">
+        <div class="card" style="width: auto; height: auto;">
             <div class="card-header text-center">
                 <h4>Registro de Profesional</h4>
             </div>
@@ -100,8 +100,14 @@
                         <input type="text" placeholder='Apellido Materno' id='apem_paciente' name='apem_paciente' class="form-control">
                     </div>
 
+                    
                     <div class='m-3'>
-                        <input type="text" placeholder='Especialidad' class="form-control">
+                        <select class="custom-select custom-select-lg mb-3 form-control" >
+                            <option value="">Especialidad</option>
+                            <option value="0">Fonoaudiología</option>
+                            <option value="1">Psicología</option>
+                            <option value="2">Psiquiatría</option>
+                        </select>
                     </div>
 
                     <div class='m-3'>

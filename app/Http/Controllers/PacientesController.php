@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Paciente;
+use App\Http\Requests\PacienteRequest;
 
 class PacientesController extends Controller
 {
@@ -12,7 +13,7 @@ class PacientesController extends Controller
         return view('pacientes.index',compact('pacientes'));
     }
 
-    public function store(Request $request){
+    public function store(PacienteRequest $request){
         $paciente = new Paciente;
         $paciente->rut_paciente = $request->rut_paciente;
         $paciente->nom_paciente = $request->nom_paciente;
@@ -46,7 +47,7 @@ class PacientesController extends Controller
         return view('pacientes.edit',compact('paciente'));
     }
 
-    public function update(Request $request,  Paciente $paciente){
+    public function update(PacienteRequest $request,  Paciente $paciente){
         $paciente->nom_paciente = $request->nom_paciente;
         $paciente->apep_paciente = $request->apep_paciente;
         $paciente->apem_paciente = $request->apem_paciente;

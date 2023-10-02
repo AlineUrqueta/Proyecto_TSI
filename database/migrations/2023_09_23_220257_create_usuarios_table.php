@@ -12,16 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('usuarios', function (Blueprint $table) {
-            $table->unsignedInteger('id')->autoIncrement(); // podríamos hacer que el email sea la clave primaria
+            //$table->unsignedInteger('id')->autoIncrement(); // podríamos hacer que el email sea la clave primaria
             $table->string('nom_usuario',50);
             $table->string('apep_usuario',50);
             $table->string('apem_usuario',50);
             $table->string('fono',13); //Es String porque se considera el + 
-            $table->string('email',50);
+            $table->string('email',50)->primary();
             $table->string('password',64); //  
             $table->tinyInteger('id_tipo'); // Admin o Secretaria
             $table->tinyInteger('estado_vigente')->default(1);
-            $table->timestamps();
+            //$table->timestamps();
             
         });
     }
