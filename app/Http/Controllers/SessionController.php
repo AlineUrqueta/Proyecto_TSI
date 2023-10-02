@@ -20,7 +20,7 @@ class SessionController extends Controller
             return redirect()->to('/admin');
         }
         else{
-            return redirect()->to('/');
+            return redirect()->to('/secretaria');
 
         }
     }

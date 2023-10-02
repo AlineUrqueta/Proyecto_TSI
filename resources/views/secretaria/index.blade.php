@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','Inicio Administrador - Centro Médico Epojé')
+@section('title','Inicio Secretaria - Centro Médico Epojé')
 @section('contenido')
     {{-- <div class="row align-items-center">
         <div class = 'col-6 mt-5'>
@@ -26,13 +26,13 @@
         </div>
         <div class="col-7 d-flex flex-column justify-content-center">
             <div class="row m-4">
-                <a class=" btn btn-outline-light btn-lg" href="{{route('admin.showUsuario')}}">Administar Usuarios</a>
+                <a class=" btn btn-light btn-lg" href="">Agendar Hora</a>
             </div>
             <div class="row m-4">
-                <a class=" btn btn-outline-light btn-lg" href="{{route('admin.showProfesional')}}">Administar Profesionales</a>
+                <a class=" btn btn-outline-light btn-lg" href="{{ route('pacientes.index') }}">Administar Pacientes</a>
             </div>
             <div class="row m-4">
-                <a class=" btn btn-outline-light btn-lg" href="{{route('admin.showEspecialidad')}}">Administar Especialidades</a>
+                <a class=" btn btn-outline-light btn-lg" href="">Administar Horarios</a>
             </div>
         </div>
 
