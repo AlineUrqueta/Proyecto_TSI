@@ -2,7 +2,7 @@
 @section('title','Mantenedor de especialidades')
 @section('contenido')
 <div class="row mt-5">
-    <div class="col-8">
+    <div class="col-sm-12 col-md-8  order-md-first order-sm-last">
         <form action="">
             {{-- @csrf --}}
             <div class="row mb-4">
@@ -66,8 +66,8 @@
 
     </div>
 
-    <div class="col-4">
-        <div class="card" style="width: 25rem; height: auto;">
+    <div class="col-md-4  mb-sm-5 order-md-last order-sm-first">
+        <div class="card" style="width: auto; height: auto;">
             <div class="card-header text-center">
                 <h4>Registro de Especialidad</h4>
             </div>

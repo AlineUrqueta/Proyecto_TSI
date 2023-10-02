@@ -2,7 +2,7 @@
 @section('title','Mantenedor de pacientes')
 @section('contenido')
 <div class="row mt-5">
-    <div class="col-7">
+    <div class="col-sm-12 col-md-7 mb-sm-5 order-md-first order-sm-last">
         <form action="{{route('pacientes.search')}}" method="GET">
             @csrf
             <div class="row mb-4">
@@ -77,7 +77,7 @@
 
     </div>
 
-    <div class="col-5">
+    <div class="col-md-5  mb-sm-5 order-md-last order-sm-first">
         <div class="card" style="width: 45rem; height: auto;">
             <div class="card-header text-center">
                 <h4>Registro de Pacientes</h4>
