@@ -25,7 +25,7 @@ class PacienteRequest extends FormRequest
     {   
         $fecha_actual = Carbon::now();
         return [
-            'rut_paciente' => 'sometimes|required|unique:pacientes|regex:/^[0-9\-]+$/|min:8|max:10',
+            'rut_paciente' => 'sometimes|required|unique:pacientes|regex:/^[0-9\-kK]+$/|min:8|max:10',
             'nom_paciente' => 'required|min:3|max:50',
             'apep_paciente' => 'required|min:4|max:50',
             'apem_paciente' => 'required|min:4|max:50',

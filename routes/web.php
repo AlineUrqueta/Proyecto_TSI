@@ -18,7 +18,7 @@ use App\Http\Controllers\SecretariaController;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('secretaria.index');
 })->middleware('auth');
 
 
@@ -51,4 +51,4 @@ Route::get('/admin/usuario',[AdminController::class,'showUsuario'])->name('admin
 Route::get('/admin/profesional',[AdminController::class,'showProfesional'])->name('admin.showProfesional');
 Route::get('/admin/especialidad',[AdminController::class,'showEspecialidad'])->name('admin.showEspecialidad');
 
-Route::get('/secretaria',[SecretariaController::class,'index'])->name('secretaria.index');
+//Route::get('/secretaria',[SecretariaController::class,'index'])->name('secretaria.index');
