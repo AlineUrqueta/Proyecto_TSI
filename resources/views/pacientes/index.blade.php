@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','Mantenedor de pacientes')
+@section('title','Mantenedor de Pacientes')
 @section('contenido')
 <div class="row mt-5">
     <div class="col-sm-12 col-md-7 mb-sm-5 order-md-first order-sm-last">

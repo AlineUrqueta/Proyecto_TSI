@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','Mantenedor de pacientes')
+@section('title','Agendar Hora')
 @section('contenido')
 <style>
     table {
