@@ -15,7 +15,7 @@
             </div>
         </form>
 
-        <table class="table table-bordered border-success  class ='btn btn-warning'">
+        <table class="table table-bordered border-success">
             <thead>
                 <tr>
                     <th scope="col">RUT</th>
@@ -74,7 +74,7 @@
 
     </div>
 
-    <div class="col-md-4  mb-sm-5 order-md-last order-sm-first">
+    <div class="col-sm-12 col-md-4  mb-sm-5 order-md-last order-sm-first">
         <div class="card" style="width: auto; height: auto;">
             <div class="card-header text-center">
                 <h4>Registro de Profesional</h4>

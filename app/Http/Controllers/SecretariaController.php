@@ -21,9 +21,11 @@ class SecretariaController extends Controller
 
     public function editarHorario(){
         return view('secretaria.editarHorario');
+    }
 
     public function agendar(){
         return view('secretaria.agendar_hora');
 
     }
+    
 }

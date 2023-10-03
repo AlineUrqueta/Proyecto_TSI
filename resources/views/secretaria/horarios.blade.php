@@ -2,7 +2,7 @@
 @section('title','Mantenedor de horarios')
 @section('contenido')
 <div class="row mt-5">
-    <div class="col-12">
+    <div class="col-sm-12 col-md-7 mb-sm-5 order-md-first order-sm-last"">
         <form action="">
             {{-- @csrf --}}
             <div class="row mb-4">
@@ -46,7 +46,7 @@
 
     </div>
 
-    <div class="col-12">
+    <div class="col-md-5  mb-sm-5 order-md-last order-sm-first">
         <div class="card" style="width: 45rem; height: auto;">
             <div class="card-header text-center">
                 <h4>Agregar Horario</h4>

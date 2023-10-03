@@ -15,7 +15,7 @@
             </div>
         </form>
 
-        <table class="table table-bordered border-success  class ='btn btn-warning'">
+        <table class="table table-bordered border-success">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
