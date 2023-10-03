@@ -14,7 +14,11 @@
                 </div>
             </div>
         </form>
-
+        @if (count($usuarios) === 0 )
+                <div class="alert alert-danger">No hay usuarios registrados</div>
+                @elseif(count($usuarios) === 1)
+                <div class="alert alert-danger">No hay usuarios registrados</div>
+                @else
         <table class="table table-bordered border-success  class ='btn btn-warning'">
             <thead>
                 <tr>
@@ -25,11 +29,7 @@
                 </tr>
             </thead>
             <tbody>
-                @if (count($usuarios) === 0 )
-                <div class="alert alert-danger">No hay usuarios registrados</div>
-                @elseif(count($usuarios) === 1)
-                <div class="alert alert-danger">No hay usuarios registrados</div>
-                @else
+                
                 @foreach ( $usuarios as $usuario )
                 <tr>
                     <th>{{$usuario->nom_usuario}} {{$usuario->apep_usuario}} {{$usuario->apem_usuario}}</th>
@@ -69,10 +69,11 @@
                     </td>
                 </tr>
                 @endforeach
-                @endif
+                
 
             </tbody>
         </table>
+        @endif
 
     </div>
 
