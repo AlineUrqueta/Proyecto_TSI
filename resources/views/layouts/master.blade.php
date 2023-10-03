@@ -33,7 +33,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     @if(auth()->check())
-                        <p class='me-4 mb-0'>Bienvenido <b>{{auth()->user()->nom_usuario}} {{auth()->user()->apep_usuario}} {{auth()->user()->apem_usuario}}</b>     </p>
+                        <p class='me-4 mb-0'>Bienvenido/a <b>{{auth()->user()->nom_usuario}} {{auth()->user()->apep_usuario}} {{auth()->user()->apem_usuario}}</b>     </p>
                         <li class="nav-item me-4">
                         <a class=" btn btn-outline-light " aria-current="page" href="{{route('login.destroy')}}">Logout</a>
                     </li>
