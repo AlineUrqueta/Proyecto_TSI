@@ -83,6 +83,7 @@
 
 
                     <div class='me-3 mt-4 text-end'>
+                        <a href="{{route('admin.index')}}" class="btn btn-outline-dark me-2">Menu Principal</a>
                         <button type='submit' class='btn btn-success '>Crear especialidad</button>
                     </div>
 

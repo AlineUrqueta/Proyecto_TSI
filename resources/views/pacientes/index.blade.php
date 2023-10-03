@@ -89,8 +89,8 @@
                     @csrf
 
                     <div class='m-3'>
-                        <input type="text" placeholder='Rut' id='rut_paciente' name='rut_paciente' class="form-control" value="{{ old('rut_paciente') }}" >
-                        <small class = "ms-2"> Formato: 9999999-K</small>
+                        <input type="text" placeholder='Rut' id='rut_paciente' name='rut_paciente' class="form-control" value="{{ old('rut_paciente') }}">
+                        <small class="ms-2"> Formato: 9999999-K</small>
                     </div>
                     <div class='m-3'>
                         <input type="text" placeholder='Nombre' id='nom_paciente' name='nom_paciente' class="form-control" value="{{ old('nom_paciente') }}">
@@ -109,7 +109,7 @@
                     </div>
 
                     <div class='m-3'>
-                        <select class="custom-select custom-select-lg mb-3 form-control" id='corp_tea' name='corp_tea' >
+                        <select class="custom-select custom-select-lg mb-3 form-control" id='corp_tea' name='corp_tea'>
                             <option value="">¿Pertenece a la Corporación TEA?</option>
                             <option value="0">Si pertenece</option>
                             <option value="1">No pertenece</option>
@@ -122,8 +122,12 @@
 
 
 
-
                     <div class='me-3 mt-4 text-end'>
+                        @if (auth()->user()->id_tipo == 1)
+                        <a href="{{route('admin.index')}}" class="btn btn-light ">Menu Principal</a>
+                        @else
+                        <a href="{{route('secretaria.index')}}" class="btn btn-outline-dark">Menu Principal</a>
+                        @endif
                         <button type='submit' class='btn btn-success '>Crear paciente</button>
                     </div>
 
@@ -154,6 +158,7 @@
 
 
         </div>
+
     </div>
 
 </div>

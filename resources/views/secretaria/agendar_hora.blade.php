@@ -33,7 +33,7 @@
             <div class="card-body">
 
 
-                <form action="" class='mt-4' >
+                <form action="" class='mt-4'>
                     {{-- @csrf --}}
 
 
@@ -81,6 +81,8 @@
 
 
                     <div class='me-3 mt-4 text-end'>
+                        <a href="{{route('secretaria.index')}}" class="btn btn-outline-dark">Menu Principal</a>
+                        
                         <button type='submit' class='btn btn-success '>Buscar Hora</button>
                     </div>
 
@@ -168,14 +170,14 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title text-center" id="exampleModalLongTitle">Agendar Hora</h5>
-                            
+
                         </div>
                         <div class="modal-body">
                             <h5>Nombre del Paciente: Paciente 1</h5>
                             <h5>Especialidad: Psicología</h5>
                             <h5>Fecha: 08/10/2023</h5>
-                            
-                            
+
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

@@ -19,7 +19,7 @@ use App\Http\Controllers\SecretariaController;
 
 Route::get('/', function () {
     return view('secretaria.index');
-})->middleware('auth');
+})->name('secretaria.index')->middleware('auth');
 
 
 
