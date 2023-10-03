@@ -32,7 +32,7 @@
                 <a class=" btn btn-outline-light btn-lg" href="{{ route('pacientes.index') }}">Administar Pacientes</a>
             </div>
             <div class="row m-4">
-                <a class=" btn btn-outline-light btn-lg" href="">Administar Horarios</a>
+                <a class=" btn btn-outline-light btn-lg" href="{{ route('secretaria.showHorarios') }}">Administar Horarios</a>
             </div>
         </div>
 
