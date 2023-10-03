@@ -28,7 +28,6 @@ Route::post('/login',[SessionController::class,'store'])->name('login.store');
 Route::get('/logout',[SessionController::class,'destroy'])->name('login.destroy');
 
 Route::get('/registro',[RegistroController::class,'create'])->name('registro.index');
-
 Route::post('/registro',[RegistroController::class,'store'])->name('registro.store');
 
 Route::get('/admin',[AdminController::class,'index'])

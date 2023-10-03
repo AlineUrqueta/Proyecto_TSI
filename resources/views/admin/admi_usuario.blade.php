@@ -2,7 +2,7 @@
 @section('title','Mantenedor de usuarios')
 @section('contenido')
 <div class="row mt-5">
-    <div class="col-sm-12 col-md-8  order-md-first order-sm-last">
+    <div class="col-sm-12 col-md-7  order-md-first order-sm-last">
         <form action="">
             {{-- @csrf --}}
             <div class="row mb-4">
@@ -25,10 +25,16 @@
                 </tr>
             </thead>
             <tbody>
+                @if (count($usuarios) === 0 )
+                <div class="alert alert-danger">No hay usuarios registrados</div>
+                @elseif(count($usuarios) === 1)
+                <div class="alert alert-danger">No hay usuarios registrados</div>
+                @else
+                @foreach ( $usuarios as $usuario )
                 <tr>
-                    <th>Albert Wily</th>
-                    <td>drwily@maverick.com</td>
-                    <td>+56967894567</td>
+                    <th>{{$usuario->nom_usuario}} {{$usuario->apep_usuario}} {{$usuario->apem_usuario}}</th>
+                    <td>{{$usuario->email}}</td>
+                    <td>{{$usuario->fono}}</td>
                     <td>
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
@@ -62,13 +68,15 @@
 
                     </td>
                 </tr>
+                @endforeach
+                @endif
 
             </tbody>
         </table>
 
     </div>
 
-    <div class="col-md-4  mb-sm-5 order-md-last order-sm-first">
+    {{-- <div class="col-md-4  mb-sm-5 order-md-last order-sm-first">
         <div class="card" style="width: auto; height: auto;">
             <div class="card-header text-center">
                 <h4>Registro de Usuario</h4>
@@ -104,21 +112,94 @@
 
                     <div class='me-3 mt-4 text-end'>
                         <a href="{{route('admin.index')}}" class="btn btn-outline-dark me-2">Menu Principal</a>
-                        <button type='submit' class='btn btn-success '>Crear usuario</button>
+    <button type='submit' class='btn btn-success '>Crear usuario</button>
+</div>
+
+
+
+</form>
+</div>
+
+
+
+
+
+
+</div>
+</div> --}}
+<div class="col-sm-12 col-md-5  mb-sm-5  order-md-last order-sm-first">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="card" style="width: 45rem; height: auto;">
+            <div class="card-header text-center">
+                <h4>Registro de Usuarios</h4>
+            </div>
+            <div class="card-body">
+
+
+                <form action="{{route('registro.store')}}" class='mt-4' method='POST'>
+                    @csrf
+                    <div class='m-3'>
+                        <input type="text" placeholder='Nombre' id='nom_usuario' name='nom_usuario' class="form-control">
+                    </div>
+
+                    <div class='m-3'>
+                        <input type="text" placeholder='Apellido Paterno' id='apep_usuario' name='apep_usuario' class="form-control">
+                    </div>
+
+                    <div class='m-3'>
+                        <input type="text" placeholder='Apellido Materno' id='apem_usuario' name='apem_usuario' class="form-control">
+                    </div>
+
+                    <div class='m-3'>
+                        <input type="text" placeholder='Celular' id='fono' name='fono' class="form-control">
+                    </div>
+
+                    <div class='m-3'>
+                        <input type="email" placeholder='Email' id='email' name='email' class="form-control">
+                    </div>
+
+                    <div class='m-3'>
+                        <input type="password" placeholder='Contraseña' id='password' name='password' class="form-control">
+                    </div>
+
+                    <div class='m-3'>
+                        <input type="password" placeholder='Confirmar Contraseña' id='password_confirmation' name='password_confirmation' class="form-control">
+                    </div>
+
+
+                    <div class='me-3 mt-4 text-end'>
+                        <button type='submit' class='btn btn-success '>Crear Usuario</button>
                     </div>
 
 
 
+
+
+
                 </form>
+
+
+
+                <div class='m-3'>
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <p>Por favor solucione los siguientes errores: </p>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                </div>
+
+
+
+
             </div>
-
-
-
-
-
-
         </div>
     </div>
+</div>
 
 </div>
 

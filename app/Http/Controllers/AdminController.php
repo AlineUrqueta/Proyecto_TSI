@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Usuario;
 
 class AdminController extends Controller
 {
     public function index(){
+        
         return view('admin.index');
     }
 
     public function showUsuario(){
-        return view('admin.admi_usuario');
+        $usuarios = Usuario::all();
+        return view('admin.admi_usuario',compact('usuarios'));
     }
 
     public function showProfesional(){

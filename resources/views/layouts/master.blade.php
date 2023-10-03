@@ -38,13 +38,13 @@
                         <li class="nav-item me-4">
                         <a class=" btn btn-outline-light " aria-current="page" href="{{route('login.destroy')}}">Logout</a>
                     </li>
-                    @else
+                    {{-- @else
                         <li class="nav-item me-4">
                         <a class=" btn btn-outline-light " aria-current="page" href="{{route('login.index')}}">Login</a>
                     </li>
                     <li class="nav-item">
                         <a class="  btn btn-outline-dark " aria-current="page" href="{{route('registro.index')}}">Registro</a>
-                    </li>
+                    </li> --}}
                     @endif
                 </ul>
             </div>

@@ -23,7 +23,7 @@ class RegistroController extends Controller
         $usuario->password = Hash::make($request->password);
         $usuario->id_tipo = 2;
         $usuario->save();
-        auth()->login($usuario);
-        return redirect()->to('/');
+        //auth()->login($usuario);
+        return redirect()->route('admin.showUsuario');
     }
 }
