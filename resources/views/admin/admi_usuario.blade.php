@@ -16,8 +16,6 @@
         </form>
         @if (count($usuarios) === 0 )
         <div class="alert alert-danger">No hay usuarios registrados</div>
-        @elseif(count($usuarios) === 1)
-        <div class="alert alert-danger">No hay usuarios registrados</div>
         @else
         <table class="table table-bordered border-success  class ='btn btn-warning'">
             <thead>
@@ -31,16 +29,18 @@
             <tbody>
 
                 @foreach ( $usuarios as $usuario)
-                @if($usuario->id_tipo <> 1)
-                    <tr>
-                        <th>{{$usuario->nom_usuario}} {{$usuario->apep_usuario}} {{$usuario->apem_usuario}}</th>
-                        <td>{{$usuario->email}}</td>
-                        <td>{{$usuario->fono}}</td>
-                        <td>
-                            <!-- Button trigger modal -->
+
+                <tr>
+                    <th>{{$usuario->nom_usuario}} {{$usuario->apep_usuario}} {{$usuario->apem_usuario}}</th>
+                    <td>{{$usuario->email}}</td>
+                    <td>{{$usuario->fono}}</td>
+                    <td>
+                        <!-- Button trigger modal -->
+                        @if($usuario->id_tipo <> 1)
                             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
                                 Eliminar
                             </button>
+                            @endif
 
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -67,9 +67,9 @@
 
                             <a class='btn btn-primary text-white' href="">Editar</a>
 
-                        </td>
-                    </tr>
-                    @endif
+                    </td>
+                </tr>
+
 
                 @endforeach
 
