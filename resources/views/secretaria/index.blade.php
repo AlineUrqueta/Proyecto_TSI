@@ -26,13 +26,13 @@
         </div>
         <div class="col-7 d-flex flex-column justify-content-center">
             <div class="row m-4">
-                <a class=" btn btn-light btn-lg" href="">Agendar Hora</a>
+                <a class=" btn btn-light btn-lg" href="{{route('secretaria.agendar')}}">Agendar Hora</a>
             </div>
             <div class="row m-4">
-                <a class=" btn btn-outline-light btn-lg" href="{{ route('pacientes.index') }}">Administar Pacientes</a>
+                <a class=" btn btn-light btn-lg" href="{{ route('pacientes.index') }}">Administar Pacientes</a>
             </div>
             <div class="row m-4">
-                <a class=" btn btn-outline-light btn-lg" href="">Administar Horarios</a>
+                <a class=" btn btn-light btn-lg" href="">Administar Horarios</a>
             </div>
         </div>
 

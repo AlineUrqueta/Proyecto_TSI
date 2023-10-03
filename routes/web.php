@@ -54,4 +54,6 @@ Route::get('/admin/especialidad',[AdminController::class,'showEspecialidad'])->n
 
 //Route::get('/secretaria',[SecretariaController::class,'index'])->name('secretaria.index');
 Route::get('/secretaria/horarios',[SecretariaController::class,'showHorarios'])->name('secretaria.showHorarios');
+Route::get('/secretaria/agendar',[SecretariaController::class,'agendar'])->name('secretaria.agendar');
+
 
