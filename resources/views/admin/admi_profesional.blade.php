@@ -15,7 +15,7 @@
             </div>
         </form>
 
-        <table class="table table-bordered border-success">
+        <table class="table table-bordered border-success" style="width: auto; height: auto;">
             <thead>
                 <tr>
                     <th scope="col">RUT</th>
