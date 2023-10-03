@@ -15,10 +15,10 @@
             </div>
         </form>
         @if (count($usuarios) === 0 )
-                <div class="alert alert-danger">No hay usuarios registrados</div>
-                @elseif(count($usuarios) === 1)
-                <div class="alert alert-danger">No hay usuarios registrados</div>
-                @else
+        <div class="alert alert-danger">No hay usuarios registrados</div>
+        @elseif(count($usuarios) === 1)
+        <div class="alert alert-danger">No hay usuarios registrados</div>
+        @else
         <table class="table table-bordered border-success  class ='btn btn-warning'">
             <thead>
                 <tr>
@@ -29,47 +29,50 @@
                 </tr>
             </thead>
             <tbody>
-                
-                @foreach ( $usuarios as $usuario )
-                <tr>
-                    <th>{{$usuario->nom_usuario}} {{$usuario->apep_usuario}} {{$usuario->apem_usuario}}</th>
-                    <td>{{$usuario->email}}</td>
-                    <td>{{$usuario->fono}}</td>
-                    <td>
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
-                            Eliminar
-                        </button>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">Eliminar Usuario</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ¿Desea eliminar?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                        <form action="">
-                                            <button class='btn btn-danger'>Eliminar</button>
-                                        </form>
+                @foreach ( $usuarios as $usuario)
+                @if($usuario->id_tipo <> 1)
+                    <tr>
+                        <th>{{$usuario->nom_usuario}} {{$usuario->apep_usuario}} {{$usuario->apem_usuario}}</th>
+                        <td>{{$usuario->email}}</td>
+                        <td>{{$usuario->fono}}</td>
+                        <td>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                                Eliminar
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Eliminar Usuario</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            ¿Desea eliminar?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <form action="">
+                                                <button class='btn btn-danger'>Eliminar</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <a class='btn btn-primary text-white' href="">Editar</a>
+                            <a class='btn btn-primary text-white' href="">Editar</a>
 
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
+                    @endif
+
                 @endforeach
-                
+
 
             </tbody>
         </table>

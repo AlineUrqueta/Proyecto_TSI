@@ -27,7 +27,7 @@
     <nav class="navbar navbar-expand-lg " style="background-color: #88bd9e;">
         <div class="container-fluid">
             {{-- <a class="navbar-brand" href="#">Centro Médico Epoje</a> --}}
-            <h4 class='font-weight-bold display-6'>Centro Médico Epoje</h4>
+            <h4 class='font-weight-bold display-6 ms-3'>Centro Médico Epoje</h4>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

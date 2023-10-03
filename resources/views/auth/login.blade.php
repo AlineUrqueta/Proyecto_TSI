@@ -18,7 +18,7 @@
                     <form action="" class = 'mt-4' method = 'POST' action = ''>
                         @csrf
                         <div class="m-3">
-                        <input type="email" placeholder = 'Correo' id = 'email' name ='email' class="form-control">
+                        <input type="email" placeholder = 'Correo' id = 'email' name ='email' class="form-control" value = {{ old('email') }}>
 
                         </div>
                         <div class="m-3">
