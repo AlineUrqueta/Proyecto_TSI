@@ -29,11 +29,11 @@
                 <a class=" btn btn-light btn-lg" href="{{route('secretaria.agendar')}}">Agendar Hora</a>
             </div>
             <div class="row m-4">
-                <a class=" btn btn-light btn-lg" href="{{ route('pacientes.index') }}">Administar Pacientes</a>
+                <a class=" btn btn-light btn-lg" href="{{ route('pacientes.index') }}">Administrar Pacientes</a>
             </div>
             <div class="row m-4">
 
-                <a class=" btn btn-light btn-lg" href="{{ route('secretaria.showHorarios') }}">Administar Horarios</a>
+                <a class=" btn btn-light btn-lg" href="{{ route('secretaria.showHorarios') }}">Administrar Horarios</a>
 
             </div>
         </div>

@@ -26,13 +26,13 @@
         </div>
         <div class="col-7 d-flex flex-column justify-content-center">
             <div class="row m-4">
-                <a class=" btn btn-light btn-lg" href="{{route('admin.showUsuario')}}">Administar Usuarios</a>
+                <a class=" btn btn-light btn-lg" href="{{route('admin.showUsuario')}}">Administrar Usuarios</a>
             </div>
             <div class="row m-4">
-                <a class=" btn btn-light btn-lg" href="{{route('admin.showProfesional')}}">Administar Profesionales</a>
+                <a class=" btn btn-light btn-lg" href="{{route('admin.showProfesional')}}">Administrar Profesionales</a>
             </div>
             <div class="row m-4">
-                <a class=" btn btn-light btn-lg" href="{{route('admin.showEspecialidad')}}">Administar Especialidades</a>
+                <a class=" btn btn-light btn-lg" href="{{route('admin.showEspecialidad')}}">Administrar Especialidades</a>
             </div>
         </div>
 
