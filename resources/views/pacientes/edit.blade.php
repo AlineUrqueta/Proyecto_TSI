@@ -48,18 +48,19 @@
 
                     <div class='m-3'>
                         <select class="custom-select custom-select-lg mb-3 form-control" id='corp_tea' name='corp_tea'>
-                            @if($paciente->corp_tea == 0)
-                                <option value="0" selected>Si pertenece a la Corporación TEA</option>
-                                <option value="1"> No pertenece a la Corporación TEA</option>
+                            @if($paciente->corp_tea == 1)
+                                <option value="1" selected>Si pertenece a la Corporación TEA</option>
+                                <option value="0"> No pertenece a la Corporación TEA</option>
                             @else
-                                <option value="0" >Si pertenece a la Corporación TEA</option>
-                                <option value="1" selected> No pertenece a la Corporación TEA</option>
+                                <option value="1" >Si pertenece a la Corporación TEA</option>
+                                <option value="0" selected> No pertenece a la Corporación TEA</option>
                             @endif
                             
                         </select>
                     </div>
 
                     <div class='m-3'>
+                        <small class="ms-2"> Fecha de Nacimiento</small>
                         <input type="date" placeholder='Fecha de nacimiento' id='fecha_nacimiento' name='fecha_nacimiento' class="form-control" value="{{$paciente->fecha_nacimiento}}">
                     </div>
 

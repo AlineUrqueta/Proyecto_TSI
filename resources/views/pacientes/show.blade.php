@@ -22,7 +22,7 @@
         <h5>Nombre : {{$paciente->nom_paciente}} {{$paciente->apep_paciente}} {{$paciente->apem_paciente}}</h5>
         <h5>Fecha de nacimiento : {{$paciente->fecha_nacimiento}} </h5>
         <h5>Celular : {{$paciente->fono}} </h5>
-        @if($paciente->corp_tea == 0)
+        @if($paciente->corp_tea == 1)
         <h5>Corporacion TEA: Si pertenece </h5>
         @else
         <h5>Corporacion TEA: No pertenece </h5>

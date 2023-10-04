@@ -41,12 +41,12 @@
                     <td>
                         <a class='btn btn-warning text-white' href="{{route('pacientes.show',$paciente->rut_paciente)}}">Mostrar</a>
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter{{$paciente->rut_paciente}}">
                             Eliminar
                         </button>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal fade" id="exampleModalCenter{{$paciente->rut_paciente}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -119,13 +119,15 @@
                     <div class='m-3'>
                         <select class="custom-select custom-select-lg mb-3 form-control" id='corp_tea' name='corp_tea'>
                             <option value="">¿Pertenece a la Corporación TEA?</option>
-                            <option value="0">Si pertenece</option>
-                            <option value="1">No pertenece</option>
+                            <option value="1">Si pertenece</option>
+                            <option value="0">No pertenece</option>
                         </select>
                     </div>
 
                     <div class='m-3'>
+                        <small class="ms-2"> Fecha de Nacimiento</small>
                         <input type="date" placeholder='Fecha de nacimiento' id='fecha_nacimiento' name='fecha_nacimiento' class="form-control" value="{{ old('fecha_nacimiento') }}">
+                        
                     </div>
 
 
