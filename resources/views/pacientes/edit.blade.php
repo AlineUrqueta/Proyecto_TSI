@@ -34,6 +34,19 @@
                     </div>
 
                     <div class='m-3'>
+                        <select class="custom-select custom-select-lg mb-3 form-control" id='estado_vigente' name='estado_vigente'>
+                            @if($paciente->estado_vigente == 1)
+                                <option value="1" selected>Vigente</option>
+                                <option value="0" > No Vigente</option>
+                            @else
+                                <option value="1"  >Vigente</option>
+                                <option value="0" selected> No Vigente</option>
+                            @endif
+                            
+                        </select>
+                    </div>
+
+                    <div class='m-3'>
                         <select class="custom-select custom-select-lg mb-3 form-control" id='corp_tea' name='corp_tea'>
                             @if($paciente->corp_tea == 0)
                                 <option value="0" selected>Si pertenece a la Corporación TEA</option>

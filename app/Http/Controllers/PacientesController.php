@@ -53,6 +53,7 @@ class PacientesController extends Controller
         $paciente->apem_paciente = $request->apem_paciente;
         $paciente->fono = $request->fono;
         $paciente->fecha_nacimiento = $request->fecha_nacimiento;
+        $paciente->estado_vigente = $request->estado_vigente;
         $paciente->corp_tea = $request->corp_tea;
         $paciente->save();
         return redirect()->route('pacientes.edit',compact('paciente'));

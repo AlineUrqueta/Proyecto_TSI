@@ -24,6 +24,7 @@
                 <tr>
                     <th scope="col">RUT</th>
                     <th scope="col">NOMBRE COMPLETO</th>
+                    <th scope="col">ESTADO DE VIGENCIA</th>
                     <th scope="col">ACCIONES</th>
                 </tr>
             </thead>
@@ -32,6 +33,11 @@
                 <tr>
                     <th>{{$paciente->rut_paciente}}</th>
                     <td>{{$paciente->nom_paciente}} {{$paciente->apep_paciente}} {{$paciente->apem_paciente}}</td>
+                    @if($paciente->estado_vigente == 1)
+                        <td>Vigente</td>
+                    @else
+                        <td>No Vigente</td>
+                    @endif
                     <td>
                         <a class='btn btn-warning text-white' href="{{route('pacientes.show',$paciente->rut_paciente)}}">Mostrar</a>
                         <!-- Button trigger modal -->
@@ -74,6 +80,8 @@
             </tbody>
         </table>
         @endif
+
+        
 
     </div>
 
