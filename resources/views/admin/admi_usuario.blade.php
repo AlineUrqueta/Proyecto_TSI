@@ -143,35 +143,36 @@
                 <form action="{{route('registro.store')}}" class='mt-4' method='POST'>
                     @csrf
                     <div class='m-3'>
-                        <input type="text" placeholder='Nombre' id='nom_usuario' name='nom_usuario' class="form-control">
+                        <input type="text" placeholder='Nombre' id='nom_usuario' name='nom_usuario' class="form-control" value = "{{old('nom_usuario')}}">
                     </div>
 
                     <div class='m-3'>
-                        <input type="text" placeholder='Apellido Paterno' id='apep_usuario' name='apep_usuario' class="form-control">
+                        <input type="text" placeholder='Apellido Paterno' id='apep_usuario' name='apep_usuario' class="form-control" value = "{{old('apep_usuario')}}">
                     </div>
 
                     <div class='m-3'>
-                        <input type="text" placeholder='Apellido Materno' id='apem_usuario' name='apem_usuario' class="form-control">
+                        <input type="text" placeholder='Apellido Materno' id='apem_usuario' name='apem_usuario' class="form-control" value = "{{old('apem_usuario')}}">
                     </div>
 
                     <div class='m-3'>
-                        <input type="text" placeholder='Celular' id='fono' name='fono' class="form-control">
+                        <input type="text" placeholder='Celular' id='fono' name='fono' class="form-control" value = "{{old('fono')}}">
                     </div>
 
                     <div class='m-3'>
-                        <input type="email" placeholder='Email' id='email' name='email' class="form-control">
+                        <input type="email" placeholder='Email' id='email' name='email' class="form-control" value = "{{old('email')}}">
                     </div>
 
                     <div class='m-3'>
-                        <input type="password" placeholder='Contraseña' id='password' name='password' class="form-control">
+                        <input type="password" placeholder='Contraseña' id='password' name='password' class="form-control" >
                     </div>
 
                     <div class='m-3'>
-                        <input type="password" placeholder='Confirmar Contraseña' id='password_confirmation' name='password_confirmation' class="form-control">
+                        <input type="password" placeholder='Confirmar Contraseña' id='password_confirmation' name='password_confirmation' class="form-control" >
                     </div>
 
 
                     <div class='me-3 mt-4 text-end'>
+                        <a href="{{route('admin.index')}}" class="btn btn-outline-dark me-2">Menu Principal</a>
                         <button type='submit' class='btn btn-success '>Crear Usuario</button>
                     </div>
 

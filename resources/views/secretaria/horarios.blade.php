@@ -57,7 +57,13 @@
                 <form action="" class='mt-4'>
 
                     <div class='m-3'>
-                        <input type="text" placeholder='Rut profesional' class="form-control">
+                        <select class="custom-select custom-select-lg mb-3 form-control" id='corp_tea' name='corp_tea'>
+                            <option value=""> --- Seleccionar Profesional ---</option>
+                            <option value="0">Maite Errazuriz</option>
+                            <option value="1">Aline Urqueta</option>
+                            <option value="2">Francisco Perez</option>
+                            <option value="3">Diego Apablaza</option>
+                        </select>
                     </div>
 
                     <div class="row">

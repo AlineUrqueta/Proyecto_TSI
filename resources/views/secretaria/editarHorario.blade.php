@@ -15,7 +15,7 @@
                     <form action="" class='mt-4'>
 
                         <div class='m-3'>
-                            <input type="text" placeholder='10456789-k' class="form-control">
+                            <input type="text" placeholder='10456789-k' class="form-control" disabled>
                         </div>
 
                         <div class="row">
@@ -219,7 +219,7 @@
                         
         
                         <div class='me-3 mt-4 text-end'>
-                            <a href="{{route('secretaria.index')}}" class="btn btn-outline-dark">Menu Principal</a>
+                            <a href="{{route('secretaria.showHorarios')}}" class="btn btn-outline-dark">Menu Principal</a>
                             <button type='submit' class='btn btn-success '>Confirmar Cambios</button>
                         </div>
 

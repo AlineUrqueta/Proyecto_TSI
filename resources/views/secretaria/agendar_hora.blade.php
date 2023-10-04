@@ -46,15 +46,7 @@
                             <option value="3">Paciente 4</option>
                         </select>
                     </div>
-                    <div class='m-3'>
-                        <select class="custom-select custom-select-lg mb-3 form-control" id='' name=''>
-                            <option value="">-- Seleccionar Profesional --</option>
-                            <option value="0">Profesional 1</option>
-                            <option value="1">Profesional 2</option>
-                            <option value="2">Profesional 3</option>
-                            <option value="3">Profesional 4</option>
-                        </select>
-                    </div>
+                    
 
                     <div class='m-3'>
                         <select class="custom-select custom-select-lg mb-3 form-control" id='' name=''>
@@ -63,6 +55,16 @@
                             <option value="1">Psicología</option>
                             <option value="2">Terapia Ocupacional</option>
                             <option value="3">Psiquiatría</option>
+                        </select>
+                    </div>
+
+                    <div class='m-3'>
+                        <select class="custom-select custom-select-lg mb-3 form-control" id='' name=''>
+                            <option value="">-- Seleccionar Profesional --</option>
+                            <option value="0">Profesional 1</option>
+                            <option value="1">Profesional 2</option>
+                            <option value="2">Profesional 3</option>
+                            <option value="3">Profesional 4</option>
                         </select>
                     </div>
 
@@ -81,7 +83,7 @@
 
 
                     <div class='me-3 mt-4 text-end'>
-                        <a href="{{route('secretaria.index')}}" class="btn btn-outline-dark">Menu Principal</a>
+                        <a href="{{route('secretaria.index')}}" class="btn btn-outline-dark me-2 ">Menu Principal</a>
                         
                         <button type='submit' class='btn btn-success '>Buscar Hora</button>
                     </div>
