@@ -6,6 +6,7 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PacientesController;
 use App\Http\Controllers\SecretariaController;
+use App\Http\Controllers\EspecialidadesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,24 +37,21 @@ Route::get('/admin',[AdminController::class,'index'])
 
 Route::get('/pacientes',[PacientesController::class,'index'])->name('pacientes.index');
 Route::get('/search-paciente',[PacientesController::class,'search'])->name('pacientes.search');
-
 Route::post('/pacientes',[PacientesController::class,'store'])->name('pacientes.store');
-
 Route::delete('/pacientes/{paciente}',[PacientesController::class,'destroy'])->name('pacientes.destroy');
-
 Route::get('/pacientes/{paciente}',[PacientesController::class,'show'])->name('pacientes.show');
-
 Route::get('/pacientes/edit/{paciente}',[PacientesController::class,'edit'])->name('pacientes.edit');
 Route::put('/pacientes/{paciente}',[PacientesController::class,'update'])->name('pacientes.update');
 
 Route::get('/admin/usuario',[AdminController::class,'showUsuario'])->name('admin.showUsuario');
 Route::get('/admin/profesional',[AdminController::class,'showProfesional'])->name('admin.showProfesional');
-Route::get('/admin/especialidad',[AdminController::class,'showEspecialidad'])->name('admin.showEspecialidad');
 
+// Route::get('/admin/especialidad',[AdminController::class,'showEspecialidad'])->name('admin.showEspecialidad'); // Lo cambie a especialidad
+Route::get('/especialidad',[EspecialidadesController::class,'index'])->name('especialidad.index');
+Route::post('/especialidad',[EspecialidadesController::class,'store'])->name('especialidad.store');
 
 //Route::get('/secretaria',[SecretariaController::class,'index'])->name('secretaria.index');
 Route::get('/secretaria/horarios',[SecretariaController::class,'showHorarios'])->name('secretaria.showHorarios');
-
 Route::get('/secretaria/horarios/ver',[SecretariaController::class,'verHorario'])->name('secretaria.verHorario');
 Route::get('/secretaria/horarios/editar',[SecretariaController::class,'editarHorario'])->name('secretaria.editarHorario');
 Route::get('/secretaria/agendar',[SecretariaController::class,'agendar'])->name('secretaria.agendar');

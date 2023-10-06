@@ -21,7 +21,5 @@ class AdminController extends Controller
         return view('admin.admi_profesional');
     }
 
-    public function showEspecialidad(){
-        return view('admin.admi_especialidad');
-    }
+    
 }

@@ -15,6 +15,9 @@
             </div>
         </form>
 
+        @if (count($especialidades) === 0)
+        <div class="alert alert-danger">No hay pacientes registrados</div>
+        @else
         <table class="table table-bordered border-success">
             <thead>
                 <tr>
@@ -24,17 +27,19 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach ($especialidades as $especialidad )
                 <tr>
-                    <th>1</th>
-                    <td>Terapia Ocupacional</td>
+
+                    <th>{{$especialidad->id_especialidad}}</th>
+                    <td>{{$especialidad->nom_especialidad}}</td>
                     <td>
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter{{$especialidad->id_especialidad}}">
                             Eliminar
                         </button>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal fade" id="exampleModalCenter{{$especialidad->id_especialidad}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -44,7 +49,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        ¿Desea eliminar?
+                                        ¿Desea eliminar {{$especialidad->nom_especialidad}}?
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -60,9 +65,11 @@
 
                     </td>
                 </tr>
+                @endforeach
 
             </tbody>
         </table>
+        @endif
 
     </div>
 
@@ -74,11 +81,23 @@
             <div class="card-body">
 
 
-                <form action="" class='mt-4'>
+                <form action="{{route('especialidad.store')}}" class='mt-4' method="POST">
                     @csrf
 
                     <div class='m-3'>
-                        <input type="text" placeholder='Nombre especialidad' id='nom_paciente' name='nom_paciente' class="form-control">
+                        <input type="text" placeholder='Nombre especialidad' id='nom_especialidad' name='nom_especialidad' class="form-control">
+                    </div>
+                    <div class='m-3'>
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+
                     </div>
 
 
@@ -91,6 +110,7 @@
 
                 </form>
             </div>
+
 
 
 
