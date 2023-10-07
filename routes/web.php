@@ -49,6 +49,10 @@ Route::get('/admin/profesional',[AdminController::class,'showProfesional'])->nam
 // Route::get('/admin/especialidad',[AdminController::class,'showEspecialidad'])->name('admin.showEspecialidad'); // Lo cambie a especialidad
 Route::get('/especialidad',[EspecialidadesController::class,'index'])->name('especialidad.index');
 Route::post('/especialidad',[EspecialidadesController::class,'store'])->name('especialidad.store');
+Route::delete('/especialidad/{especialidad}',[EspecialidadesController::class,'destroy'])->name('especialidad.destroy');
+Route::get('/especialidad/edit/{especialidad}',[EspecialidadesController::class,'edit'])->name('especialidad.edit');
+Route::put('/especialidad/{especialidad}',[EspecialidadesController::class,'update'])->name('especialidad.update');
+Route::get('/search-especialidad',[EspecialidadesController::class,'search'])->name('especialidad.search');
 
 //Route::get('/secretaria',[SecretariaController::class,'index'])->name('secretaria.index');
 Route::get('/secretaria/horarios',[SecretariaController::class,'showHorarios'])->name('secretaria.showHorarios');

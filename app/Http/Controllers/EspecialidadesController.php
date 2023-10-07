@@ -17,13 +17,16 @@ class EspecialidadesController extends Controller
         return view('admin.admi_especialidad',compact('especialidades'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
+    public function show(Especialidad $especialidad){ // Mostrar una lista con los profesionales que tienen esa especialidad
         //
     }
+
+    public function search(Request $request){
+        $buscar = $request->buscar;
+        $especialidades = Especialidad::where('nom_especialidad', 'LIKE', "%$buscar%")-> get();
+        return view('admin.admi_especialidad', compact('especialidades'));
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -36,28 +39,23 @@ class EspecialidadesController extends Controller
         return redirect() -> route('especialidad.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Especialidad $especialidad)
-    {
-        
-    }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Especialidad $especialidad)
     {
-        //
+        return view('admin.editar_especialidad',compact('especialidad'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Especialidad $especialidad)
+    public function update(EspecialidadRequest $request, Especialidad $especialidad)
     {
-        //
+        $especialidad->nom_especialidad = $request->nom_especialidad;
+        $especialidad->save();
+        return redirect() -> route('especialidad.edit',compact('especialidad'));
     }
 
     /**
@@ -65,6 +63,16 @@ class EspecialidadesController extends Controller
      */
     public function destroy(Especialidad $especialidad)
     {
-        //
+        //$profesionales = DB::table('profesionales')->where('id_especialidad', $id_especialidad)->count();
+        /* if ($profesionales === 0){
+            return $especialidad->delete();
+        }
+        else{
+            $error = 'bla bla bla';
+            return $error;
+        } */
+
+        $especialidad->delete();
+        return redirect()->route('especialidad.index');
     }
 }

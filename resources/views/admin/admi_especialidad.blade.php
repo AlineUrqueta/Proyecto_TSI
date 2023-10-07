@@ -3,22 +3,22 @@
 @section('contenido')
 <div class="row mt-5">
     <div class="col-sm-12 col-md-8  order-md-first order-sm-last">
-        <form action="">
-            {{-- @csrf --}}
+        <form action="{{route('especialidad.search')}}">
+            @csrf
             <div class="row mb-4">
                 <div class="col-6">
                     <input type="text" name="buscar" placeholder="Buscar especialidad" class="form-control">
                 </div>
                 <div class="col-4">
-                    <button type="" class='btn btn-success '>Buscar</button>
+                    <button type="submit" class='btn btn-success '>Buscar</button>
                 </div>
             </div>
         </form>
 
         @if (count($especialidades) === 0)
-        <div class="alert alert-danger">No hay pacientes registrados</div>
+        <div class="alert alert-danger">No hay especialidades registradas</div>
         @else
-        <table class="table table-bordered border-success">
+        <table class="table table-bordered border-success" style= "width:45rem;height:auto">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
@@ -34,11 +34,12 @@
                     <td>{{$especialidad->nom_especialidad}}</td>
                     <td>
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter{{$especialidad->id_especialidad}}">
+                        <button type="button" class="btn btn-danger me-3" data-toggle="modal" data-target="#exampleModalCenter{{$especialidad->id_especialidad}}">
                             Eliminar
                         </button>
+                       
 
-                        <!-- Modal -->
+                        <!-- Modal Eliminar -->
                         <div class="modal fade" id="exampleModalCenter{{$especialidad->id_especialidad}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
@@ -53,15 +54,19 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                        <form action="">
-                                            <button class='btn btn-danger'>Eliminar</button>
+                                        <form action="{{route('especialidad.update',$especialidad->id_especialidad)}}" method="POST">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class='btn btn-danger'>Eliminar</button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <a class='btn btn-primary text-white' href="">Editar</a>
+                        
+
+                        <a class='btn btn-primary text-white' href="{{route('especialidad.edit',$especialidad->id_especialidad)}}">Editar</a>
 
                     </td>
                 </tr>
