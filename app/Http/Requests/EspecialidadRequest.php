@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Requests;
+use Illuminate\Validation\Rule;
+
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -22,7 +24,8 @@ class EspecialidadRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nom_especialidad'=>'required|min:5|max:25|unique:especialidades|'
+            
+            'nom_especialidad'=> 'required|min:5|max:25|unique:especialidades,nom_especialidad',            
         ];
     }
 

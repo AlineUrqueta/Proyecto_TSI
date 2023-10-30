@@ -69,7 +69,7 @@ class EspecialidadesController extends Controller
         }
         else{
             $error = 'bla bla bla';
-            return $error;
+            return  $messageError;
         } */
 
         $especialidad->delete();

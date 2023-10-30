@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PacientesController;
 use App\Http\Controllers\SecretariaController;
 use App\Http\Controllers\EspecialidadesController;
+use App\Http\Controllers\ProfesionalesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,7 +45,7 @@ Route::get('/pacientes/edit/{paciente}',[PacientesController::class,'edit'])->na
 Route::put('/pacientes/{paciente}',[PacientesController::class,'update'])->name('pacientes.update');
 
 Route::get('/admin/usuario',[AdminController::class,'showUsuario'])->name('admin.showUsuario');
-Route::get('/admin/profesional',[AdminController::class,'showProfesional'])->name('admin.showProfesional');
+
 
 // Route::get('/admin/especialidad',[AdminController::class,'showEspecialidad'])->name('admin.showEspecialidad'); // Lo cambie a especialidad
 Route::get('/especialidad',[EspecialidadesController::class,'index'])->name('especialidad.index');
@@ -61,4 +62,5 @@ Route::get('/secretaria/horarios/editar',[SecretariaController::class,'editarHor
 Route::get('/secretaria/agendar',[SecretariaController::class,'agendar'])->name('secretaria.agendar');
 
 
-
+//Profesionales
+Route::get('/admin/profesional',[ProfesionalesController::class,'index'])->name('admin.indexProfesional');

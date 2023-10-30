@@ -17,9 +17,7 @@ class AdminController extends Controller
         return view('admin.admi_usuario',compact('usuarios'));
     }
 
-    public function showProfesional(){
-        return view('admin.admi_profesional');
-    }
+    
 
     
 }

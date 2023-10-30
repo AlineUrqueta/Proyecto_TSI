@@ -29,7 +29,7 @@
                 <a class=" btn btn-light btn-lg" href="{{route('admin.showUsuario')}}">Administrar Usuarios</a>
             </div>
             <div class="row m-4">
-                <a class=" btn btn-light btn-lg" href="{{route('admin.showProfesional')}}">Administrar Profesionales</a>
+                <a class=" btn btn-light btn-lg" href="{{route('admin.indexProfesional')}}">Administrar Profesionales</a>
             </div>
             <div class="row m-4">
                 <a class=" btn btn-light btn-lg" href="{{route('especialidad.index')}}">Administrar Especialidades</a>

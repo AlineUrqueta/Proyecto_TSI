@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('especialidades', function (Blueprint $table) {
-            $table->tinyIncrements('id_especialidad'); // podríamos hacer que el email sea la clave primaria
+            $table->tinyIncrements('id_especialidad');
             $table->string('nom_especialidad',25);
             $table->timestamps();
         });

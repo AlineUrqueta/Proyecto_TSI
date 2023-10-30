@@ -11,4 +11,9 @@ class Especialidad extends Model
     protected $table = 'especialidades';
     protected $primaryKey = 'id_especialidad';
     public $timestamps = false;
+
+    // public function profesionales(): BelongsTo
+    // {
+    //     return $this->belongsTo(Profesionales::class);
+    // }
 }
