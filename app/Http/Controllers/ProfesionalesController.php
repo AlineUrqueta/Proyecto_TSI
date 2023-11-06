@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Profesional;
+use App\Models\Especialidad;
 use Illuminate\Http\Request;
+use App\Http\Requests\PRofesionalesRequest;
 
 class ProfesionalesController extends Controller
 {
@@ -12,8 +14,9 @@ class ProfesionalesController extends Controller
      */
     public function index()
     {
-        
-        return view('admin.admi_profesional');
+        $especialidades = Especialidad::all();
+        $profesionales = Profesional::all();
+        return view('admin.admi_profesional',compact('especialidades','profesionales'));
         
     }
 
@@ -28,9 +31,20 @@ class ProfesionalesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProfesionalesRequest $request)
     {
-        //
+        $profesional = new Profesional;
+        $profesional->rut_profesional = $request->rut_profesional;
+        $profesional->nom_profesional = $request->nom_profesional;
+        $profesional->apep_profesional = $request->apep_profesional;
+        $profesional->apem_profesional = $request->apem_profesional;
+        $profesional->fono = $request->fono;
+        $profesional->email = $request->email;
+        $profesional->id_especialidad_profesional = $request->id_especialidad;
+        $profesional->estado_vigente = 1;
+        $profesional->save();
+        return redirect()->route('admin.indexProfesional');
+        
     }
 
     /**

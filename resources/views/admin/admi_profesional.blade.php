@@ -14,7 +14,9 @@
                 </div>
             </div>
         </form>
-
+        @if (count($profesionales) === 0)
+        <div class="alert alert-danger">No hay profesionales registrados</div>
+        @else
         <table class="table table-bordered border-success" style="width: auto; height: auto;">
             <thead>
                 <tr>
@@ -28,13 +30,23 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach ($profesionales as $profesional )
                 <tr>
-                    <th>10456789-k</th>
-                    <th>Albert Wily</th>
-                    <th>Terapia Ocupacional</th>
-                    <td>drwily@maverick.com</td>
-                    <td>+56967894567</td>
+                    <th>{{$profesional->rut_profesional}}</th>
+                    <th>{{$profesional->nom_profesional}} {{$profesional->apep_profesional}} {{$profesional->apem_profesional}}</th>
+
+                    @foreach ($especialidades as $especialidad )
+                    @if ($especialidad->id_especialidad == $profesional->id_especialidad_profesional)
+                    <th>{{$especialidad->nom_especialidad}}</th>
+                    @endif
+                    @endforeach
+                    <td>{{$profesional->email}}</td>
+                    <td>{{$profesional->fono}}</td>
+                    @if ($profesional->estado_vigencia == 0)
                     <td>Activo</td>
+                    @else
+                    <td>Inactivo</td>
+                    @endif
                     <td>
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
@@ -69,8 +81,13 @@
                     </td>
                 </tr>
 
+                @endforeach
+
+
             </tbody>
         </table>
+        @endif
+
 
     </div>
 
@@ -82,43 +99,42 @@
             <div class="card-body">
 
 
-                <form action="" class='mt-4'>
+                <form action="{{route('profesional.store')}}" class='mt-4' method='POST'>
                     @csrf
                     <div class='m-3'>
-                        <input type="text" placeholder='Rut' class="form-control">
+                        <input type="text" placeholder='RUT Profesional' class="form-control" id="rut_profesional" name = "rut_profesional" >
                     </div>
 
                     <div class='m-3'>
-                        <input type="text" placeholder='Nombre' id='nom_paciente' name='nom_paciente' class="form-control">
+                        <input type="text" placeholder='Nombre' id='nom_profesional' name='nom_profesional' class="form-control" value="{{ old('nom_profesional') }}">
                     </div>
 
                     <div class='m-3'>
-                        <input type="text" placeholder='Apellido Paterno' id='apep_paciente' name='apep_paciente' class="form-control">
+                        <input type="text" placeholder='Apellido Paterno' id='apep_profesional' name='apep_profesional' class="form-control" value="{{ old('apep_profesional') }}">
                     </div>
 
                     <div class='m-3'>
-                        <input type="text" placeholder='Apellido Materno' id='apem_paciente' name='apem_paciente' class="form-control">
+                        <input type="text" placeholder='Apellido Materno' id='apem_profesional' name='apem_profesional' class="form-control" value="{{ old('apem_profesional') }}">
                     </div>
 
-                    
+
                     <div class='m-3'>
-                        <select class="custom-select custom-select-lg mb-3 form-control" >
-                            <option value="">Especialidad</option>
-                            <option value="0">Fonoaudiología</option>
-                            <option value="1">Psicología</option>
-                            <option value="2">Psiquiatría</option>
+                        <select class="custom-select custom-select-lg mb-3 form-control" id ="id_especialidad" name="id_especialidad">
+                            <option value=""> --Ingrese especialidad-- </option>
+                            @foreach ($especialidades as $especialidad)
+                            <option value="{{$especialidad->id_especialidad}}" >{{$especialidad->id_especialidad}} {{$especialidad->nom_especialidad}} </option>
+                            @endforeach
+
                         </select>
                     </div>
 
                     <div class='m-3'>
-                        <input type="text" placeholder='Celular' id='fono' name='fono' class="form-control">
+                        <input type="text" placeholder='Celular' id='fono' name='fono' class="form-control" value="{{ old('fono') }}">
                     </div>
 
                     <div class='m-3'>
-                        <input type="text" placeholder='Email' class="form-control">
+                        <input type="email" placeholder='email' class="form-control" name = 'email' id = 'email' value="{{ old('email') }}">
                     </div>
-
-
 
 
                     <div class='me-3 mt-4 text-end'>
@@ -129,6 +145,20 @@
 
 
                 </form>
+
+                <div class='m-3'>
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <p>Por favor solucione los siguientes errores: </p>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+
+                </div>
             </div>
 
 
