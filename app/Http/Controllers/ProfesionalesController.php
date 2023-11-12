@@ -47,6 +47,13 @@ class ProfesionalesController extends Controller
         
     }
 
+    public function search(Request $request){
+        $buscar = $request->buscar;
+        $profesionales = Profesional::where('apep_profesional', 'LIKE', "%$buscar%")->orWhere('rut_profesional', 'LIKE', "%$buscar%")-> get();
+        $especialidades = Especialidad::all();
+        return view('admin.admi_profesional', compact('profesionales','especialidades'));
+    }
+
     /**
      * Display the specified resource.
      */

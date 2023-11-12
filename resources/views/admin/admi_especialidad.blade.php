@@ -34,9 +34,12 @@
                     <td>{{$especialidad->nom_especialidad}}</td>
                     <td>
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-danger me-3" data-toggle="modal" data-target="#exampleModalCenter{{$especialidad->id_especialidad}}">
+                        @if ($especialidad->profesionales->count() === 0)
+                            <button type="button" class="btn btn-danger me-3" data-toggle="modal" data-target="#exampleModalCenter{{$especialidad->id_especialidad}}">
                             Eliminar
-                        </button>
+                            </button>
+                        @endif
+                        
                        
 
                         <!-- Modal Eliminar -->

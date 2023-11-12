@@ -3,8 +3,8 @@
 @section('contenido')
 <div class="row mt-5">
     <div class="col-sm-12 col-md-8  order-md-first order-sm-last">
-        <form action="">
-            {{-- @csrf --}}
+        <form action="{{route('profesional.search')}}"  method="GET">
+            @csrf 
             <div class="row mb-4">
                 <div class="col-6">
                     <input type="text" name="buscar" placeholder="Buscar profesional por nombre o especialidad" class="form-control">

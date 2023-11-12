@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Especialidad;
 use Illuminate\Http\Request;
 use App\Http\Requests\EspecialidadRequest;
+use Illuminate\Support\Facades\DB;
 
 class EspecialidadesController extends Controller
 {
@@ -63,16 +64,11 @@ class EspecialidadesController extends Controller
      */
     public function destroy(Especialidad $especialidad)
     {
-        //$profesionales = DB::table('profesionales')->where('id_especialidad', $id_especialidad)->count();
-        /* if ($profesionales === 0){
-            return $especialidad->delete();
+        $profesionales = DB::table('profesionales')->where('id_especialidad_profesional', $especialidad->id_especialidad)->count();
+        if ($profesionales === 0){
+            $especialidad->delete();
+            return redirect()->route('especialidad.index');
         }
-        else{
-            $error = 'bla bla bla';
-            return  $messageError;
-        } */
-
-        $especialidad->delete();
-        return redirect()->route('especialidad.index');
+        
     }
 }

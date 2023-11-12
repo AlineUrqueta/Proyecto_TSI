@@ -15,8 +15,8 @@ class Profesional extends Model
     public $timestamps = false;
     public $incrementing = false;
 
-    // public function especialidades(): HasMany
-    // {
-    //     return $this->hasMany(Especialidades::class);
-    // }
+    public function especialidad()
+    {
+        return $this->belongsTo(Especialidad::class, 'id_especialidad');
+    }
 }

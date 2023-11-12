@@ -12,8 +12,8 @@ class Especialidad extends Model
     protected $primaryKey = 'id_especialidad';
     public $timestamps = false;
 
-    // public function profesionales(): BelongsTo
-    // {
-    //     return $this->belongsTo(Profesionales::class);
-    // }
+    public function profesionales()
+    {
+        return $this->hasMany(Profesional::class,'id_especialidad_profesional');
+    }
 }
