@@ -34,58 +34,49 @@
                     </div>
 
                     <div class='m-3'>
+                        <input type="text" placeholder='Email' id='email' name='email' class="form-control" value="{{$profesional->email}}">
+                    </div>
+
+                    <div class='m-3'>
                         <select class="custom-select custom-select-lg mb-3 form-control" id='estado_vigente' name='estado_vigente'>
-                            @if($profesional->estado_vigente == 1)
-                                <option value="1" selected>Vigente</option>
-                                <option value="0" > No Vigente</option>
-                            @else
-                                <option value="1"  >Vigente</option>
-                                <option value="0" selected> No Vigente</option>
-                            @endif
-                            
+                            <option value="1">Vigente</option>
+                            <option value="0"> No Vigente</option>
                         </select>
+                    </div>
+
+
+
+                    <div class='m-3'>
+                        {{-- <select class="custom-select custom-select-lg mb-3 form-control" id='id_especialidad_profesional' name='id_especialidad_profesional'>
+                            @foreach ($especialidades as $especialidad )
+                            @if($especialidad->id_especialidad === $profesional->id_especialidad_profesional)
+                            <option value="{{$profesional->id_especialidad_profesional}}" selected>{{$especialidad->nom_especialidad}}</option>
+                            @else
+                            <option value="{{$profesional->id_especialidad_profesional}}">{{$especialidad->nom_especialidad}}</option>
+                            @endif
+                            @endforeach
+
+                        </select> --}}
+
+                        <select class="custom-select custom-select-lg mb-3 form-control" id='id_especialidad_profesional' name='id_especialidad_profesional'>
+                            @foreach ($especialidades as $especialidad)
+                            <option value="{{$especialidad->id_especialidad}}" {{$profesional->id_especialidad_profesional == $especialidad->id_especialidad ? 'selected' : ''}}>
+                                {{$especialidad->nom_especialidad}}
+                            </option>
+                            @endforeach
+                        </select>
+
+
                     </div>
 
                     
 
-                    <div class='m-3'>
-                        <small class="ms-2"> Fecha de Nacimiento</small>
-                        <input type="date" placeholder='Fecha de nacimiento' id='fecha_nacimiento' name='fecha_nacimiento' class="form-control" value="{{$profesional->fecha_nacimiento}}">
-                    </div>
 
 
-
-                    <!-- Button trigger modal -->
                     <div class='me-3 mt-4 text-end'>
-                        <a href="{{route('profesionals.index')}}" class = "btn btn-primary">Volver a profesionals</a>
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
-                            Editar</button>
+                        <a href="{{route('admin.indexProfesional')}}" class="btn btn-primary">Volver a profesionales</a>
+                        <button type='submit' class='btn btn-success '>Editar </button>
                     </div>
-
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Editar profesional</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    ¿Desea editar a {{$profesional->nom_profesional}} {{$profesional->apep_profesional}} con RUT {{$profesional->rut_profesional}} ?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-
-                                    <button class='btn btn-success' type="submit">Editar</button>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
 
 
                 </form>

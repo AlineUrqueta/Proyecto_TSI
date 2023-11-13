@@ -3,8 +3,8 @@
 @section('contenido')
 <div class="row mt-5">
     <div class="col-sm-12 col-md-8  order-md-first order-sm-last">
-        <form action="{{route('profesional.search')}}"  method="GET">
-            @csrf 
+        <form action="{{route('profesional.search')}}" method="GET">
+            @csrf
             <div class="row mb-4">
                 <div class="col-6">
                     <input type="text" name="buscar" placeholder="Buscar profesional por nombre o especialidad" class="form-control">
@@ -42,43 +42,14 @@
                     @endforeach
                     <td>{{$profesional->email}}</td>
                     <td>{{$profesional->fono}}</td>
-                    @if ($profesional->estado_vigencia == 0)
-                    <td>Activo</td>
+                    @if ($profesional->estado_vigente == 1)
+                    <td>Vigente</td>
                     @else
-                    <td>Inactivo</td>
+                    <td>No Vigente</td>
                     @endif
                     <td>
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
-                            Estado
-                        </button>
-                        
+
                         <a class='btn btn-primary text-white' href="{{route('profesional.edit',$profesional->rut_profesional)}}">Editar</a>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">Cambiar Estado</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        ¿Desea cambiar de estado al profesional?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                        <form action="">
-                                            <button class='btn btn-danger'>Cambiar estado</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        
 
                     </td>
                 </tr>
@@ -104,7 +75,7 @@
                 <form action="{{route('profesional.store')}}" class='mt-4' method='POST'>
                     @csrf
                     <div class='m-3'>
-                        <input type="text" placeholder='RUT Profesional' class="form-control" id="rut_profesional" name = "rut_profesional" >
+                        <input type="text" placeholder='RUT Profesional' class="form-control" id="rut_profesional" name="rut_profesional">
                     </div>
 
                     <div class='m-3'>
@@ -121,10 +92,10 @@
 
 
                     <div class='m-3'>
-                        <select class="custom-select custom-select-lg mb-3 form-control" id ="id_especialidad" name="id_especialidad">
+                        <select class="custom-select custom-select-lg mb-3 form-control" id="id_especialidad" name="id_especialidad">
                             <option value=""> --Ingrese especialidad-- </option>
                             @foreach ($especialidades as $especialidad)
-                            <option value="{{$especialidad->id_especialidad}}" >{{$especialidad->id_especialidad}} {{$especialidad->nom_especialidad}} </option>
+                            <option value="{{$especialidad->id_especialidad}}">{{$especialidad->id_especialidad}} {{$especialidad->nom_especialidad}} </option>
                             @endforeach
 
                         </select>
@@ -135,7 +106,7 @@
                     </div>
 
                     <div class='m-3'>
-                        <input type="email" placeholder='email' class="form-control" name = 'email' id = 'email' value="{{ old('email') }}">
+                        <input type="email" placeholder='email' class="form-control" name='email' id='email' value="{{ old('email') }}">
                     </div>
 
 

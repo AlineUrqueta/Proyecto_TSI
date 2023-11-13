@@ -76,7 +76,8 @@ class ProfesionalesController extends Controller
      */
     public function edit(Profesional $profesional)
     {
-        return view('profesional.edit',compact('profesional'));
+        $especialidades = Especialidad::all();
+        return view('admin.admin_profesional-editar',compact('profesional','especialidades'));
     }
 
     /**
@@ -84,7 +85,17 @@ class ProfesionalesController extends Controller
      */
     public function update(Request $request, Profesional $profesional)
     {
-        //
+        //$profesional->rut_profesional = $request->rut_profesional;
+
+        $profesional->nom_profesional = $request->nom_profesional;
+        $profesional->apep_profesional = $request->apep_profesional;
+        $profesional->apem_profesional = $request->apem_profesional;
+        $profesional->fono = $request->fono;
+        $profesional->email = $request->email;
+        $profesional->id_especialidad_profesional = $request->id_especialidad_profesional;
+        $profesional->estado_vigente = $request->estado_vigente;
+        $profesional->save();
+        return redirect()->route('profesional.edit',compact('profesional'));
     }
 
     /**
