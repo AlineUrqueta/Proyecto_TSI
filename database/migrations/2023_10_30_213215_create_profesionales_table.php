@@ -12,13 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('profesionales', function (Blueprint $table) {
-            $table->string('rut_profesional')->primary(); 
-            $table->string('nom_profesional',50);
-            $table->string('apep_profesional',50);
-            $table->string('apem_profesional',50);
-            $table->string('fono',13); //Es String porque se considera el +  //  
-            $table->string('email',50);
-            $table->tinyIncrements('id_especialidad_profesional');
+
+            $table->string('rut_profesional')->primary();
+            $table->string('nom_profesional', 50);
+            $table->string('apep_profesional', 50);
+            $table->string('apem_profesional', 50);
+            $table->string('fono', 13);
+            $table->string('email', 50);
+            $table->tinyInteger('id_especialidad_profesional')->unsigned();
             $table->foreign('id_especialidad_profesional')->references('id_especialidad')->on('especialidades');
             $table->tinyInteger('estado_vigente')->default(1);
 

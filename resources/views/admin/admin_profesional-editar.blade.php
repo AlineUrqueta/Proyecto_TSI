@@ -39,30 +39,30 @@
 
                     <div class='m-3'>
                         <select class="custom-select custom-select-lg mb-3 form-control" id='estado_vigente' name='estado_vigente'>
-                            <option value="1">Vigente</option>
+                        @if ($profesional->estado_vigente === 1)
+                            <option value="1" selected>Vigente</option>
                             <option value="0"> No Vigente</option>
+                        @else
+                            <option value="1">Vigente</option>
+                            <option value="0" selected> No Vigente</option>
+                        @endif
+                            
                         </select>
                     </div>
 
 
 
                     <div class='m-3'>
-                        {{-- <select class="custom-select custom-select-lg mb-3 form-control" id='id_especialidad_profesional' name='id_especialidad_profesional'>
-                            @foreach ($especialidades as $especialidad )
-                            @if($especialidad->id_especialidad === $profesional->id_especialidad_profesional)
-                            <option value="{{$profesional->id_especialidad_profesional}}" selected>{{$especialidad->nom_especialidad}}</option>
-                            @else
-                            <option value="{{$profesional->id_especialidad_profesional}}">{{$especialidad->nom_especialidad}}</option>
-                            @endif
-                            @endforeach
-
-                        </select> --}}
 
                         <select class="custom-select custom-select-lg mb-3 form-control" id='id_especialidad_profesional' name='id_especialidad_profesional'>
                             @foreach ($especialidades as $especialidad)
-                            <option value="{{$especialidad->id_especialidad}}" {{$profesional->id_especialidad_profesional == $especialidad->id_especialidad ? 'selected' : ''}}>
+                            @if ($especialidad->id_especialidad === $profesional->id_especialidad_profesional)
+                                <option value="{{$especialidad->id_especialidad}}" selected>{{$especialidad->nom_especialidad}}</option>
+                            @else
+                                <option value="{{$especialidad->id_especialidad}}">
                                 {{$especialidad->nom_especialidad}}
                             </option>
+                            @endif
                             @endforeach
                         </select>
 

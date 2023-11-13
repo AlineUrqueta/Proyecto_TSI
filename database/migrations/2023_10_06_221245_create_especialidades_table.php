@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('especialidades', function (Blueprint $table) {
             $table->tinyIncrements('id_especialidad');
             $table->string('nom_especialidad',25);
-            $table->timestamps();
+            //$table->timestamps();
         });
     }
 
