@@ -65,4 +65,6 @@ Route::get('/secretaria/agendar',[SecretariaController::class,'agendar'])->name(
 //Profesionales
 Route::get('/admin/profesional',[ProfesionalesController::class,'index'])->name('admin.indexProfesional');
 Route::post('/admin/profesional',[ProfesionalesController::class,'store'])->name('profesional.store');
-Route::get('/search-profesimal',[ProfesionalesController::class,'search'])->name('profesional.search');
+Route::get('/admin/search-profesional',[ProfesionalesController::class,'search'])->name('profesional.search');
+Route::get('/admin/edit/{profesional}',[ProfesionalesController::class,'edit'])->name('profesional.edit');
+Route::put('/admin/{profesional}',[ProfesionalesController::class,'update'])->name('profesional.update');

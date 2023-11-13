@@ -17,6 +17,6 @@ class Profesional extends Model
 
     public function especialidad()
     {
-        return $this->belongsTo(Especialidad::class, 'id_especialidad');
+        return $this->belongsTo(Especialidad::class, 'id_especialidad_profesional');
     }
 }

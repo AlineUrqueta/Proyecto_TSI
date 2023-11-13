@@ -50,8 +50,10 @@
                     <td>
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
-                            Cambiar estado
+                            Estado
                         </button>
+                        
+                        <a class='btn btn-primary text-white' href="{{route('profesional.edit',$profesional->rut_profesional)}}">Editar</a>
 
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -76,7 +78,7 @@
                             </div>
                         </div>
 
-                        <a class='btn btn-primary text-white' href="">Editar</a>
+                        
 
                     </td>
                 </tr>

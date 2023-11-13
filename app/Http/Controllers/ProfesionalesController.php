@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Profesional;
 use App\Models\Especialidad;
 use Illuminate\Http\Request;
-use App\Http\Requests\PRofesionalesRequest;
+use App\Http\Requests\ProfesionalesRequest;
 
 class ProfesionalesController extends Controller
 {
@@ -15,7 +15,7 @@ class ProfesionalesController extends Controller
     public function index()
     {
         $especialidades = Especialidad::all();
-        $profesionales = Profesional::all();
+        $profesionales = Profesional::orderBy('estado_vigente')->get();
         return view('admin.admi_profesional',compact('especialidades','profesionales'));
         
     }
@@ -49,7 +49,16 @@ class ProfesionalesController extends Controller
 
     public function search(Request $request){
         $buscar = $request->buscar;
-        $profesionales = Profesional::where('apep_profesional', 'LIKE', "%$buscar%")->orWhere('rut_profesional', 'LIKE', "%$buscar%")-> get();
+
+        $especialidades = Especialidad::where('nom_especialidad', 'LIKE', "%$buscar%")->get();
+
+        $profesionales = Profesional::where('apep_profesional', 'LIKE', "%$buscar%")
+        ->orWhere(function ($query) use ($buscar) {
+            $query->whereHas('especialidad', function ($subquery) use ($buscar) {
+                $subquery->where('nom_especialidad', 'LIKE', "%$buscar%");
+            });
+        })->orWhere('nom_profesional', 'LIKE', "%$buscar%")->get();
+        
         $especialidades = Especialidad::all();
         return view('admin.admi_profesional', compact('profesionales','especialidades'));
     }
@@ -67,7 +76,7 @@ class ProfesionalesController extends Controller
      */
     public function edit(Profesional $profesional)
     {
-        //
+        return view('profesional.edit',compact('profesional'));
     }
 
     /**
