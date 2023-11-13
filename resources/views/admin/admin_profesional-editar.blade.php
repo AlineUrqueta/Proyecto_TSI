@@ -39,14 +39,14 @@
 
                     <div class='m-3'>
                         <select class="custom-select custom-select-lg mb-3 form-control" id='estado_vigente' name='estado_vigente'>
-                        @if ($profesional->estado_vigente === 1)
+                            @if ($profesional->estado_vigente === 1)
                             <option value="1" selected>Vigente</option>
                             <option value="0"> No Vigente</option>
-                        @else
+                            @else
                             <option value="1">Vigente</option>
                             <option value="0" selected> No Vigente</option>
-                        @endif
-                            
+                            @endif
+
                         </select>
                     </div>
 
@@ -57,9 +57,9 @@
                         <select class="custom-select custom-select-lg mb-3 form-control" id='id_especialidad_profesional' name='id_especialidad_profesional'>
                             @foreach ($especialidades as $especialidad)
                             @if ($especialidad->id_especialidad === $profesional->id_especialidad_profesional)
-                                <option value="{{$especialidad->id_especialidad}}" selected>{{$especialidad->nom_especialidad}}</option>
+                            <option value="{{$especialidad->id_especialidad}}" selected>{{$especialidad->nom_especialidad}}</option>
                             @else
-                                <option value="{{$especialidad->id_especialidad}}">
+                            <option value="{{$especialidad->id_especialidad}}">
                                 {{$especialidad->nom_especialidad}}
                             </option>
                             @endif
@@ -69,13 +69,14 @@
 
                     </div>
 
-                    
+
 
 
 
                     <div class='me-3 mt-4 text-end'>
                         <a href="{{route('admin.indexProfesional')}}" class="btn btn-primary">Volver a profesionales</a>
                         <button type='submit' class='btn btn-success '>Editar </button>
+                        
                     </div>
 
 
@@ -93,6 +94,10 @@
                             @endforeach
                         </ul>
                     </div>
+                    @else
+                        @if(session('editarCorrecto'))
+                            <div class="alert alert-success">{{ session('editarCorrecto') }}</div>
+                        @endif
                     @endif
                 </div>
             </div>

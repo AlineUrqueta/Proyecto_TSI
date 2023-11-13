@@ -22,13 +22,13 @@ class ProfesionalesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'rut_profesional' => 'required|unique:profesionales|regex:/^(\d{7,8}-[\dkK])$/',
+            'rut_profesional' => 'sometimes|required|unique:profesionales|regex:/^(\d{7,8}-[\dkK])$/',
             'nom_profesional' => 'required|min:3|max:50',
             'apep_profesional' => 'required|min:4|max:50',
             'apem_profesional' => 'required|min:4|max:50',
             'email'=>'required|min:10|max:60',
             'fono' => 'required|min:9|max:13',
-            'id_especialidad'=>'required'
+            'id_especialidad_profesional'=>'required'
         ];
     }
 

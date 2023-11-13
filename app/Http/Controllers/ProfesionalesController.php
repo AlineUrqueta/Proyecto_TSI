@@ -83,7 +83,7 @@ class ProfesionalesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Profesional $profesional)
+    public function update(ProfesionalesRequest $request, Profesional $profesional)
     {
         //$profesional->rut_profesional = $request->rut_profesional;
 
@@ -95,7 +95,7 @@ class ProfesionalesController extends Controller
         $profesional->id_especialidad_profesional = $request->id_especialidad_profesional;
         $profesional->estado_vigente = $request->estado_vigente;
         $profesional->save();
-        return redirect()->route('profesional.edit',compact('profesional'));
+        return redirect()->route('profesional.edit',compact('profesional'))->with('editarCorrecto', 'Datos actualizados!');;
     }
 
     /**
