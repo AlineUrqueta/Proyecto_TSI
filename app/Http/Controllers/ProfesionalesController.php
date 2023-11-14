@@ -15,7 +15,7 @@ class ProfesionalesController extends Controller
     public function index()
     {
         $especialidades = Especialidad::all();
-        $profesionales = Profesional::orderBy('estado_vigente')->get();
+        $profesionales = Profesional::orderBy('estado_vigente','desc')->get();
         return view('admin.admi_profesional',compact('especialidades','profesionales'));
         
     }
@@ -31,6 +31,8 @@ class ProfesionalesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    
+
     public function store(ProfesionalesRequest $request)
     {
         $profesional = new Profesional;
@@ -41,10 +43,11 @@ class ProfesionalesController extends Controller
         $profesional->fono = $request->fono;
         $profesional->email = $request->email;
         $profesional->id_especialidad_profesional = $request->id_especialidad;
+        
         $profesional->estado_vigente = 1;
         $profesional->save();
         return redirect()->route('admin.indexProfesional');
-        
+       
     }
 
     public function search(Request $request){
@@ -57,7 +60,7 @@ class ProfesionalesController extends Controller
             $query->whereHas('especialidad', function ($subquery) use ($buscar) {
                 $subquery->where('nom_especialidad', 'LIKE', "%$buscar%");
             });
-        })->orWhere('nom_profesional', 'LIKE', "%$buscar%")->get();
+        })->orWhere('nom_profesional', 'LIKE', "%$buscar%")->orderBy('estado_vigente','desc')->get();
         
         $especialidades = Especialidad::all();
         return view('admin.admi_profesional', compact('profesionales','especialidades'));
@@ -92,10 +95,10 @@ class ProfesionalesController extends Controller
         $profesional->apem_profesional = $request->apem_profesional;
         $profesional->fono = $request->fono;
         $profesional->email = $request->email;
-        $profesional->id_especialidad_profesional = $request->id_especialidad_profesional;
+        $profesional->id_especialidad_profesional = $request->id_especialidad;
         $profesional->estado_vigente = $request->estado_vigente;
         $profesional->save();
-        return redirect()->route('profesional.edit',compact('profesional'))->with('editarCorrecto', 'Datos actualizados!');;
+        return redirect()->route('profesional.edit',compact('profesional'))->with('editarCorrecto', 'Datos actualizados!');
     }
 
     /**

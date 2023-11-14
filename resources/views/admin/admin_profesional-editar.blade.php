@@ -54,7 +54,7 @@
 
                     <div class='m-3'>
 
-                        <select class="custom-select custom-select-lg mb-3 form-control" id='id_especialidad_profesional' name='id_especialidad_profesional'>
+                        <select class="custom-select custom-select-lg mb-3 form-control" id='id_especialidad' name='id_especialidad'>
                             @foreach ($especialidades as $especialidad)
                             @if ($especialidad->id_especialidad === $profesional->id_especialidad_profesional)
                             <option value="{{$especialidad->id_especialidad}}" selected>{{$especialidad->nom_especialidad}}</option>

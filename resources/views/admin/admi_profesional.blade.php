@@ -106,7 +106,7 @@
                     </div>
 
                     <div class='m-3'>
-                        <input type="email" placeholder='email' class="form-control" name='email' id='email' value="{{ old('email') }}">
+                        <input type="email" placeholder='Email' class="form-control" name='email' id='email' value="{{ old('email') }}">
                     </div>
 
 
@@ -128,8 +128,12 @@
                             <li>{{ $error }}</li>
                             @endforeach
                         </ul>
+                        
+
                     </div>
                     @endif
+
+
 
                 </div>
             </div>

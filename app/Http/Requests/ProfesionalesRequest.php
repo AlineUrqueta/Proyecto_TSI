@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\DigitoVerificador;
+use Illuminate\Validation\Rule;
 
 class ProfesionalesRequest extends FormRequest
 {
@@ -19,17 +21,26 @@ class ProfesionalesRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
+
+     
     public function rules(): array
     {
         return [
-            'rut_profesional' => 'sometimes|required|unique:profesionales|regex:/^(\d{7,8}-[\dkK])$/',
+            'rut_profesional' => [
+                'sometimes',
+                'required',
+                'unique:profesionales',
+                'regex:/^(\d{7,8}-[\dkK])$/',
+                new DigitoVerificador,
+            ],
             'nom_profesional' => 'required|min:3|max:50',
             'apep_profesional' => 'required|min:4|max:50',
             'apem_profesional' => 'required|min:4|max:50',
-            'email'=>'required|min:10|max:60',
+            'email' => 'required|min:10|max:60',
             'fono' => 'required|min:9|max:13',
-            'id_especialidad_profesional'=>'required'
+            'id_especialidad' => 'required',
         ];
+
     }
 
     public function messages(){
