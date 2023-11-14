@@ -49,9 +49,12 @@ class DigitoVerificador implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         $resultado = $this->calcularDigitoVerificador($value);
-        if ($resultado === false) {
+        
+        if (strpos($value, '-') !== false && $resultado === false ) {
             $fail('El dígito verificador no es válido.');
         }
+        
+        
 
     }
 }
