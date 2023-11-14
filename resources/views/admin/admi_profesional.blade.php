@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title','Mantenedor de profesionales')
 @section('contenido')
-<div class="row mt-5">
+<div class="row mt-5 ">
     <div class="col-sm-12 col-md-8  order-md-first order-sm-last">
         <form action="{{route('profesional.search')}}" method="GET">
             @csrf
@@ -21,18 +21,18 @@
             <thead>
                 <tr>
                     <th scope="col">RUT</th>
-                    <th scope="col">NOMBRE COMPLETO</th>
+                    <th scope="col">NOMBRE</th>
                     <th scope="col">ESPECIALIDAD</th>
                     <th scope="col">EMAIL</th>
                     <th scope="col">FONO</th>
                     <th scope="col">ESTADO</th>
-                    <th scope="col">ACCIONES</th>
+                    <th scope="col">ACCION</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($profesionales as $profesional )
                 <tr>
-                    <th>{{$profesional->rut_profesional}}</th>
+                    <th >{{$profesional->rut_profesional}}</th>
                     <th>{{$profesional->nom_profesional}} {{$profesional->apep_profesional}} {{$profesional->apem_profesional}}</th>
 
                     @foreach ($especialidades as $especialidad )
@@ -43,13 +43,19 @@
                     <td>{{$profesional->email}}</td>
                     <td>{{$profesional->fono}}</td>
                     @if ($profesional->estado_vigente == 1)
-                    <td>Vigente</td>
+                    <td class="text-center"><span class="material-symbols-outlined">
+                            check
+                        </span></td>
                     @else
-                    <td>No Vigente</td>
+                    <td class="text-center"><span class="material-symbols-outlined">
+                            do_not_disturb_on
+                        </span></td>
                     @endif
                     <td>
 
-                        <a class='btn btn-primary text-white' href="{{route('profesional.edit',$profesional->rut_profesional)}}">Editar</a>
+                        <a class='btn btn-warning text-white' href="{{route('profesional.edit',$profesional->rut_profesional)}}"><span class="material-symbols-outlined">
+                                manufacturing
+                            </span></a>
 
                     </td>
                 </tr>
@@ -128,7 +134,7 @@
                             <li>{{ $error }}</li>
                             @endforeach
                         </ul>
-                        
+
 
                     </div>
                     @endif

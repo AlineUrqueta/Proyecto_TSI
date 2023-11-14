@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
-     <link rel="shortcut icon" href="images/icono.png" />
+    <link rel="shortcut icon" href="images/icono.png" />
+    
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
         body {
@@ -34,8 +36,8 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     @if(auth()->check())
-                        <p class='me-4 mb-0'>Bienvenido/a <b>{{auth()->user()->nom_usuario}} {{auth()->user()->apep_usuario}} {{auth()->user()->apem_usuario}}</b>     </p>
-                        <li class="nav-item me-4">
+                    <p class='me-4 mb-0'>Bienvenido/a <b>{{auth()->user()->nom_usuario}} {{auth()->user()->apep_usuario}} {{auth()->user()->apem_usuario}}</b> </p>
+                    <li class="nav-item me-4">
                         <a class=" btn btn-outline-light " aria-current="page" href="{{route('login.destroy')}}">Logout</a>
                     </li>
                     {{-- @else
