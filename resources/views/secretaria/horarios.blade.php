@@ -67,7 +67,7 @@
             <div class="card-body">
 
 
-                <form action="" class='mt-4'>
+                <form action="{{route('horario.store')}}" class='mt-4' method='POST'>
 
                     <div class='m-3'>
                         <select class="custom-select custom-select-lg mb-3 form-control" id='corp_tea' name='corp_tea'>
@@ -89,7 +89,7 @@
                                 $lunesCheck = 0;
                             @endphp
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" @checked($lunesCheck = 1) role="switch" id="lunes" checked>
+                                <input class="form-check-input" type="checkbox" @checked($lunesCheck = 1) role="switch"  id="1" name="1" checked>
                                 <label class="form-check-label" for="lunes">Lunes</label>
                             </div>
 
@@ -97,7 +97,7 @@
 
                         <div class="col-6">
                             <div class="row m-2">
-                                <select class="form-select" aria-label="hora_inicio_lunes" @if ($lunesCheck == 0) disabled @endif>
+                                <select class="form-select" aria-label="hora_inicio_lunes" name="hora_inicio" @if ($lunesCheck == 0) disabled @endif>
                                     <option selected>Hora de inicio</option>
                                     <option value="1">9:00</option>
                                     <option value="2">9:45</option>
@@ -118,7 +118,7 @@
                                 </select>
                             </div>
                             <div class="row m-2">
-                                <select class="form-select" aria-label="hora_fin_lunes" @if ($lunesCheck == 0) disabled @endif>
+                                <select class="form-select" aria-label="hora_fin_lunes" name="hora_fin" @if ($lunesCheck == 0) disabled @endif>
                                     <option selected>Hora de termino</option>
                                     <option value="1">9:45</option>
                                     <option value="2">10:30</option>
@@ -148,7 +148,7 @@
                                 $martesCheck = 0;
                             @endphp
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" @checked($martesCheck = 1) role="switch" id="martes" checked>
+                                <input class="form-check-input" type="checkbox" @checked($martesCheck = 1) role="switch"  id="2" name="2" checked>
                                 <label class="form-check-label" for="martes">Martes</label>
                             </div>
 
@@ -156,12 +156,12 @@
 
                         <div class="col-6">
                             <div class="row m-2">
-                                <select class="form-select" aria-label="hora_inicio_martes" @if ($martesCheck == 0) disabled @endif>
+                                <select class="form-select" aria-label="hora_inicio_martes" name="hora_inicio" @if ($martesCheck == 0) disabled @endif>
                                     <option selected>Hora de inicio</option>
                                 </select>
                             </div>
                             <div class="row m-2">
-                                <select class="form-select" aria-label="hora_fin_martes" @if ($martesCheck == 0) disabled @endif>
+                                <select class="form-select" aria-label="hora_fin_martes" name="hora_fin" @if ($martesCheck == 0) disabled @endif>
                                     <option selected>Hora de termino</option>
                                 </select>
                             </div>
@@ -176,7 +176,7 @@
                                 $miercolesCheck = 0;
                             @endphp
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" @checked($miercolesCheck = 1) role="switch" id="miercoles" checked>
+                                <input class="form-check-input" type="checkbox" @checked($miercolesCheck = 1) role="switch"  id="3" name="3" checked>
                                 <label class="form-check-label" for="miercoles">Miercoles</label>
                             </div>
 
@@ -184,12 +184,12 @@
 
                         <div class="col-6">
                             <div class="row m-2">
-                                <select class="form-select" aria-label="hora_inicio_miercoles" @if ($miercolesCheck == 0) disabled @endif>
+                                <select class="form-select" aria-label="hora_inicio_miercoles" name="hora_inicio" @if ($miercolesCheck == 0) disabled @endif>
                                     <option selected>Hora de inicio</option>
                                 </select>
                             </div>
                             <div class="row m-2">
-                                <select class="form-select" aria-label="hora_fin_miercoles" @if ($miercolesCheck == 0) disabled @endif>
+                                <select class="form-select" aria-label="hora_fin_miercoles" name="hora_fin" @if ($miercolesCheck == 0) disabled @endif>
                                     <option selected>Hora de termino</option>
                                 </select>
                             </div>
@@ -204,7 +204,7 @@
                                 $juevesCheck = 0;
                             @endphp
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" @checked($juevesCheck = 1) role="switch" id="jueves" checked>
+                                <input class="form-check-input" type="checkbox" @checked($juevesCheck = 1) role="switch"  id="4" name="4" checked>
                                 <label class="form-check-label" for="jueves">Jueves</label>
                             </div>
 
@@ -212,12 +212,12 @@
 
                         <div class="col-6">
                             <div class="row m-2">
-                                <select class="form-select" aria-label="hora_inicio_jueves" @if ($juevesCheck == 0) disabled @endif>
+                                <select class="form-select" aria-label="hora_inicio_jueves" name="hora_inicio" @if ($juevesCheck == 0) disabled @endif>
                                     <option selected>Hora de inicio</option>
                                 </select>
                             </div>
                             <div class="row m-2">
-                                <select class="form-select" aria-label="hora_fin_jueves" @if ($juevesCheck == 0) disabled @endif>
+                                <select class="form-select" aria-label="hora_fin_jueves" name="hora_fin" @if ($juevesCheck == 0) disabled @endif>
                                     <option selected>Hora de termino</option>
                                 </select>
                             </div>
@@ -232,7 +232,7 @@
                                 $viernesCheck = 0;
                             @endphp
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" @checked($viernesCheck = 1) role="switch" id="viernes" checked>
+                                <input class="form-check-input" type="checkbox" @checked($viernesCheck = 1) role="switch"  id="5" name="5" checked>
                                 <label class="form-check-label" for="viernes">Viernes</label>
                             </div>
 
@@ -240,12 +240,12 @@
 
                         <div class="col-6">
                             <div class="row m-2">
-                                <select class="form-select" aria-label="hora_inicio_viernes" @if ($viernesCheck == 0) disabled @endif>
+                                <select class="form-select" aria-label="hora_inicio_viernes" name="hora_inicio" @if ($viernesCheck == 0) disabled @endif>
                                     <option selected>Hora de inicio</option>
                                 </select>
                             </div>
                             <div class="row m-2">
-                                <select class="form-select" aria-label="hora_fin_viernes" @if ($viernesCheck == 0) disabled @endif>
+                                <select class="form-select" aria-label="hora_fin_viernes" name="hora_fin" @if ($viernesCheck == 0) disabled @endif>
                                     <option selected>Hora de termino</option>
                                 </select>
                             </div>
@@ -260,7 +260,7 @@
                                 $sabadoCheck = 0;
                             @endphp
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" @checked($sabadoCheck = 1) role="switch" id="sabado" checked>
+                                <input class="form-check-input" type="checkbox" @checked($sabadoCheck = 1) role="switch"  id="6" name="6" checked>
                                 <label class="form-check-label" for="sabado">Sábado</label>
                             </div>
 
@@ -268,12 +268,12 @@
 
                         <div class="col-6">
                             <div class="row m-2">
-                                <select class="form-select" aria-label="hora_inicio_sabado" @if ($sabadoCheck == 0) disabled @endif>
+                                <select class="form-select" aria-label="hora_inicio_sabado" name="hora_inicio" @if ($sabadoCheck == 0) disabled @endif>
                                     <option selected>Hora de inicio</option>
                                 </select>
                             </div>
                             <div class="row m-2">
-                                <select class="form-select" aria-label="hora_fin_sabado" @if ($sabadoCheck == 0) disabled @endif>
+                                <select class="form-select" aria-label="hora_fin_sabado" name="hora_fin" @if ($sabadoCheck == 0) disabled @endif>
                                     <option selected>Hora de termino</option>
                                 </select>
                             </div>

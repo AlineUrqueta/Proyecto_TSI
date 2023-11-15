@@ -8,6 +8,7 @@ use App\Http\Controllers\PacientesController;
 use App\Http\Controllers\SecretariaController;
 use App\Http\Controllers\EspecialidadesController;
 use App\Http\Controllers\ProfesionalesController;
+use App\Http\Controllers\HorariosController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -73,3 +74,6 @@ Route::put('/admin/{profesional}',[ProfesionalesController::class,'update'])->na
 Route::get('/admin/usuario/editar/{usuario}',[SecretariaController::class,'edit'])->name('usuario.edit');
 Route::put('/admin/usuario/editar/{usuario}',[SecretariaController::class,'update'])->name('usuario.update');
 Route::get('/admin/search-usuario',[SecretariaController::class,'search'])->name('usuario.search');
+
+//Horario
+Route::post('/secretaria/horarios',[HorariosController::class,'store'])->name('horario.store');
