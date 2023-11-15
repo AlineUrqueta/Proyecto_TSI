@@ -3,8 +3,8 @@
 @section('contenido')
 <div class="row mt-5">
     <div class="col-sm-12 col-md-7 mb-sm-5 order-md-first order-sm-last"">
-        <form action="">
-            {{-- @csrf --}}
+        <form action="{{route('profesional.search')}}" method="GET">
+            @csrf
             <div class="row mb-4">
                 <div class="col-6">
                     <input type="text" name="buscar" placeholder="Buscar horario por profesional" class="form-control">
@@ -15,6 +15,9 @@
             </div>
         </form>
 
+        @if (count($profesionales) === 0)
+        <div class="alert alert-danger">No hay profesionales registrados</div>
+        @else
         <table class="table table-bordered border-success  class ='btn btn-warning'">
             <thead>
                 <tr>
@@ -27,12 +30,18 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach ($profesionales as $profesional )
                 <tr>
-                    <th>10456789-k</th>
-                    <th>Albert Wily</th>
-                    <th>Terapia Ocupacional</th>
-                    <td>drwily@maverick.com</td>
-                    <td>+56967894567</td>
+                    <th >{{$profesional->rut_profesional}}</th>
+                    <th>{{$profesional->nom_profesional}} {{$profesional->apep_profesional}} {{$profesional->apem_profesional}}</th>
+
+                    @foreach ($especialidades as $especialidad )
+                    @if ($especialidad->id_especialidad == $profesional->id_especialidad_profesional)
+                    <th>{{$especialidad->nom_especialidad}}</th>
+                    @endif
+                    @endforeach
+                    <td>{{$profesional->email}}</td>
+                    <td>{{$profesional->fono}}</td>
                     <td>
 
                         <a class='btn btn-primary text-white' href="{{ route('secretaria.editarHorario') }}">Editar</a>
@@ -41,8 +50,12 @@
                     </td>
                 </tr>
 
+                @endforeach
+
+
             </tbody>
         </table>
+        @endif
 
     </div>
 
