@@ -72,11 +72,14 @@
                     <div class='m-3'>
                         <select class="custom-select custom-select-lg mb-3 form-control" id='corp_tea' name='corp_tea'>
                             <option value=""> --- Seleccionar Profesional ---</option>
-                            <option value="0">Maite Errazuriz</option>
-                            <option value="1">Aline Urqueta</option>
+                            @foreach ($profesionales as $profesional )
+                            <option>{{$profesional->nom_profesional}} {{$profesional->apep_profesional}} {{$profesional->apem_profesional}}</option>
+                            {{-- <option value="1">Aline Urqueta</option>
                             <option value="2">Francisco Perez</option>
-                            <option value="3">Diego Apablaza</option>
+                            <option value="3">Diego Apablaza</option> --}}
+                            @endforeach
                         </select>
+                        
                     </div>
 
                     <div class="row">
