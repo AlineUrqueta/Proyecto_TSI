@@ -26,7 +26,7 @@
 
 <div class="row mt-5">
     <div class="col-sm-12 col-md-6">
-        <div class="card" style="width: 45rem; height: auto;">
+        <div class="card" style="width: auto; height: auto;">
             <div class="card-header text-center">
                 <h4>Agendar hora médica</h4>
             </div>
@@ -46,7 +46,7 @@
                             <option value="3">Paciente 4</option>
                         </select>
                     </div>
-                    
+
 
                     <div class='m-3'>
                         <select class="custom-select custom-select-lg mb-3 form-control" id='' name=''>
@@ -84,7 +84,7 @@
 
                     <div class='me-3 mt-4 text-end'>
                         <a href="{{route('secretaria.index')}}" class="btn btn-outline-dark me-2 ">Menu Principal</a>
-                        
+
                         <button type='submit' class='btn btn-success '>Buscar Hora</button>
                     </div>
 
