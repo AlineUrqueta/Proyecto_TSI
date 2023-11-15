@@ -13,7 +13,7 @@ class AdminController extends Controller
     }
 
     public function showUsuario(){
-        $usuarios = Usuario::all();
+        $usuarios = Usuario::orderBy('estado_vigente','desc')->get();
         return view('admin.admi_usuario',compact('usuarios'));
     }
 

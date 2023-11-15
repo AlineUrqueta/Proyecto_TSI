@@ -68,3 +68,8 @@ Route::post('/admin/profesional',[ProfesionalesController::class,'store'])->name
 Route::get('/admin/search-profesional',[ProfesionalesController::class,'search'])->name('profesional.search');
 Route::get('/admin/edit/{profesional}',[ProfesionalesController::class,'edit'])->name('profesional.edit');
 Route::put('/admin/{profesional}',[ProfesionalesController::class,'update'])->name('profesional.update');
+
+//Usuario
+Route::get('/admin/usuario/editar/{usuario}',[SecretariaController::class,'edit'])->name('usuario.edit');
+Route::put('/admin/usuario/editar/{usuario}',[SecretariaController::class,'update'])->name('usuario.update');
+Route::get('/admin/search-usuario',[SecretariaController::class,'search'])->name('usuario.search');

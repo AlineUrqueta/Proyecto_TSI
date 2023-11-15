@@ -15,7 +15,7 @@ class SessionController extends Controller
     public function store(Request $request){
     $credentials = $request->only('email', 'password');
 
-    if (Auth::attempt($credentials)) {
+    if (Auth::attempt($credentials) && auth()->user()->estado_vigente === 1) {
         if (auth()->user()->id_tipo == 1){
             return redirect()->to('/admin');
         }
@@ -23,9 +23,12 @@ class SessionController extends Controller
             return redirect()->to('/');
 
         }
+    }else{
+        auth()->logout();
+        return back()->withErrors(['message' => 'Email y/o contraseña incorrecta']);
     }
 
-    return back()->withErrors(['message' => 'Email y/o contraseña incorrecta']);
+    
 }
     
 
