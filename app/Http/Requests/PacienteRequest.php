@@ -3,7 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\RutValidationRule;
+use App\Rules\DigitoVerificador;
+use Illuminate\Validation\Rule;
 use Carbon\Carbon;
 
 class PacienteRequest extends FormRequest
@@ -26,7 +27,13 @@ class PacienteRequest extends FormRequest
         $fecha_actual = Carbon::now();
         //regex:/^[0-9\-kK]+$/
         return [
-            'rut_paciente' => 'sometimes|required|unique:pacientes|regex:/^(\d{7,8}-[\dkK])$/',
+            'rut_paciente' => [
+                'sometimes',
+                'required',
+                'unique:pacientes',
+                'regex:/^(\d{7,8}-[\dkK])$/',
+                new DigitoVerificador,
+            ],
             'nom_paciente' => 'required|min:3|max:50',
             'apep_paciente' => 'required|min:4|max:50',
             'apem_paciente' => 'required|min:4|max:50',

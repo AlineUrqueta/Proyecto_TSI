@@ -7,7 +7,7 @@
     <div class="row">
         <div class="row mb-2">
             <div class="col-10">
-                <h3>Datos personales paciente</h3>
+                <h3>Datos personales </h3>
             </div>
             <div class="col-2 text-end">
                 <a class="btn btn-success " href="{{route('pacientes.index')}}">Volver a Pacientes</a>
@@ -45,24 +45,17 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>30-09-2023 14:00</td>
-                <td>Psicología</td>
-                <td>Nombre y apellido del médico</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>03-09-2022 10:00</td>
-                <td>Terapeuta Ocupacional</td>
-                <td>Nombre y apellido del médico</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>09-03-2022 16:00</td>
-                <td>Psiquiatra</td>
-                <td>Nombre y apellido del médico</td>
-            </tr>
+            @foreach ($atenciones as $atencion )
+
+                <tr>
+                    <th scope="row">1</th>
+                    <td>{{$atencion->fecha}} {{$atencion->hora_inicio}}</td>
+                    <td>{{$atencion->especialidad->nom_especialidad}}</td>
+                    <td>{{$atencion->profesional->nom_profesional}} {{$atencion->profesional->apep_profesional}}</td>
+                </tr>
+                
+            @endforeach
+            
         </tbody>
 
     </table>

@@ -34,37 +34,40 @@
 
 
                 <form action="" class='mt-4'>
-                    {{-- @csrf --}}
+                    @csrf
 
 
                     <div class='m-3'>
-                        <select class="custom-select custom-select-lg mb-3 form-control" id='' name=''>
+
+
+                        <select class="custom-select custom-select-lg mb-3 form-control" id='rut_paciente' name='rut_paciente'>
                             <option value="">-- Seleccionar Paciente --</option>
-                            <option value="0">Paciente 1</option>
-                            <option value="1">Paciente 2</option>
-                            <option value="2">Paciente 3</option>
-                            <option value="3">Paciente 4</option>
+                            @foreach ( $pacientes as $paciente )
+
+                            <option value="{{$paciente->rut_paciente}}">{{$paciente->nom_paciente}} {{$paciente->apep_paciente}} {{$paciente->apem_paciente}}</option>
+                            @endforeach
+
                         </select>
                     </div>
 
 
                     <div class='m-3'>
-                        <select class="custom-select custom-select-lg mb-3 form-control" id='' name=''>
+                        <select class="custom-select custom-select-lg mb-3 form-control" id='id_especialidad' name='id_especialidad'>
                             <option value="">-- Seleccionar Especialidad --</option>
-                            <option value="0">Fonoaudiología</option>
-                            <option value="1">Psicología</option>
-                            <option value="2">Terapia Ocupacional</option>
-                            <option value="3">Psiquiatría</option>
+                            @foreach ( $especialidades as $especialidad )
+
+                            <option value="{{$especialidad->id_especialidad}}">{{$especialidad->nom_especialidad}}</option>
+                            @endforeach
                         </select>
                     </div>
 
                     <div class='m-3'>
-                        <select class="custom-select custom-select-lg mb-3 form-control" id='' name=''>
+                        <select class="custom-select custom-select-lg mb-3 form-control" id='rut_profesional' name='rut_profesional'>
                             <option value="">-- Seleccionar Profesional --</option>
-                            <option value="0">Profesional 1</option>
-                            <option value="1">Profesional 2</option>
-                            <option value="2">Profesional 3</option>
-                            <option value="3">Profesional 4</option>
+                            @foreach ( $profesionales as $profesional )
+
+                            <option value="{{$profesional->rut_profesional}}">{{$profesional->nom_profesional}} {{$profesional->apep_profesional}} {{$profesional->apem_profesional}}</option>
+                            @endforeach
                         </select>
                     </div>
 
@@ -79,11 +82,9 @@
                     </div>
 
 
-
-
-
                     <div class='me-3 mt-4 text-end'>
                         <a href="{{route('secretaria.index')}}" class="btn btn-outline-dark me-2 ">Menu Principal</a>
+                        <a href="{{route('secretaria.agendar')}}" class="btn btn-warning me-2 text-white">Limpiar</a>
 
                         <button type='submit' class='btn btn-success '>Buscar Hora</button>
                     </div>
@@ -91,6 +92,39 @@
 
 
                 </form>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var especialidadSelect = document.getElementById('id_especialidad');
+                        var profesionalSelect = document.getElementById('rut_profesional');
+
+                        especialidadSelect.addEventListener('change', function() {
+                            var especialidadId = this.value;
+
+                            fetch('/obtener-profesionales/' + especialidadId)
+                                .then(response => response.json())
+                                .then(data => {
+                                    profesionalSelect.innerHTML = "<option value=''>-- Seleccionar Profesional --</option>";
+                                    data.forEach(profesional => {
+                                        profesionalSelect.innerHTML += "<option value='" + profesional.rut_profesional + "'>" + profesional.nom_profesional + " " + profesional.apep_profesional + " " + profesional.apem_profesional + "</option>";
+                                    });
+                                })
+                                .catch(error => console.error('Error:', error));
+                        });
+
+                        profesionalSelect.addEventListener('change', function() {
+                            var profesionalId = this.value;
+                            fetch('/obtener-especialidad/' + profesionalId)
+                                .then(response => response.json())
+                                .then(data => {
+                                    especialidadSelect.innerHTML = "<option value='" + data.id_especialidad + "'>" + data.nom_especialidad + "</option>";
+                                })
+                                .catch(error => console.error('Error:', error));
+                        });
+                    });
+
+                </script>
+
 
 
 
@@ -112,6 +146,7 @@
         </div>
 
     </div>
+
     <div class="col-sm-12 col-md-6">
         <table>
             <tr>

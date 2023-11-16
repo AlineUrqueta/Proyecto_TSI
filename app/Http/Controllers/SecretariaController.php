@@ -87,10 +87,10 @@ class SecretariaController extends Controller
         return view('secretaria.editarHorario');
     }
 
-    public function agendar(){
-        return view('secretaria.agendar_hora');
+    // public function agendar(){
+    //     return view('secretaria.agendar_hora');
 
-    }
+    // }
 
     public function search(Request $request){
         $buscar = $request->buscar;

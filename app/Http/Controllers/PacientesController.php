@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Paciente;
+use App\Models\Atencion;
 use App\Http\Requests\PacienteRequest;
 
 class PacientesController extends Controller
@@ -40,7 +41,9 @@ class PacientesController extends Controller
     }
 
     public function show(Paciente $paciente){
-        return view('pacientes.show',compact('paciente'));
+        $rut = $paciente->rut_paciente;
+        $atenciones = Atencion::where('rut_paciente_atenciones','LIKE','rut')->get();
+        return view('pacientes.show',compact('paciente','atenciones'));
     }
 
     public function edit(Paciente $paciente){

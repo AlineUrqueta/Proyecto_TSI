@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('atenciones', function (Blueprint $table) {
-            $table->integer('id_atenciones')->autoIncrement();
+            $table->integer('id_atencion')->autoIncrement();
 
-            $table->string('rut_paciente_antenciones');
-            $table->foreign('rut_paciente_antenciones')->references('rut_paciente')->on('pacientes');
+            $table->string('rut_paciente_atenciones');
+            $table->foreign('rut_paciente_atenciones')->references('rut_paciente')->on('pacientes');
             
             $table->string('rut_profesional_atenciones');
             $table->foreign('rut_profesional_atenciones')->references('rut_profesional')->on('profesionales');
