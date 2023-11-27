@@ -18,12 +18,12 @@
         @if (count($especialidades) === 0)
         <div class="alert alert-danger">No hay especialidades registradas</div>
         @else
-        <table class="table table-bordered border-success" style="width:40rem;height:auto">
-            <thead>
+        <table class="table table-bordered border-success"  style="width:40rem;height:auto">
+            <thead >
                 <tr>
                     <th scope="col" class="text-center">ID</th>
                     <th scope="col" class="text-center">ESPECIALIDAD</th>
-                    <th scope="col" class="text-center">ACCIONES</th>
+                    <th scope="col" class="text-center ">ACCIONES</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,11 +32,14 @@
 
                     <th>{{$especialidad->id_especialidad}}</th>
                     <td>{{$especialidad->nom_especialidad}}</td>
-                    <td>
+
+                    <td class ="text-center">
                         <!-- Button trigger modal -->
                         @if ($especialidad->profesionales->count() === 0)
-                        <button type="button" class="btn btn-danger me-3" data-toggle="modal" data-target="#exampleModalCenter{{$especialidad->id_especialidad}}">
-                            Eliminar
+                        <button type="button" class="btn btn-danger me-0 d-inline-flex" data-toggle="modal" data-target="#exampleModalCenter{{$especialidad->id_especialidad}}">
+                            <span class="material-symbols-outlined">
+                                delete
+                            </span>
                         </button>
                         @endif
 
@@ -68,11 +71,11 @@
                         </div>
 
 
-                        <div class="text-center">
-                            <a class='btn btn-warning text-white ' href="{{route('especialidad.edit',$especialidad->id_especialidad)}}"><span class="material-symbols-outlined">
-                                    manufacturing
-                                </span></a>
-                        </div>
+
+                        <a class='btn btn-warning text-white d-inline-flex' href="{{route('especialidad.edit',$especialidad->id_especialidad)}}"><span class="material-symbols-outlined">
+                                manufacturing
+                            </span></a>
+
 
 
                     </td>
