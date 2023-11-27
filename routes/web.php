@@ -9,6 +9,7 @@ use App\Http\Controllers\SecretariaController;
 use App\Http\Controllers\EspecialidadesController;
 use App\Http\Controllers\ProfesionalesController;
 use App\Http\Controllers\AtencionesController;
+use App\Http\Controllers\HorariosController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -79,3 +80,5 @@ Route::get('/admin/search-usuario',[SecretariaController::class,'search'])->name
 Route::get('/secretaria/agendar',[AtencionesController::class,'index'])->name('secretaria.agendar');
 Route::get('/obtener-profesionales/{especialidadId}',[AtencionesController::class,'profesionalEspecialidad'])->name('secretaria.buscarProfesional');
 Route::get('/obtener-especialidad/{profesionalId}', [AtencionesController::class, 'especialidadProfesional'])->name('secretaria.buscarEspecialidad');
+//Horario
+Route::post('/secretaria/horarios',[HorariosController::class,'store'])->name('horario.store');

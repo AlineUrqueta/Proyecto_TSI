@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use App\Http\Requests\UsuarioRequest;
+use App\Models\Profesional;
+use App\Models\Especialidad;
 
 class SecretariaController extends Controller
 {
@@ -77,7 +79,9 @@ class SecretariaController extends Controller
 
 
     public function showHorarios(){
-        return view('secretaria.horarios');
+        $especialidades = Especialidad::all();
+        $profesionales = Profesional::all();
+        return view('secretaria.horarios',compact('especialidades','profesionales'));
     }
 
     public function verHorario(){
