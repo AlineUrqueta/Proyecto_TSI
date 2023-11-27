@@ -11,6 +11,7 @@ class Horario extends Model
     protected $table = 'disponibilidad';
     protected $primaryKey = ['rut_profesional','hora_inicio','hora_fin'];
     protected $keyType = 'string';
+    public $incrementing = false;
     public $timestamps = false;
 
     public function rut_profesional()

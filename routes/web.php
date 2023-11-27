@@ -80,5 +80,6 @@ Route::get('/admin/search-usuario',[SecretariaController::class,'search'])->name
 Route::get('/secretaria/agendar',[AtencionesController::class,'index'])->name('secretaria.agendar');
 Route::get('/obtener-profesionales/{especialidadId}',[AtencionesController::class,'profesionalEspecialidad'])->name('secretaria.buscarProfesional');
 Route::get('/obtener-especialidad/{profesionalId}', [AtencionesController::class, 'especialidadProfesional'])->name('secretaria.buscarEspecialidad');
+
 //Horario
 Route::post('/secretaria/horarios',[HorariosController::class,'store'])->name('horario.store');

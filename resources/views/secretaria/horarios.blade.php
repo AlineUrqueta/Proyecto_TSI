@@ -2,7 +2,7 @@
 @section('title','Mantenedor de horarios')
 @section('contenido')
 <div class="row mt-5">
-    <div class="col-sm-12 col-md-7 mb-sm-5 order-md-first order-sm-last"">
+    <div class="col-sm-12 col-md-8  order-md-first order-sm-last">
         <form action="{{route('profesional.search')}}" method="GET">
             @csrf
             <div class="row mb-4">
@@ -25,14 +25,13 @@
                     <th scope="col">NOMBRE COMPLETO</th>
                     <th scope="col">ESPECIALIDAD</th>
                     <th scope="col">EMAIL</th>
-                    <th scope="col">FONO</th>
                     <th scope="col">HORARIO</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($profesionales as $profesional )
                 <tr>
-                    <th >{{$profesional->rut_profesional}}</th>
+                    <th>{{$profesional->rut_profesional}}</th>
                     <th>{{$profesional->nom_profesional}} {{$profesional->apep_profesional}} {{$profesional->apem_profesional}}</th>
 
                     @foreach ($especialidades as $especialidad )
@@ -41,11 +40,14 @@
                     @endif
                     @endforeach
                     <td>{{$profesional->email}}</td>
-                    <td>{{$profesional->fono}}</td>
                     <td>
 
-                        <a class='btn btn-primary text-white' href="{{ route('secretaria.editarHorario') }}">Editar</a>
-                        <a class='btn btn-primary text-white' href="{{ route('secretaria.verHorario') }}">Ver</a>
+                        <a class='btn btn-warning text-white d-inline-flex' href="{{ route('secretaria.editarHorario') }}"><span class="material-symbols-outlined">
+                                settings
+                            </span></a>
+                        <a class='btn btn-primary text-white d-inline-flex' href="{{ route('secretaria.verHorario') }}"><span class="material-symbols-outlined">
+                                calendar_today
+                            </span></a>
 
                     </td>
                 </tr>
@@ -59,8 +61,8 @@
 
     </div>
 
-    <div class="col-md-5  mb-sm-5 order-md-last order-sm-first">
-        <div class="card" style="width: 45rem; height: auto;">
+    <div class="col-md-4  mb-sm-5 order-md-last order-sm-first">
+        <div class="card" style="width: auto; height: auto;">
             <div class="card-header text-center">
                 <h4>Agregar Horario</h4>
             </div>
@@ -68,37 +70,39 @@
 
 
                 <form action="{{route('horario.store')}}" class='mt-4' method='POST'>
-
+                    @csrf
                     <div class='m-3'>
-                        <select class="custom-select custom-select-lg mb-3 form-control" id='corp_tea' name='corp_tea'>
+                        <select class="custom-select custom-select-lg mb-3 form-control" id='rut_profesional' name='rut_profesional'>
                             <option value=""> --- Seleccionar Profesional ---</option>
                             @foreach ($profesionales as $profesional )
-                            <option>{{$profesional->nom_profesional}} {{$profesional->apep_profesional}} {{$profesional->apem_profesional}}</option>
-                            {{-- <option value="1">Aline Urqueta</option>
-                            <option value="2">Francisco Perez</option>
-                            <option value="3">Diego Apablaza</option> --}}
+                            <option value="{{$profesional->rut_profesional}}">{{$profesional->nom_profesional}} {{$profesional->apep_profesional}} {{$profesional->apem_profesional}}</option>
                             @endforeach
                         </select>
-                        
-                    </div>
 
-                    <div class="row">
-                        <div class="col-2"></div>
-                        <div class="col-4 d-flex  align-items-center">
-                            @php
-                                $lunesCheck = 0;
-                            @endphp
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" @checked($lunesCheck = 1) role="switch"  id="1" name="1" checked>
-                                <label class="form-check-label" for="lunes">Lunes</label>
-                            </div>
+
+
+
+
+                        <div class="col">
+                            <select class="custom-select custom-select-lg mb-3 form-control" id='dia' name='dia'>
+                                <option value=""> --- Seleccionar Dia ---</option>
+
+                                <option value="1">Lunes</option>
+                                <option value="2">Martes</option>
+                                <option value="3">Miércoles</option>
+                                <option value="4">Jueves</option>
+                                <option value="5">Viernes</option>
+                                <option value="6">Sabado</option>
+
+                            </select>
 
                         </div>
+                        
 
-                        <div class="col-6">
-                            <div class="row m-2">
-                                <select class="form-select" aria-label="hora_inicio_lunes" name="hora_inicio" @if ($lunesCheck == 0) disabled @endif>
-                                    <option selected>Hora de inicio</option>
+                        <div class="col">
+                            <div class="mb-3">
+                                <select class="form-select" id="hora_inicio" name="hora_inicio">
+                                    <option value="">Hora de inicio</option>
                                     <option value="1">9:00</option>
                                     <option value="2">9:45</option>
                                     <option value="3">10:30</option>
@@ -117,9 +121,9 @@
                                     <option value="16">20:15</option>
                                 </select>
                             </div>
-                            <div class="row m-2">
-                                <select class="form-select" aria-label="hora_fin_lunes" name="hora_fin" @if ($lunesCheck == 0) disabled @endif>
-                                    <option selected>Hora de termino</option>
+                            <div class="mb-3">
+                                <select class="form-select" id="hora_fin" name="hora_fin">
+                                    <option value="">Hora de termino</option>
                                     <option value="1">9:45</option>
                                     <option value="2">10:30</option>
                                     <option value="3">11:15</option>
@@ -141,151 +145,35 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-2"></div>
-                        <div class="col-4 d-flex  align-items-center">
+                    @if ($errors->any())
+                    <div class="alert alert-danger m-3">
+                        <ul>
                             @php
-                                $martesCheck = 0;
+                            $contador = 0;
                             @endphp
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" @checked($martesCheck = 1) role="switch"  id="2" name="2" checked>
-                                <label class="form-check-label" for="martes">Martes</label>
-                            </div>
 
-                        </div>
-
-                        <div class="col-6">
-                            <div class="row m-2">
-                                <select class="form-select" aria-label="hora_inicio_martes" name="hora_inicio" @if ($martesCheck == 0) disabled @endif>
-                                    <option selected>Hora de inicio</option>
-                                </select>
-                            </div>
-                            <div class="row m-2">
-                                <select class="form-select" aria-label="hora_fin_martes" name="hora_fin" @if ($martesCheck == 0) disabled @endif>
-                                    <option selected>Hora de termino</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                    </div>
-
-                    <div class="row">
-                        <div class="col-2"></div>
-                        <div class="col-4 d-flex  align-items-center">
+                            @foreach ($errors->all() as $error)
+                            @if (strpos($error, 'Esta disponibilidad ya fue registrada') === 0 && $contador === 0)
+                            <li>{{ $error }}</li>
                             @php
-                                $miercolesCheck = 0;
+                            $contador++;
                             @endphp
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" @checked($miercolesCheck = 1) role="switch"  id="3" name="3" checked>
-                                <label class="form-check-label" for="miercoles">Miercoles</label>
-                            </div>
-
-                        </div>
-
-                        <div class="col-6">
-                            <div class="row m-2">
-                                <select class="form-select" aria-label="hora_inicio_miercoles" name="hora_inicio" @if ($miercolesCheck == 0) disabled @endif>
-                                    <option selected>Hora de inicio</option>
-                                </select>
-                            </div>
-                            <div class="row m-2">
-                                <select class="form-select" aria-label="hora_fin_miercoles" name="hora_fin" @if ($miercolesCheck == 0) disabled @endif>
-                                    <option selected>Hora de termino</option>
-                                </select>
-                            </div>
-                        </div>
-                        
+                            @elseif (strpos($error, 'Esta disponibilidad ya fue registrada') !== 0)
+                            <li>{{ $error }}</li>
+                            @endif
+                            @endforeach
+                        </ul>
                     </div>
+                    @endif
 
-                    <div class="row">
-                        <div class="col-2"></div>
-                        <div class="col-4 d-flex  align-items-center">
-                            @php
-                                $juevesCheck = 0;
-                            @endphp
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" @checked($juevesCheck = 1) role="switch"  id="4" name="4" checked>
-                                <label class="form-check-label" for="jueves">Jueves</label>
-                            </div>
 
-                        </div>
 
-                        <div class="col-6">
-                            <div class="row m-2">
-                                <select class="form-select" aria-label="hora_inicio_jueves" name="hora_inicio" @if ($juevesCheck == 0) disabled @endif>
-                                    <option selected>Hora de inicio</option>
-                                </select>
-                            </div>
-                            <div class="row m-2">
-                                <select class="form-select" aria-label="hora_fin_jueves" name="hora_fin" @if ($juevesCheck == 0) disabled @endif>
-                                    <option selected>Hora de termino</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                    </div>
-
-                    <div class="row">
-                        <div class="col-2"></div>
-                        <div class="col-4 d-flex  align-items-center">
-                            @php
-                                $viernesCheck = 0;
-                            @endphp
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" @checked($viernesCheck = 1) role="switch"  id="5" name="5" checked>
-                                <label class="form-check-label" for="viernes">Viernes</label>
-                            </div>
-
-                        </div>
-
-                        <div class="col-6">
-                            <div class="row m-2">
-                                <select class="form-select" aria-label="hora_inicio_viernes" name="hora_inicio" @if ($viernesCheck == 0) disabled @endif>
-                                    <option selected>Hora de inicio</option>
-                                </select>
-                            </div>
-                            <div class="row m-2">
-                                <select class="form-select" aria-label="hora_fin_viernes" name="hora_fin" @if ($viernesCheck == 0) disabled @endif>
-                                    <option selected>Hora de termino</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                    </div>
-
-                    <div class="row">
-                        <div class="col-2"></div>
-                        <div class="col-4 d-flex  align-items-center">
-                            @php
-                                $sabadoCheck = 0;
-                            @endphp
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" @checked($sabadoCheck = 1) role="switch"  id="6" name="6" checked>
-                                <label class="form-check-label" for="sabado">Sábado</label>
-                            </div>
-
-                        </div>
-
-                        <div class="col-6">
-                            <div class="row m-2">
-                                <select class="form-select" aria-label="hora_inicio_sabado" name="hora_inicio" @if ($sabadoCheck == 0) disabled @endif>
-                                    <option selected>Hora de inicio</option>
-                                </select>
-                            </div>
-                            <div class="row m-2">
-                                <select class="form-select" aria-label="hora_fin_sabado" name="hora_fin" @if ($sabadoCheck == 0) disabled @endif>
-                                    <option selected>Hora de termino</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                    </div>
-                     
-      
                     <div class='me-3 mt-4 text-end'>
                         <a href="{{route('secretaria.index')}}" class="btn btn-outline-dark me-2">Menu Principal</a>
                         <button type='submit' class='btn btn-success '>Registrar Horario</button>
                     </div>
+
+
 
 
 
