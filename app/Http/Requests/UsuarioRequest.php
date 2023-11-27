@@ -29,6 +29,7 @@ class UsuarioRequest extends FormRequest
             'fono' => 'required|min:9|max:13',
             'email' => 'sometimes|required|min:10|max:50|unique:usuarios',
             'password' => 'sometimes|required|min:8|max:64|confirmed',
+            'estado_vigente'=>'sometimes',
             'id_tipo'=> 'sometimes' 
         ];
     }

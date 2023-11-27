@@ -56,10 +56,11 @@ class SecretariaController extends Controller
         $usuario->apep_usuario = $request->apep_usuario;
         $usuario->apem_usuario = $request->apem_usuario;
         $usuario->fono = $request->fono;
-        $usuario->estado_vigente = $request->estado_vigente;
-        //$usuario->email = $request->email;
-        //$usuario->password = Hash::make($request->password);
-        //$usuario->id_tipo = $request->id_tipo;
+        if ($usuario->estado_vigente === 1){ // Admin
+            $usuario->estado_vigente = 1;
+        }else{
+            $usuario->estado_vigente = $request->estado_vigente;
+        }
         $usuario->save();
         return redirect()->route('usuario.edit',compact('usuario'))->with('editarCorrecto', 'Datos actualizados!');
     }
