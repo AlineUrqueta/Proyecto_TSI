@@ -81,7 +81,7 @@ class SecretariaController extends Controller
     public function showHorarios(){
         $especialidades = Especialidad::all();
         $profesionales = Profesional::all();
-        return view('secretaria.horarios',compact('especialidades','profesionales'));
+        return view('secretaria.horarios',compact('especialidades','profesionales')); // Cambiar
     }
 
     public function verHorario(){

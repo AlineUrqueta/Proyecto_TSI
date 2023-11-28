@@ -71,6 +71,8 @@
                         </select>
                     </div>
 
+                    
+
                     {{-- <div class='m-3'>
                         <select class="custom-select custom-select-lg mb-3 form-control" id='' name=''>
                             <option value="">-- Seleccionar Semana --</option>
@@ -151,7 +153,7 @@
 
     </div>
 
-    <div class="col-sm-12 col-md-6">
+    {{-- <div class="col-sm-12 col-md-6">
     <table class="table">
         <tr>
             <th>Lunes</th>
@@ -201,7 +203,8 @@
             </div>
         </div>
     </div>
-</div>
+
+</div> --}}
 
 
     {{-- <div class="col-sm-12 col-md-6">

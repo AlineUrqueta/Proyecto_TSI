@@ -6,6 +6,7 @@ use App\Models\Atencion;
 use App\Models\Paciente;
 use App\Models\Especialidad;
 use App\Models\Profesional;
+use App\Models\Horario;
 use Illuminate\Http\Request;
 
 class AtencionesController extends Controller
@@ -18,7 +19,8 @@ class AtencionesController extends Controller
         $pacientes = Paciente::all();
         $profesionales = Profesional::where('estado_vigente','=',1)->get();
         $especialidades = Especialidad::all();
-        return view('secretaria.agendar_hora',compact('pacientes','profesionales','especialidades'));
+        $horarios = Horario::all();
+        return view('secretaria.agendar_hora',compact('pacientes','profesionales','especialidades','horarios'));
     }
 
     //Buscar
