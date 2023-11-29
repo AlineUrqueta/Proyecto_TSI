@@ -201,6 +201,7 @@
                 <th>Profesional | Especialidad</th>
                 <th>Fecha | Hora </th>
                 <th>Secretaria</th>
+                <th>Estado</th>
                 <th>Acciones</th>
             </tr>
             @foreach ($atenciones as $atencion)
@@ -209,6 +210,12 @@
                 <td>{{$atencion->profesional->nom_profesional}} {{$atencion->profesional->apep_profesional}} | {{$atencion->profesional->especialidad->nom_especialidad}}</td>
                 <td>{{$atencion->fecha_atencion}} | {{$atencion->hora_inicio}} </td>
                 <td>{{$atencion->usuario->nom_usuario}} {{$atencion->usuario->apep_usuario}}</td>
+                <td> 
+                    @if($atencion->estado_atencion==1)Agendado
+                    @elseif ($atencion->estado_atencion==0)Cancelada
+                    @else Atendido
+                    @endif
+                </td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Ejemplo de Button Group">
                         <button class="btn btn-warning text-white d-inline-block"><span class="material-symbols-outlined">
