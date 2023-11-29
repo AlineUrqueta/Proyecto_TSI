@@ -25,7 +25,7 @@
 </style>
 
 <div class="row mt-5">
-    <div class="col-sm-12 col-md-6">
+    <div class="col-sm-12 col-md-4">
         <div class="card" style="width: auto; height: auto;">
             <div class="card-header text-center">
                 <h4>Agendar hora médica</h4>
@@ -33,7 +33,7 @@
             <div class="card-body">
 
 
-                <form action="" class='mt-4'>
+                <form action="{{route('secretaria.agendar')}}" class='mt-4' method ="POST">
                     @csrf
 
 
@@ -71,28 +71,66 @@
                         </select>
                     </div>
 
-                    
+                    <div class="m-3">
+                        <input type="date" class="form-control" id="fecha_atencion" name="fecha_atencion" value="{{ now()->format('Y-m-d') }}" min=" {{ now()->format('Y-m-d') }}" max="2024-01-01">
 
-                    {{-- <div class='m-3'>
-                        <select class="custom-select custom-select-lg mb-3 form-control" id='' name=''>
-                            <option value="">-- Seleccionar Semana --</option>
-                            <option value="0">02/10/2023 - 08/10/2023</option>
-                            <option value="1">09/10/2023 - 15/10/2023</option>
-                            <option value="2">16/10/2023 - 22/10/2023</option>
-                            <option value="3">23/10/2023 - 29/10/2023</option>
-                        </select>
-                    </div> --}}
-                    <div class = "m-3">
-                        <input type="date" class= "form-control" value="{{ now()->format('Y-m-d') }}"" min="{{ now()->format('Y-m-d') }}" max="2024-01-01">
-                        
                     </div>
+
+
+
+                    <div class="m-3">
+                        <select class="form-control" name="hora_inicio" id="hora_inicio" onchange="actualizarHoraFin()">
+                            <option value="9:00">9:00</option>
+                            <option value="9:45">9:45</option>
+                            <option value="10:30">10:30</option>
+                            <option value="11:15">11:15</option>
+                            <option value="12:00">12:00</option>
+                            <option value="12:45">12:45</option>
+                            <option value="13:30">13:30</option>
+                            <option value="14:15">14:15</option>
+                            <option value="15:00">15:00</option>
+                            <option value="15:45">15:45</option>
+                            <option value="16:30">16:30</option>
+                            <option value="17:15">17:15</option>
+                            <option value="18:00">18:00</option>
+                            <option value="18:45">18:45</option>
+                            <option value="19:30">19:30</option>
+                            <option value="20:15">20:15</option>
+                        </select>
+
+                    </div>
+
+                    <div class="m-3">
+                        <input type="text" class="form-control" name="hora_fin" id="hora_fin" value="" readonly>
+                        <script>
+                            function actualizarHoraFin() {
+                                var horaInicioSelect = document.getElementById('hora_inicio');
+                                var horaFinInput = document.getElementById('hora_fin');
+
+                                var horaInicioSeleccionada = horaInicioSelect.value;
+
+                                var fechaInicio = new Date('2000-01-01 ' + horaInicioSeleccionada);
+
+                                fechaInicio.setMinutes(fechaInicio.getMinutes() + 45);
+                                var horaFin = ('0' + fechaInicio.getHours()).slice(-2) + ':' + ('0' + fechaInicio.getMinutes()).slice(-2);
+
+                                horaFinInput.value = horaFin;
+                            }
+
+                            actualizarHoraFin();
+
+                        </script>
+                    </div>
+
+
+
 
 
                     <div class='me-3 mt-4 text-end'>
                         <a href="{{route('secretaria.index')}}" class="btn btn-outline-dark me-2 ">Menu Principal</a>
                         <a href="{{route('secretaria.agendar')}}" class="btn btn-warning me-2 text-white">Limpiar</a>
 
-                        <button type='submit' class='btn btn-success '>Buscar Hora</button>
+                        <button type='submit' class='btn btn-success '>Agendar Hora</button>
                     </div>
 
 
@@ -153,138 +191,47 @@
 
     </div>
 
-    {{-- <div class="col-sm-12 col-md-6">
-    <table class="table">
-        <tr>
-            <th>Lunes</th>
-            <th>Martes</th>
-            <th>Miércoles</th>
-            <th>Jueves</th>
-            <th>Viernes</th>
-        </tr>
-        @for ($i = 0; $i < 16; $i++)
-            <tr>
-                @for ($j = 0; $j < 5; $j++)
-                    @php
-                        $horaInicio = strtotime("09:00") + ($i * 45 * 60);
-                        $horaFin = $horaInicio + (45 * 60);
-                        $esEvento = $j == 3 && $i == 1 || $j == 1 && $i == 3 || $j == 0 && $i == 4;
-                    @endphp
-                    <td>
-                        @if ($esEvento)
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                                {{ date('H:i', $horaInicio) }} - {{ date('H:i', $horaFin) }}
-                            </button>
-                        @else
-                            {{ date('H:i', $horaInicio) }} - {{ date('H:i', $horaFin) }}
-                        @endif
-                    </td>
-                @endfor
-            </tr>
-        @endfor
-    </table>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-center" id="exampleModalLongTitle">Agendar Hora</h5>
-                </div>
-                <div class="modal-body">
-                    <h5>Nombre del Paciente: Paciente 1</h5>
-                    <h5>Especialidad: Psicología</h5>
-                    <h5>Fecha: 08/10/2023</h5>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Agendar Hora</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div> --}}
 
 
-    {{-- <div class="col-sm-12 col-md-6">
+
+    <div class="col-sm-12 col-md-8">
         <table>
             <tr>
-                <th>Lunes</th>
-                <th>Martes</th>
-                <th>Miércoles</th>
-                <th>Jueves</th>
-                <th>Viernes</th>
+                <th>Paciente</th>
+                <th>Profesional | Especialidad</th>
+                <th>Fecha | Hora </th>
+                <th>Secretaria</th>
+                <th>Acciones</th>
             </tr>
+            @foreach ($atenciones as $atencion)
             <tr>
-                <td>10:00 - 10:45</td>
-                <td>10:00 - 10:45</td>
-                <td>10:00 - 10:45</td>
-                <td>10:00 - 10:45</td>
-                <td>10:00 - 10:45</td>
-            </tr>
-            <tr>
-                <td>10:45 - 11:30</td>
-                <td>10:45 - 11:30</td>
-                <td>10:45 - 11:30</td>
-                <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                        10:45 - 11:30
-                    </button></td>
-                <td>10:45 - 11:30</td>
-            </tr>
-            <tr>
-                <td>11:30 - 12:15</td>
-                <td>11:30 - 12:15</td>
-                <td>11:30 - 12:15</td>
-                <td>11:30 - 12:15</td>
-                <td>11:30 - 12:15</td>
-            </tr>
-            <tr>
-                <td>12:15 - 13:00</td>
-                <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                        12:15 - 13:00
-                    </button></td>
-                <td>12:15 - 13:00</td>
-                <td>12:15 - 13:00</td>
-                <td>12:15 - 13:00</td>
-            </tr>
-            <tr>
-                <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                        13:00 - 13:45
-                    </button>
-                </td>
-                <td>13:00 - 13:45</td>
-                <td>13:00 - 13:45</td>
-                <td>13:00 - 13:45</td>
-                <td>13:00 - 13:45</td>
-            </tr>
-            <!-- Button trigger modal -->
-
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title text-center" id="exampleModalLongTitle">Agendar Hora</h5>
-
-                        </div>
-                        <div class="modal-body">
-                            <h5>Nombre del Paciente: Paciente 1</h5>
-                            <h5>Especialidad: Psicología</h5>
-                            <h5>Fecha: 08/10/2023</h5>
-
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary">Agendar Hora</button>
-                        </div>
+                <td>{{$atencion->paciente->nom_paciente}} {{$atencion->paciente->apep_paciente}} {{$atencion->paciente->apep_paciente}}</td>
+                <td>{{$atencion->profesional->nom_profesional}} {{$atencion->profesional->apep_profesional}} | {{$atencion->profesional->especialidad->nom_especialidad}}</td>
+                <td>{{$atencion->fecha_atencion}} | {{$atencion->hora_inicio}} </td>
+                <td>{{$atencion->usuario->nom_usuario}} {{$atencion->usuario->apep_usuario}}</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Ejemplo de Button Group">
+                        <button class="btn btn-warning text-white d-inline-block"><span class="material-symbols-outlined">
+                                manufacturing
+                            </span></button>
+                        <button class="btn btn-success text-white d-inline-block"><span class="material-symbols-outlined">
+                                check
+                            </span></button>
+                        <button class="btn btn-danger text-white d-inline-block"><span class="material-symbols-outlined">
+                                block
+                            </span></button>
                     </div>
-                </div>
-            </div>
+
+
+
+                </td>
+
+            </tr>
+            @endforeach
+
+
         </table>
-    </div> --}}
+    </div>
 
 
 

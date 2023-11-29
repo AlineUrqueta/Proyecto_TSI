@@ -78,6 +78,7 @@ Route::get('/admin/search-usuario',[SecretariaController::class,'search'])->name
 
 //Atenciones
 Route::get('/secretaria/agendar',[AtencionesController::class,'index'])->name('secretaria.agendar');
+Route::post('/secretaria/agendar',[AtencionesController::class,'store'])->name('secretaria.store');
 Route::get('/obtener-profesionales/{especialidadId}',[AtencionesController::class,'profesionalEspecialidad'])->name('secretaria.buscarProfesional');
 Route::get('/obtener-especialidad/{profesionalId}', [AtencionesController::class, 'especialidadProfesional'])->name('secretaria.buscarEspecialidad');
 

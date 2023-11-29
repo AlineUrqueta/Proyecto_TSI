@@ -12,17 +12,17 @@ class Atencion extends Model
 
     public function paciente()
     {
-        return $this->belongsTo(Paciente::class, 'rut_paciente');
+        return $this->belongsTo(Paciente::class, 'rut_paciente_atenciones');
     }
 
     public function profesional()
     {
-        return $this->belongsTo(Profesional::class,'rut_profesional');
+        return $this->belongsTo(Profesional::class,'rut_profesional_atenciones');
     }
 
     public function usuario()
     {
-        return $this->belongsTo(Usuario::class,'email');
+        return $this->belongsTo(Usuario::class,'email_usuario');
     }
 
 
