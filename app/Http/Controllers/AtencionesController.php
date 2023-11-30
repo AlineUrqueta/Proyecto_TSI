@@ -132,16 +132,33 @@ class AtencionesController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Atencion $atencion)
-    {
-        //
+    {   $pacientes = Paciente::all();
+        $profesionales = Profesional::where('estado_vigente','=',1)->get();
+        $especialidades = Especialidad::all();
+        return view('secretaria.editarHora',compact('atencion','pacientes','profesionales','especialidades'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Atencion $atencion)
+    public function update(AtencionesRequest $request, Atencion $atencion)
     {
-        //
+        $fecha_atencion = Carbon::parse($request->fecha_atencion);
+        $hora_inicio = Carbon::parse($request->hora_inicio);
+        $hora_fin = Carbon::parse($request -> hora_fin);
+
+        $atencion = new Atencion;
+        $atencion->rut_paciente_atenciones = $request->rut_paciente;
+        $atencion->rut_profesional_atenciones = $request->rut_profesional;
+        
+        $atencion->fecha_atencion = $fecha_atencion;
+        $atencion->hora_inicio = $hora_inicio;
+        $atencion->hora_fin = $hora_fin;
+        $atencion->email_usuario = auth()->user()->email;
+        $atencion->estado_atencion = 1;
+        $atencion->save();
+
+        return redirect()->route('secretaria.editarHora',compact('atencion'));
     }
 
     /**

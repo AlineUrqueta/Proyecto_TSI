@@ -128,10 +128,9 @@
 
 
                     <div class='m-2 text-end'>
-                        <a href="{{route('secretaria.index')}}" class="btn btn-outline-dark  ms-1">Menu Principal</a>
-                        <a href="{{route('secretaria.agendar')}}" class="btn btn-warning  text-white">Limpiar</a>
+                        <a href="{{route('secretaria.index')}}" class="btn btn-outline-dark  me-2">Menu Principal</a>
 
-                        <button type='submit' class='btn btn-success me-3 '>Agendar Hora</button>
+                        <button type='submit' class='btn btn-success me-2 '>Agendar Hora</button>
                     </div>
 
 
@@ -219,9 +218,9 @@
                 </td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Ejemplo de Button Group">
-                        <button class="btn btn-warning text-white d-inline-block"><span class="material-symbols-outlined">
+                        <a class="btn btn-warning text-white d-inline-block" href="{{route('secretaria.editHora',$atencion->id_atencion)}}"><span class="material-symbols-outlined">
                                 manufacturing
-                            </span></button>
+                            </span></a>
                         <form method="POST" action="{{ route('secretaria.atendida', ['atencionId' => $atencion->id_atencion]) }}">
                             @csrf
                             @method('POST')
