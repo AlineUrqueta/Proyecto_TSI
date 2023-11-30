@@ -81,9 +81,13 @@ Route::get('/secretaria/agendar',[AtencionesController::class,'index'])->name('s
 Route::post('/secretaria/agendar',[AtencionesController::class,'store'])->name('secretaria.store');
 Route::get('/obtener-profesionales/{especialidadId}',[AtencionesController::class,'profesionalEspecialidad'])->name('secretaria.buscarProfesional');
 Route::get('/obtener-especialidad/{profesionalId}', [AtencionesController::class, 'especialidadProfesional'])->name('secretaria.buscarEspecialidad');
+Route::get('/secretaria/listadoCitas',[AtencionesController::class,'indexListado'])->name('secretaria.listadoCitas');
+
+
 //Actualización estado
 Route::post('/secretaria/agendar/atendida/{atencionId}',[AtencionesController::class,'horaAtendida'])->name('secretaria.atendida');
 Route::post('/secretaria/agendar/cancelada/{atencionId}',[AtencionesController::class,'horaCancelada'])->name('secretaria.cancelada');
 
 //Horario
 Route::post('/secretaria/horarios',[HorariosController::class,'store'])->name('horario.store');
+

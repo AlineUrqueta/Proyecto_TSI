@@ -48,9 +48,9 @@
             @foreach ($atenciones as $atencion )
 
                 <tr>
-                    <th scope="row">1</th>
-                    <td>{{$atencion->fecha}} {{$atencion->hora_inicio}}</td>
-                    <td>{{$atencion->especialidad->nom_especialidad}}</td>
+                    <th scope="row">{{$loop->iteration}}</th>
+                    <td>{{$atencion->fecha_atencion}} {{$atencion->hora_inicio}}</td>
+                    <td>{{$atencion->profesional->especialidad->nom_especialidad}}</td>
                     <td>{{$atencion->profesional->nom_profesional}} {{$atencion->profesional->apep_profesional}}</td>
                 </tr>
                 

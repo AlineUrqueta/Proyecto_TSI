@@ -36,6 +36,11 @@
                 <a class=" btn btn-light btn-lg" href="{{ route('secretaria.showHorarios') }}">Administrar Horarios</a>
 
             </div>
+            <div class="row m-4">
+
+                <a class=" btn btn-light btn-lg" href="{{ route('secretaria.listadoCitas') }}">Administracion de Citas Médicas</a>
+
+            </div>
         </div>
 
     </div>

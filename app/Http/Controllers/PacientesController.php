@@ -29,7 +29,7 @@ class PacientesController extends Controller
 
     public function search(Request $request){
         $buscar = $request->buscar;
-        $pacientes = Paciente::where('apep_paciente', 'LIKE', "%$buscar%")->orWhere('rut_paciente', 'LIKE', "%$buscar%")-> get();
+        $pacientes = Paciente::where('apep_paciente', 'LIKE', "%$buscar%")->orWhere('rut_paciente', 'LIKE', "%$buscar%");
         return view('pacientes.index', compact('pacientes'));
     }
 
@@ -42,7 +42,8 @@ class PacientesController extends Controller
 
     public function show(Paciente $paciente){
         $rut = $paciente->rut_paciente;
-        $atenciones = Atencion::where('rut_paciente_atenciones','LIKE','rut')->get();
+        
+        $atenciones = Atencion::where('rut_paciente_atenciones','LIKE',$rut)->orderByDesc('fecha_atencion')->get();
         return view('pacientes.show',compact('paciente','atenciones'));
     }
 

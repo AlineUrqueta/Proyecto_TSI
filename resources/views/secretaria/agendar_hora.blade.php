@@ -80,6 +80,7 @@
 
                     <div class="m-3">
                         <select class="form-control" name="hora_inicio" id="hora_inicio" onchange="actualizarHoraFin()">
+                            <option value ="">-- Seleccionar Hora de Inicio --</option>
                             <option value="9:00">9:00</option>
                             <option value="9:45">9:45</option>
                             <option value="10:30">10:30</option>
@@ -101,7 +102,7 @@
                     </div>
 
                     <div class="m-3">
-                        <input type="text" class="form-control" name="hora_fin" id="hora_fin" value="" readonly>
+                        <input type="text" class="form-control" name="hora_fin" id="hora_fin" value="00:00" readonly>
                         <script>
                             function actualizarHoraFin() {
                                 var horaInicioSelect = document.getElementById('hora_inicio');
@@ -126,11 +127,11 @@
 
 
 
-                    <div class='me-3 mt-4 text-end'>
-                        <a href="{{route('secretaria.index')}}" class="btn btn-outline-dark me-2 ">Menu Principal</a>
-                        <a href="{{route('secretaria.agendar')}}" class="btn btn-warning me-2 text-white">Limpiar</a>
+                    <div class='m-2 text-end'>
+                        <a href="{{route('secretaria.index')}}" class="btn btn-outline-dark  ms-1">Menu Principal</a>
+                        <a href="{{route('secretaria.agendar')}}" class="btn btn-warning  text-white">Limpiar</a>
 
-                        <button type='submit' class='btn btn-success '>Agendar Hora</button>
+                        <button type='submit' class='btn btn-success me-3 '>Agendar Hora</button>
                     </div>
 
 
