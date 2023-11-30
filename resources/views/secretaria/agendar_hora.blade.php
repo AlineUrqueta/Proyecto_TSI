@@ -72,10 +72,11 @@
                     </div>
 
                     <div class="m-3">
-                        <input type="date" class="form-control" id="fecha_atencion" name="fecha_atencion" value="{{ now()->format('Y-m-d') }}" min=" {{ now()->format('Y-m-d') }}" max="2024-01-01">
+                        <input type="date" class="form-control" id="fecha_atencion" name="fecha_atencion" value="{{ now()->format('Y-m-d') }}" min="{{ now()->format('Y-m-d') }}" max="{{ now()->addYear()->format('Y-m-d') }}">
 
                     </div>
 
+                    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
                     <div class="m-3">
@@ -250,5 +251,5 @@
 
 
 
-
+   
     @endsection

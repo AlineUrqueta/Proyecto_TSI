@@ -92,6 +92,7 @@ class AtencionesController extends Controller
         return redirect()->route('secretaria.agendar');
     }
 
+
     /**
      * Display the specified resource.
      */
