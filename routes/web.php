@@ -84,6 +84,8 @@ Route::get('/obtener-especialidad/{profesionalId}', [AtencionesController::class
 //Actualización estado
 Route::post('/secretaria/agendar/atendida/{atencionId}',[AtencionesController::class,'horaAtendida'])->name('secretaria.atendida');
 Route::post('/secretaria/agendar/cancelada/{atencionId}',[AtencionesController::class,'horaCancelada'])->name('secretaria.cancelada');
+//Descartar horas tomadas
+Route::get('/horas-ocupadas/{fecha}',[AtencionesController::class,'obtenerHoras'])->name('secretaria.obtenerHoras');
 
 
 //Horario

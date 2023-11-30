@@ -73,31 +73,39 @@
 
                     <div class="m-3">
                         <input type="date" class="form-control" id="fecha_atencion" name="fecha_atencion" value="{{ now()->format('Y-m-d') }}" min="{{ now()->format('Y-m-d') }}" max="{{ now()->addYear()->format('Y-m-d') }}">
-
                     </div>
 
                     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-
                     <div class="m-3">
+
                         <select class="form-control" name="hora_inicio" id="hora_inicio" onchange="actualizarHoraFin()">
-                            <option value="9:00">9:00</option>
-                            <option value="9:45">9:45</option>
-                            <option value="10:30">10:30</option>
-                            <option value="11:15">11:15</option>
-                            <option value="12:00">12:00</option>
-                            <option value="12:45">12:45</option>
-                            <option value="13:30">13:30</option>
-                            <option value="14:15">14:15</option>
-                            <option value="15:00">15:00</option>
-                            <option value="15:45">15:45</option>
-                            <option value="16:30">16:30</option>
-                            <option value="17:15">17:15</option>
-                            <option value="18:00">18:00</option>
-                            <option value="18:45">18:45</option>
-                            <option value="19:30">19:30</option>
-                            <option value="20:15">20:15</option>
+                            @php
+                                $todasLasHoras = [
+                                    '9:00', '9:45', '10:30', '11:15', '12:00', '12:45','13:30', '14:15', '15:00', '15:45', '16:30', '17:15','18:00', '18:45', '19:30', '20:15'
+                                ];
+                                
+                            @endphp
+                            @foreach ($todasLasHoras as $hora)
+                                <option value="{{$hora}}">{{$hora}}</option>
+                            @endforeach
                         </select>
+                        {{-- <select class="form-control" name="hora_inicio" id="hora_inicio" onchange="actualizarHoraFin()">
+                            @php
+                                $todasLasHoras = [
+                                    '9:00', '9:45', '10:30', '11:15', '12:00', '12:45','13:30', '14:15', '15:00', '15:45', '16:30', '17:15','18:00', '18:45', '19:30', '20:15'
+                                ];
+                                $fechaSeleccionada = now()->format('Y-m-d'); //para probar
+                                $horasOcupadas = json_decode(file_get_contents(route('secretaria.obtenerHoras', ['fecha' => $fechaSeleccionada])), true);
+                            @endphp
+                            @foreach ($todasLasHoras as $hora)
+                                @if (in_array($hora, $horasOcupadas))
+                                    <option value="{{$hora}}" disabled>{{$hora}}</option>
+                                @else
+                                    <option value="{{$hora}}">{{$hora}}</option>
+                                @endif
+                            @endforeach
+                        </select> --}}
 
                     </div>
 

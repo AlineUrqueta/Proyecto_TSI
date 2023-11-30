@@ -92,6 +92,13 @@ class AtencionesController extends Controller
         return redirect()->route('secretaria.agendar');
     }
 
+    public function obtenerHoras($fecha)
+    {
+        $horasSeleccionadas = Atencion::where('fecha_atencion', $fecha)->pluck('hora');
+
+        return response()->json($horasSeleccionadas);
+    }
+
 
     /**
      * Display the specified resource.
