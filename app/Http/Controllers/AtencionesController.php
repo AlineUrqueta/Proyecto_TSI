@@ -7,6 +7,7 @@ use App\Models\Paciente;
 use App\Models\Especialidad;
 use App\Models\Profesional;
 use Illuminate\Http\Request;
+use  Illuminate\Support\Facades\DB;
 
 class AtencionesController extends Controller
 {
@@ -70,6 +71,25 @@ class AtencionesController extends Controller
 
         return redirect()->route('secretaria.agendar');
 
+    }
+
+    public function horaAtendida($atencionId){
+        $atencion = Atencion::where('id_atencion', $atencionId)->first();
+        if($atencion->estado_atencion == 1){
+            $atencion->estado_atencion = 2;
+        }else{
+            $atencion->estado_atencion = 1;
+        }
+        
+        $atencion->save();
+        return redirect()->route('secretaria.agendar');
+    }
+
+    public function horaCancelada($atencionId){
+        $atencion = Atencion::where('id_atencion', $atencionId)->first();
+        $atencion->estado_atencion = 0;
+        $atencion->save();
+        return redirect()->route('secretaria.agendar');
     }
 
     /**

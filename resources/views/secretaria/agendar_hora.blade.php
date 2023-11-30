@@ -206,7 +206,7 @@
             </tr>
             @foreach ($atenciones as $atencion)
             <tr>
-                <td>{{$atencion->paciente->nom_paciente}} {{$atencion->paciente->apep_paciente}} {{$atencion->paciente->apep_paciente}}</td>
+                <td>{{$atencion->paciente->nom_paciente}} {{$atencion->paciente->apep_paciente}} {{$atencion->paciente->apem_paciente}}</td>
                 <td>{{$atencion->profesional->nom_profesional}} {{$atencion->profesional->apep_profesional}} | {{$atencion->profesional->especialidad->nom_especialidad}}</td>
                 <td>{{$atencion->fecha_atencion}} | {{$atencion->hora_inicio}} </td>
                 <td>{{$atencion->usuario->nom_usuario}} {{$atencion->usuario->apep_usuario}}</td>
@@ -221,16 +221,22 @@
                         <button class="btn btn-warning text-white d-inline-block"><span class="material-symbols-outlined">
                                 manufacturing
                             </span></button>
-                        <button class="btn btn-success text-white d-inline-block"><span class="material-symbols-outlined">
+                        <form method="POST" action="{{ route('secretaria.atendida', ['atencionId' => $atencion->id_atencion]) }}">
+                            @csrf
+                            @method('POST')
+                        <button class="btn btn-success text-white d-inline-block" type="submit"><span class="material-symbols-outlined">
                                 check
                             </span></button>
-                        <button class="btn btn-danger text-white d-inline-block"><span class="material-symbols-outlined">
+                        </form>
+                        <form method="POST" action="{{ route('secretaria.cancelada', ['atencionId' => $atencion->id_atencion]) }}">
+                            @csrf
+                            @method('POST')
+                            <button class="btn btn-danger text-white d-inline-block" type="submit"><span class="material-symbols-outlined">
                                 block
                             </span></button>
+                        </form>
+                        
                     </div>
-
-
-
                 </td>
 
             </tr>

@@ -9,6 +9,7 @@ class Atencion extends Model
 {
     use HasFactory;
     protected $table = 'atenciones';
+    protected $primaryKey = 'id_atencion';
 
     public function paciente()
     {
