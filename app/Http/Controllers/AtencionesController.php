@@ -66,18 +66,16 @@ class AtencionesController extends Controller
         $hora_fin = Carbon::parse($request -> hora_fin);
 
         $atencion = new Atencion;
-        $atencion->rut_paciente_atenciones = $request->rut_paciente;
-        $atencion->rut_profesional_atenciones = $request->rut_profesional;
-        
+        $atencion->rut_paciente_atenciones = $request->rut_paciente_atenciones;
+        $atencion->rut_profesional_atenciones = $request->rut_profesional_atenciones;
+
         $atencion->fecha_atencion = $fecha_atencion;
         $atencion->hora_inicio = $hora_inicio;
         $atencion->hora_fin = $hora_fin;
         $atencion->email_usuario = auth()->user()->email;
         $atencion->estado_atencion = 1;
         $atencion->save();
-
         return redirect()->route('secretaria.agendar');
-
     }
 
     public function horaAtendida($atencionId){

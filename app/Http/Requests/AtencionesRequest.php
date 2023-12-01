@@ -20,12 +20,13 @@ class AtencionesRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
+
     public function rules(): array
     {
         $fecha_actual = Carbon::now();
         return [
             'rut_paciente_atenciones'=>'required',
-            'rut_profesionales_atenciones'=>'required',
+            'rut_profesional_atenciones'=>'required',
             'fecha_atencion'=>'required|date|before:'.$fecha_actual,
             'hora_inicio'=>'required',
             'hora_fin'=>'required',
@@ -35,7 +36,7 @@ class AtencionesRequest extends FormRequest
     public function messages(){
         return [
             'rut_paciente_atenciones.required'=>'Seleccione paciente',
-            'rut_profesionales_atenciones.required'=>'Seleccione profesional',
+            'rut_profesional_atenciones.required'=>'Seleccione profesional',
             'fecha_atencion.required'=>'Indique fecha',
             'hora_inicio.required'=>'Indique hora de inicio',
             'hora_fin.required'=>'Indique hora de fin',   

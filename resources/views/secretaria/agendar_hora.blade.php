@@ -38,9 +38,7 @@
 
 
                     <div class='m-3'>
-
-
-                        <select class="custom-select custom-select-lg mb-3 form-control" id='rut_paciente' name='rut_paciente'>
+                        <select class="custom-select custom-select-lg mb-3 form-control" id='rut_paciente_atenciones' name='rut_paciente_atenciones'>
                             <option value="">-- Seleccionar Paciente --</option>
                             @foreach ( $pacientes as $paciente )
 
@@ -62,7 +60,7 @@
                     </div>
 
                     <div class='m-3'>
-                        <select class="custom-select custom-select-lg mb-3 form-control" id='rut_profesional' name='rut_profesional'>
+                        <select class="custom-select custom-select-lg mb-3 form-control" id='rut_profesional_atenciones' name='rut_profesional_atenciones'>
                             <option value="">-- Seleccionar Profesional --</option>
                             @foreach ( $profesionales as $profesional )
 
@@ -73,7 +71,6 @@
 
                     <div class="m-3">
                         <input type="date" class="form-control" id="fecha_atencion" name="fecha_atencion" value="{{ now()->format('Y-m-d') }}" min=" {{ now()->format('Y-m-d') }}" max="2024-01-01">
-
                     </div>
 
 
@@ -140,7 +137,7 @@
                 <script>
                     document.addEventListener('DOMContentLoaded', function() {
                         var especialidadSelect = document.getElementById('id_especialidad');
-                        var profesionalSelect = document.getElementById('rut_profesional');
+                        var profesionalSelect = document.getElementById('rut_profesional_atenciones');
 
                         especialidadSelect.addEventListener('change', function() {
                             var especialidadId = this.value;
