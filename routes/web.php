@@ -9,7 +9,6 @@ use App\Http\Controllers\SecretariaController;
 use App\Http\Controllers\EspecialidadesController;
 use App\Http\Controllers\ProfesionalesController;
 use App\Http\Controllers\AtencionesController;
-use App\Http\Controllers\HorariosController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -92,7 +91,4 @@ Route::get('/obtener-horas-disponibles/{profesionalId}/{fechaSeleccionada}', [At
 //Actualización estado
 Route::post('/secretaria/agendar/atendida/{atencionId}',[AtencionesController::class,'horaAtendida'])->name('secretaria.atendida');
 Route::post('/secretaria/agendar/cancelada/{atencionId}',[AtencionesController::class,'horaCancelada'])->name('secretaria.cancelada');
-
-//Horario
-Route::post('/secretaria/horarios',[HorariosController::class,'store'])->name('horario.store');
 

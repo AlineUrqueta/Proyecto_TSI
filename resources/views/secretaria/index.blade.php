@@ -1,12 +1,6 @@
 @extends('layouts.master')
 @section('title','Inicio Secretaria - Centro Médico Epojé')
 @section('contenido')
-    {{-- <div class="row align-items-center">
-        <div class = 'col-6 mt-5'>
-            <img src="{{asset('images/logo.jpeg')}}" alt="Logo Centro" class="img-fluid">
-        </div>
-    </div> --}}
-
     <div class="container-fluid mt-4 d-flex justify-content-center" style="background-color: #88bd9e">
         <div class="col-5 d-flex justify-content-center">
             <div class="row m-4">
@@ -32,14 +26,7 @@
                 <a class=" btn btn-light btn-lg" href="{{ route('pacientes.index') }}">Administrar Pacientes</a>
             </div>
             <div class="row m-4">
-
-                <a class=" btn btn-light btn-lg" href="{{ route('secretaria.showHorarios') }}">Administrar Horarios</a>
-
-            </div>
-            <div class="row m-4">
-
                 <a class=" btn btn-light btn-lg" href="{{ route('secretaria.listadoCitas') }}">Administracion de Citas Médicas</a>
-
             </div>
         </div>
 
