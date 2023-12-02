@@ -33,9 +33,9 @@
 
                         <td>
                             <div class="btn-group" role="group" aria-label="Ejemplo de Button Group">
-                                <button class="btn btn-warning text-white d-inline-block"><span class="material-symbols-outlined">
+                                <a href="{{route('secretaria.editHora',['atencion'=>$atencion->id_atencion])}}" class="btn btn-warning text-white d-inline-block"><span class="material-symbols-outlined">
                                         manufacturing
-                                    </span></button>
+                                    </span></a>
                                 <form method="POST" action="{{ route('secretaria.atendida', ['atencionId' => $atencion->id_atencion]) }}">
                                     @csrf
                                     @method('POST')
@@ -127,9 +127,10 @@
 
                         <td>
                             <div class="btn-group" role="group" aria-label="Ejemplo de Button Group">
-                                <button class="btn btn-warning text-white d-inline-block"><span class="material-symbols-outlined">
+
+                                <a href="{{route('secretaria.editHora',['atencion'=>$atencion->id_atencion])}}" class="btn btn-warning text-white d-inline-block"><span class="material-symbols-outlined">
                                         manufacturing
-                                    </span></button>
+                                    </span></a>
                                 <form method="POST" action="{{ route('secretaria.atendida', ['atencionId' => $atencion->id_atencion]) }}">
                                     @csrf
                                     @method('POST')

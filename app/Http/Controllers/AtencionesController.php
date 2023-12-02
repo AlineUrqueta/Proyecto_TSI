@@ -150,11 +150,11 @@ class AtencionesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Atencion $atencion)
+    public function editView(Atencion $atencion)
     {   $pacientes = Paciente::all();
         $profesionales = Profesional::where('estado_vigente','=',1)->get();
         $especialidades = Especialidad::all();
-        return view('secretaria.editarHora',compact('atencion','pacientes','profesionales','especialidades'));
+        return view('secretaria.editarAtencion',compact('atencion','pacientes','profesionales','especialidades'));
     }
 
     /**
@@ -163,8 +163,8 @@ class AtencionesController extends Controller
     public function update(AtencionesRequest $request, Atencion $atencion)
     {
         $fecha_atencion = Carbon::parse($request->fecha_atencion);
-        $hora_inicio = Carbon::parse($request->hora_inicio);
-        $hora_fin = Carbon::parse($request -> hora_fin);
+        $hora_inicio = $request->hora_inicio;
+        $hora_fin = $request -> hora_fin;
 
         $atencion = new Atencion;
         $atencion->rut_paciente_atenciones = $request->rut_paciente;
