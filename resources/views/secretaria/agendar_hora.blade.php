@@ -1,28 +1,7 @@
 @extends('layouts.master')
 @section('title','Agendar Hora')
 @section('contenido')
-<style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
 
-    th,
-    td {
-        border: 1px solid #ddd;
-        text-align: center;
-        padding: 8px;
-    }
-
-    th {
-        background-color: #f2f2f2;
-    }
-
-    td {
-        background-color: #ffffff;
-    }
-
-</style>
 
 <div class="row mt-5">
     <div class="col-sm-12 col-md-4">
@@ -199,7 +178,8 @@
 
 
     <div class="col-sm-12 col-md-8">
-        <table>
+        @if(count($atenciones) !== 0)
+        <table class="table table-bordered border-success" style="width:auto;height:auto">
             <tr>
                 <th>Paciente</th>
                 <th>Profesional | Especialidad</th>
@@ -248,6 +228,9 @@
 
 
         </table>
+        @else
+            <div class="alert alert-danger"> No hay horas agendadas! </div>
+        @endif
     </div>
 
 

@@ -3,17 +3,10 @@
 @section('contenido')
 
 
-<div class="row mt-4" style="position: relative;">
-    <div class="col-3">
-        <div id="list-example" class="list-group">
-            <a class="list-group-item list-group-item-action" href="#list-item-1">Agendadas</a>
-            <a class="list-group-item list-group-item-action" href="#list-item-2">Por Confirmar</a>
-            <a class="list-group-item list-group-item-action" href="#list-item-3">Confirmadas</a>
-            <a class="list-group-item list-group-item-action" href="#list-item-4">Anuladas</a>
-        </div>
-    </div>
-    <div class="col-9" style="position: relative; height: 40rem; overflow-y: scroll;" tabindex="0">
-        <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+<div class="row mt-4" >
+    
+    <div class="col-12">
+        
             <div class="col">
                 <h4 id="list-item-1">Agendadas</h4>
                 <table class="table table-bordered border-success" style="width:auto;height:auto">
@@ -59,6 +52,7 @@
 
 
                 </table>
+                
             </div>
 
             <div class="col">
@@ -203,16 +197,9 @@
             </div>
 
 
-        </div>
+        
     </div>
 </div>
-<script>
-    $(document).ready(function() {
-        $('body').scrollspy({
-            target: '#list-example'
-        });
-    });
 
-</script>
 
 @endsection

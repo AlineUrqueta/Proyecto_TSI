@@ -69,18 +69,6 @@ class AtencionesController extends Controller
         }
     }
     
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(AtencionesRequest $request)
     {
         $fecha_atencion = Carbon::parse($request->fecha_atencion);
@@ -141,17 +129,7 @@ class AtencionesController extends Controller
         return view('secretaria.listadoCitas',compact('atencionesAgendadas','atencionesPorConfirmar','atencionesConfirmadas','atencionesCanceladas'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Atencion $atencion)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Atencion $atencion)
     {   $pacientes = Paciente::all();
         $profesionales = Profesional::where('estado_vigente','=',1)->get();
@@ -159,9 +137,6 @@ class AtencionesController extends Controller
         return view('secretaria.editarHora',compact('atencion','pacientes','profesionales','especialidades'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(AtencionesRequest $request, Atencion $atencion)
     {
         $fecha_atencion = Carbon::parse($request->fecha_atencion);
@@ -182,11 +157,5 @@ class AtencionesController extends Controller
         return redirect()->route('secretaria.editarHora',compact('atencion'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Atencion $atencion)
-    {
-        //
-    }
+
 }
