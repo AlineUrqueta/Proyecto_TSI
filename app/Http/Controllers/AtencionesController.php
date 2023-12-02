@@ -121,12 +121,21 @@ class AtencionesController extends Controller
         ->whereDate('fecha_atencion', '>=', Carbon::now())
         ->get();
 
+        $atencionesRealizadas = Atencion::where('estado_atencion', 3)->get();
+
         $atencionesCanceladas = Atencion::where('estado_atencion', 0)
         ->whereDate('fecha_atencion', '>=', Carbon::now())
         ->get();
 
 
-        return view('secretaria.listadoCitas',compact('atencionesAgendadas','atencionesPorConfirmar','atencionesConfirmadas','atencionesCanceladas'));
+        return view('secretaria.listadoCitas',compact('atencionesAgendadas','atencionesPorConfirmar','atencionesConfirmadas','atencionesCanceladas','atencionesRealizadas'));
+    }
+
+    public function indexFiltrar()
+    {
+        $atenciones = Atencion::all();
+        $profesionales = Profesional::where('estado_vigente','=',1)->get();
+        return view('secretaria.filtrarCitas',compact('atenciones','profesionales'));
     }
 
 

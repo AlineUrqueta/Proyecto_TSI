@@ -179,7 +179,7 @@
 
     <div class="col-sm-12 col-md-8">
         @if(count($atenciones) !== 0)
-        <table class="table table-bordered border-success" style="width:auto;height:auto">
+        <table class="table table-bordered border-success" >
             <tr>
                 <th>Paciente</th>
                 <th>Profesional | Especialidad</th>
@@ -192,7 +192,7 @@
             <tr>
                 <td>{{$atencion->paciente->nom_paciente}} {{$atencion->paciente->apep_paciente}} {{$atencion->paciente->apem_paciente}}</td>
                 <td>{{$atencion->profesional->nom_profesional}} {{$atencion->profesional->apep_profesional}} | {{$atencion->profesional->especialidad->nom_especialidad}}</td>
-                <td>{{$atencion->fecha_atencion}} | {{$atencion->hora_inicio}} </td>
+                <td>{{ strftime('%d/%m/%Y', strtotime($atencion->fecha_atencion)) }} | {{$atencion->hora_inicio}} </td>
                 <td>{{$atencion->usuario->nom_usuario}} {{$atencion->usuario->apep_usuario}}</td>
                 <td>
                     @if($atencion->estado_atencion==1)Agendado
@@ -238,4 +238,4 @@
 
 
 
-    @endsection
+@endsection

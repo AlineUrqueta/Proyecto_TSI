@@ -20,7 +20,7 @@
         </div>
 
         <h5>Nombre : {{$paciente->nom_paciente}} {{$paciente->apep_paciente}} {{$paciente->apem_paciente}}</h5>
-        <h5>Fecha de nacimiento : {{$paciente->fecha_nacimiento}} </h5>
+        <h5>Fecha de nacimiento : {{ strftime('%d/%m/%Y', strtotime($paciente->fecha_nacimiento)) }} </h5>
         <h5>Celular : {{$paciente->fono}} </h5>
         @if($paciente->corp_tea == 1)
         <h5>Corporacion TEA: Si pertenece </h5>
@@ -33,9 +33,9 @@
 
 
 </div>
-
-<div class="mt-5">
-    <table class="table table-success table-striped">
+<hr>
+<div class="mt-4">
+    <table class="table table-bordered border-success">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -49,7 +49,7 @@
 
                 <tr>
                     <th scope="row">{{$loop->iteration}}</th>
-                    <td>{{$atencion->fecha_atencion}} {{$atencion->hora_inicio}}</td>
+                    <td>{{ strftime('%d/%m/%Y', strtotime($atencion->fecha_atencion)) }} {{$atencion->hora_inicio}}</td>
                     <td>{{$atencion->profesional->especialidad->nom_especialidad}}</td>
                     <td>{{$atencion->profesional->nom_profesional}} {{$atencion->profesional->apep_profesional}}</td>
                 </tr>
