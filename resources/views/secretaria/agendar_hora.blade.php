@@ -41,8 +41,9 @@
                         <select class="custom-select custom-select-lg mb-3 form-control" id='rut_paciente_atenciones' name='rut_paciente_atenciones'>
                             <option value="">-- Seleccionar Paciente --</option>
                             @foreach ( $pacientes as $paciente )
-
-                            <option value="{{$paciente->rut_paciente}}">{{$paciente->nom_paciente}} {{$paciente->apep_paciente}} {{$paciente->apem_paciente}}</option>
+                                @if($paciente->estado_vigente==1)
+                                    <option value="{{$paciente->rut_paciente}}">{{$paciente->nom_paciente}} {{$paciente->apep_paciente}} {{$paciente->apem_paciente}}</option>
+                                @endif
                             @endforeach
 
                         </select>
@@ -75,6 +76,18 @@
 
                     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+                    <script>
+                        const picker = document.getElementById('fecha_atencion');
+                        picker.addEventListener('input', function(e) {
+                            var diaSeleccionado = new Date(this.value).getUTCDay();
+                            if (diaSeleccionado === 0) {
+                                e.preventDefault();
+                                this.value = '';
+                                alert('No se atiende los domingos');
+                            }
+                        });
+                    </script>
+
                     <div class="m-3">
 
                         <select class="form-control" name="hora_inicio" id="hora_inicio" onchange="actualizarHoraFin()">
@@ -83,22 +96,7 @@
                             <option value="{{$hora}}">{{$hora}}</option>
                             @endforeach
                         </select>
-                        {{-- <select class="form-control" name="hora_inicio" id="hora_inicio" onchange="actualizarHoraFin()">
-                            @php
-                                $todasLasHoras = [
-                                    '9:00', '9:45', '10:30', '11:15', '12:00', '12:45','13:30', '14:15', '15:00', '15:45', '16:30', '17:15','18:00', '18:45', '19:30', '20:15'
-                                ];
-                                $fechaSeleccionada = now()->format('Y-m-d'); //para probar
-                                $horasOcupadas = json_decode(file_get_contents(route('secretaria.obtenerHoras', ['fecha' => $fechaSeleccionada])), true);
-                            @endphp
-                            @foreach ($todasLasHoras as $hora)
-                                @if (in_array($hora, $horasOcupadas))
-                                    <option value="{{$hora}}" disabled>{{$hora}}</option>
-                                @else
-                                    <option value="{{$hora}}">{{$hora}}</option>
-                                @endif
-                            @endforeach
-                        </select> --}}
+                        
 
                     </div>
 
@@ -223,7 +221,6 @@
                 <th>Fecha | Hora </th>
                 <th>Secretaria</th>
                 <th>Estado</th>
-                <th>Acciones</th>
             </tr>
             @foreach ($atenciones as $atencion)
             <tr>
@@ -237,28 +234,7 @@
                     @else Atendido
                     @endif
                 </td>
-                <td>
-                    <div class="btn-group" role="group" aria-label="Ejemplo de Button Group">
-                        <a class="btn btn-warning text-white d-inline-block" href="{{route('secretaria.editHora',$atencion->id_atencion)}}"><span class="material-symbols-outlined">
-                                manufacturing
-                            </span></a>
-                        <form method="POST" action="{{ route('secretaria.atendida', ['atencionId' => $atencion->id_atencion]) }}">
-                            @csrf
-                            @method('POST')
-                            <button class="btn btn-success text-white d-inline-block" type="submit"><span class="material-symbols-outlined">
-                                    check
-                                </span></button>
-                        </form>
-                        <form method="POST" action="{{ route('secretaria.cancelada', ['atencionId' => $atencion->id_atencion]) }}">
-                            @csrf
-                            @method('POST')
-                            <button class="btn btn-danger text-white d-inline-block" type="submit"><span class="material-symbols-outlined">
-                                    block
-                                </span></button>
-                        </form>
-
-                    </div>
-                </td>
+                
 
             </tr>
             @endforeach

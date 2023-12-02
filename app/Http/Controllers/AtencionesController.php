@@ -110,14 +110,14 @@ class AtencionesController extends Controller
         }
         
         $atencion->save();
-        return redirect()->route('secretaria.agendar');
+        return redirect()->route('secretaria.listadoCitas');
     }
 
     public function horaCancelada($atencionId){
         $atencion = Atencion::where('id_atencion', $atencionId)->first();
         $atencion->estado_atencion = 0;
         $atencion->save();
-        return redirect()->route('secretaria.agendar');
+        return redirect()->route('secretaria.listadoCitas');
     }
 
     public function indexListado()
