@@ -8,6 +8,7 @@ use App\Http\Controllers\PacientesController;
 use App\Http\Controllers\SecretariaController;
 use App\Http\Controllers\EspecialidadesController;
 use App\Http\Controllers\ProfesionalesController;
+use App\Http\Controllers\AtencionesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -59,7 +60,7 @@ Route::get('/search-especialidad',[EspecialidadesController::class,'search'])->n
 Route::get('/secretaria/horarios',[SecretariaController::class,'showHorarios'])->name('secretaria.showHorarios');
 Route::get('/secretaria/horarios/ver',[SecretariaController::class,'verHorario'])->name('secretaria.verHorario');
 Route::get('/secretaria/horarios/editar',[SecretariaController::class,'editarHorario'])->name('secretaria.editarHorario');
-Route::get('/secretaria/agendar',[SecretariaController::class,'agendar'])->name('secretaria.agendar');
+
 
 
 //Profesionales
@@ -73,3 +74,21 @@ Route::put('/admin/{profesional}',[ProfesionalesController::class,'update'])->na
 Route::get('/admin/usuario/editar/{usuario}',[SecretariaController::class,'edit'])->name('usuario.edit');
 Route::put('/admin/usuario/editar/{usuario}',[SecretariaController::class,'update'])->name('usuario.update');
 Route::get('/admin/search-usuario',[SecretariaController::class,'search'])->name('usuario.search');
+
+//Atenciones
+Route::get('/secretaria/agendar',[AtencionesController::class,'index'])->name('secretaria.agendar');
+Route::post('/secretaria/agendar',[AtencionesController::class,'store'])->name('secretaria.store');
+Route::get('/obtener-profesionales/{especialidadId}',[AtencionesController::class,'profesionalEspecialidad'])->name('secretaria.buscarProfesional');
+Route::get('/obtener-especialidad/{profesionalId}', [AtencionesController::class, 'especialidadProfesional'])->name('secretaria.buscarEspecialidad');
+Route::get('/secretaria/listadoCitas',[AtencionesController::class,'indexListado'])->name('secretaria.listadoCitas');
+
+Route::get('secretaria/editar/{atencion}',[AtencionesController::class,'edit'])->name('secretaria.editHora');
+Route::put('secretaria/editar/{atencion}',[AtencionesController::class,'update'])->name('secretaria.updateHora');
+
+Route::get('/obtener-horas-disponibles/{profesionalId}/{fechaSeleccionada}', [AtencionesController::class, 'obtenerHorasDisponibles']);
+
+
+//Actualización estado
+Route::post('/secretaria/agendar/atendida/{atencionId}',[AtencionesController::class,'horaAtendida'])->name('secretaria.atendida');
+Route::post('/secretaria/agendar/cancelada/{atencionId}',[AtencionesController::class,'horaCancelada'])->name('secretaria.cancelada');
+

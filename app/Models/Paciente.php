@@ -14,4 +14,9 @@ class Paciente extends Model
     public $incrementing = false;
     public $timestamps = false;
 
+    public function atenciones()
+    {
+        return $this->hasMany(Atencion::class,'id_atencion');
+    }
+
 }

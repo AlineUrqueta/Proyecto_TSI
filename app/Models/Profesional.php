@@ -19,4 +19,9 @@ class Profesional extends Model
     {
         return $this->belongsTo(Especialidad::class, 'id_especialidad_profesional');
     }
+
+    public function horario()
+    {
+        return $this->hasMany(Horario::class,'rut_profesional');
+    }
 }

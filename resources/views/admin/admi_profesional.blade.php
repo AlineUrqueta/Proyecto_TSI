@@ -32,7 +32,7 @@
             <tbody>
                 @foreach ($profesionales as $profesional )
                 <tr>
-                    <th >{{$profesional->rut_profesional}}</th>
+                    <th>{{$profesional->rut_profesional}}</th>
                     <th>{{$profesional->nom_profesional}} {{$profesional->apep_profesional}} {{$profesional->apem_profesional}}</th>
 
                     @foreach ($especialidades as $especialidad )
@@ -45,11 +45,13 @@
                     @if ($profesional->estado_vigente == 1)
                     <td class="text-center"><span class="material-symbols-outlined">
                             check
-                        </span></td>
+                        </span>
+                    </td>
                     @else
                     <td class="text-center"><span class="material-symbols-outlined">
                             do_not_disturb_on
-                        </span></td>
+                        </span>
+                    </td>
                     @endif
                     <td>
 

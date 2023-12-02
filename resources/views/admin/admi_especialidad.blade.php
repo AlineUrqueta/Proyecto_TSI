@@ -35,13 +35,21 @@
 
                     <td class ="text-center">
                         <!-- Button trigger modal -->
-                        @if ($especialidad->profesionales->count() === 0)
-                        <button type="button" class="btn btn-danger me-0 d-inline-flex" data-toggle="modal" data-target="#exampleModalCenter{{$especialidad->id_especialidad}}">
-                            <span class="material-symbols-outlined">
-                                delete
-                            </span>
-                        </button>
-                        @endif
+                        <div class="text-center">
+                            @if ($especialidad->profesionales->count() === 0)
+                            <button type="button" class="btn btn-danger me-3" data-toggle="modal" data-target="#exampleModalCenter{{$especialidad->id_especialidad}}">
+                                <span class="material-symbols-outlined">
+                                    delete
+                                </span>
+                            </button>
+                            @endif
+                            <a class='btn btn-warning text-white ' href="{{route('especialidad.edit',$especialidad->id_especialidad)}}"><span class="material-symbols-outlined">
+                                    manufacturing
+                                </span>
+                            </a>
+
+                        </div>
+
 
 
 
@@ -71,10 +79,6 @@
                         </div>
 
 
-
-                        <a class='btn btn-warning text-white d-inline-flex' href="{{route('especialidad.edit',$especialidad->id_especialidad)}}"><span class="material-symbols-outlined">
-                                manufacturing
-                            </span></a>
 
 
 

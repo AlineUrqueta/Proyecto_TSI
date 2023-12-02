@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use App\Http\Requests\UsuarioRequest;
+use App\Models\Profesional;
+use App\Models\Especialidad;
 
 class SecretariaController extends Controller
 {
@@ -61,10 +63,6 @@ class SecretariaController extends Controller
         }else{
             $usuario->estado_vigente = $request->estado_vigente;
         }
-        
-        //$usuario->email = $request->email;
-        //$usuario->password = Hash::make($request->password);
-        //$usuario->id_tipo = $request->id_tipo;
         $usuario->save();
         return redirect()->route('usuario.edit',compact('usuario'))->with('editarCorrecto', 'Datos actualizados!');
     }
@@ -81,7 +79,9 @@ class SecretariaController extends Controller
 
 
     public function showHorarios(){
-        return view('secretaria.horarios');
+        $especialidades = Especialidad::all();
+        $profesionales = Profesional::all();
+        return view('secretaria.horarios',compact('especialidades','profesionales')); // Cambiar
     }
 
     public function verHorario(){
@@ -92,10 +92,10 @@ class SecretariaController extends Controller
         return view('secretaria.editarHorario');
     }
 
-    public function agendar(){
-        return view('secretaria.agendar_hora');
+    // public function agendar(){
+    //     return view('secretaria.agendar_hora');
 
-    }
+    // }
 
     public function search(Request $request){
         $buscar = $request->buscar;

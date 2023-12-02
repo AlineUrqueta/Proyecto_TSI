@@ -25,72 +25,154 @@
 </style>
 
 <div class="row mt-5">
-    <div class="col-sm-12 col-md-6">
-        <div class="card" style="width: 45rem; height: auto;">
+    <div class="col-sm-12 col-md-4">
+        <div class="card" style="width: auto; height: auto;">
             <div class="card-header text-center">
                 <h4>Agendar hora médica</h4>
             </div>
             <div class="card-body">
 
 
-                <form action="" class='mt-4'>
-                    {{-- @csrf --}}
+                <form action="{{route('secretaria.agendar')}}" class='mt-4' method="POST">
+                    @csrf
 
 
                     <div class='m-3'>
-                        <select class="custom-select custom-select-lg mb-3 form-control" id='' name=''>
+                        <select class="custom-select custom-select-lg mb-3 form-control" id='rut_paciente_atenciones' name='rut_paciente_atenciones'>
                             <option value="">-- Seleccionar Paciente --</option>
-                            <option value="0">Paciente 1</option>
-                            <option value="1">Paciente 2</option>
-                            <option value="2">Paciente 3</option>
-                            <option value="3">Paciente 4</option>
+                            @foreach ( $pacientes as $paciente )
+
+                            <option value="{{$paciente->rut_paciente}}">{{$paciente->nom_paciente}} {{$paciente->apep_paciente}} {{$paciente->apem_paciente}}</option>
+                            @endforeach
+
                         </select>
                     </div>
-                    
+
 
                     <div class='m-3'>
-                        <select class="custom-select custom-select-lg mb-3 form-control" id='' name=''>
+                        <select class="custom-select custom-select-lg mb-3 form-control" id='id_especialidad' name='id_especialidad'>
                             <option value="">-- Seleccionar Especialidad --</option>
-                            <option value="0">Fonoaudiología</option>
-                            <option value="1">Psicología</option>
-                            <option value="2">Terapia Ocupacional</option>
-                            <option value="3">Psiquiatría</option>
+                            @foreach ( $especialidades as $especialidad )
+
+                            <option value="{{$especialidad->id_especialidad}}">{{$especialidad->nom_especialidad}}</option>
+                            @endforeach
                         </select>
                     </div>
 
                     <div class='m-3'>
-                        <select class="custom-select custom-select-lg mb-3 form-control" id='' name=''>
+                        <select class="custom-select custom-select-lg mb-3 form-control" id='rut_profesional_atenciones' name='rut_profesional_atenciones'>
                             <option value="">-- Seleccionar Profesional --</option>
-                            <option value="0">Profesional 1</option>
-                            <option value="1">Profesional 2</option>
-                            <option value="2">Profesional 3</option>
-                            <option value="3">Profesional 4</option>
+                            @foreach ( $profesionales as $profesional )
+
+                            <option value="{{$profesional->rut_profesional}}">{{$profesional->nom_profesional}} {{$profesional->apep_profesional}} {{$profesional->apem_profesional}}</option>
+                            @endforeach
                         </select>
                     </div>
 
-                    <div class='m-3'>
-                        <select class="custom-select custom-select-lg mb-3 form-control" id='' name=''>
-                            <option value="">-- Seleccionar Semana --</option>
-                            <option value="0">02/10/2023 - 08/10/2023</option>
-                            <option value="1">09/10/2023 - 15/10/2023</option>
-                            <option value="2">16/10/2023 - 22/10/2023</option>
-                            <option value="3">23/10/2023 - 29/10/2023</option>
-                        </select>
+                    <div class="m-3">
+                        <input type="date" class="form-control" id="fecha_atencion" name="fecha_atencion" value="{{ now()->format('Y-m-d') }}" min=" {{ now()->format('Y-m-d') }}" max="2024-01-01">
                     </div>
 
 
 
+                    <div class="m-3">
+                        <select class="form-control" name="hora_inicio" id="hora_inicio" onchange="actualizarHoraFin()">
+                            <option value="">-- Seleccionar Hora de Inicio --</option>
+                            @foreach ($horas as $hora)
+                            <option value="{{$hora}}">{{$hora}}</option>
+                            @endforeach
+                        </select>
+
+                    </div>
+
+                    <div class="m-3">
+                        <input type="text" class="form-control" name="hora_fin" id="hora_fin" value="00:00" readonly>
+                        <script>
+                            function actualizarHoraFin() {
+                                var horaInicioSelect = document.getElementById('hora_inicio');
+                                var horaFinInput = document.getElementById('hora_fin');
+
+                                var horaInicioSeleccionada = horaInicioSelect.value;
+
+                                var fechaInicio = new Date('2000-01-01 ' + horaInicioSeleccionada);
+
+                                fechaInicio.setMinutes(fechaInicio.getMinutes() + 45);
+                                var horaFin = ('0' + fechaInicio.getHours()).slice(-2) + ':' + ('0' + fechaInicio.getMinutes()).slice(-2);
+
+                                horaFinInput.value = horaFin;
+                            }
+                            actualizarHoraFin();
+
+                        </script>
+                    </div>
 
 
-                    <div class='me-3 mt-4 text-end'>
-                        <a href="{{route('secretaria.index')}}" class="btn btn-outline-dark me-2 ">Menu Principal</a>
-                        
-                        <button type='submit' class='btn btn-success '>Buscar Hora</button>
+
+
+
+                    <div class='m-2 text-end'>
+                        <a href="{{route('secretaria.index')}}" class="btn btn-outline-dark  me-2">Menu Principal</a>
+
+                        <button type='submit' class='btn btn-success me-2 '>Agendar Hora</button>
                     </div>
 
 
 
                 </form>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var especialidadSelect = document.getElementById('id_especialidad');
+                        var profesionalSelect = document.getElementById('rut_profesional_atenciones');
+                        var fechaSelect = document.getElementById('fecha_atencion');
+                        var horasSelect = document.getElementById('hora_inicio');
+
+                        especialidadSelect.addEventListener('change', function() {
+                            var especialidadId = this.value;
+
+                            fetch('/obtener-profesionales/' + especialidadId)
+                                .then(response => response.json())
+                                .then(data => {
+                                    profesionalSelect.innerHTML = "<option value=''>-- Seleccionar Profesional --</option>";
+                                    data.forEach(profesional => {
+                                        profesionalSelect.innerHTML += "<option value='" + profesional.rut_profesional + "'>" + profesional.nom_profesional + " " + profesional.apep_profesional + " " + profesional.apem_profesional + "</option>";
+                                    });
+                                })
+                                .catch(error => console.error('Error:', error));
+                        });
+
+                        profesionalSelect.addEventListener('change', function() {
+                            var profesionalId = this.value;
+                            fetch('/obtener-especialidad/' + profesionalId)
+                                .then(response => response.json())
+                                .then(data => {
+                                    especialidadSelect.innerHTML = "<option value='" + data.id_especialidad + "'>" + data.nom_especialidad + "</option>";
+                                })
+                                .catch(error => console.error('Error:', error));
+                        });
+
+                        fechaSelect.addEventListener('change', function() {
+                            var profesionalId = profesionalSelect.value;
+                            var fechaSeleccionada = this.value;
+
+                            if (profesionalId && fechaSeleccionada) {
+                                // Realiza el fetch para obtener las horas disponibles
+                                fetch('/obtener-horas-disponibles/' + profesionalId + '/' + fechaSeleccionada)
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        console.log(data); // Imprime la respuesta en la consola
+                                        horasSelect.innerHTML = "<option value=''>-- Seleccionar Hora --</option>";
+                                        data.forEach(hora => {
+                                            horasSelect.innerHTML += "<option value='" + hora + "'>" + hora + "</option>";
+                                        });
+                                    })
+                                    .catch(error => console.error('Error:', error));
+                            }
+                        });
+                    });
+
+                </script>
+
 
 
 
@@ -112,82 +194,59 @@
         </div>
 
     </div>
-    <div class="col-sm-12 col-md-6">
+
+
+
+
+    <div class="col-sm-12 col-md-8">
         <table>
             <tr>
-                <th>Lunes</th>
-                <th>Martes</th>
-                <th>Miércoles</th>
-                <th>Jueves</th>
-                <th>Viernes</th>
+                <th>Paciente</th>
+                <th>Profesional | Especialidad</th>
+                <th>Fecha | Hora </th>
+                <th>Secretaria</th>
+                <th>Estado</th>
+                <th>Acciones</th>
             </tr>
+            @foreach ($atenciones as $atencion)
             <tr>
-                <td>10:00 - 10:45</td>
-                <td>10:00 - 10:45</td>
-                <td>10:00 - 10:45</td>
-                <td>10:00 - 10:45</td>
-                <td>10:00 - 10:45</td>
-            </tr>
-            <tr>
-                <td>10:45 - 11:30</td>
-                <td>10:45 - 11:30</td>
-                <td>10:45 - 11:30</td>
-                <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                        10:45 - 11:30
-                    </button></td>
-                <td>10:45 - 11:30</td>
-            </tr>
-            <tr>
-                <td>11:30 - 12:15</td>
-                <td>11:30 - 12:15</td>
-                <td>11:30 - 12:15</td>
-                <td>11:30 - 12:15</td>
-                <td>11:30 - 12:15</td>
-            </tr>
-            <tr>
-                <td>12:15 - 13:00</td>
-                <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                        12:15 - 13:00
-                    </button></td>
-                <td>12:15 - 13:00</td>
-                <td>12:15 - 13:00</td>
-                <td>12:15 - 13:00</td>
-            </tr>
-            <tr>
-                <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                        13:00 - 13:45
-                    </button>
+                <td>{{$atencion->paciente->nom_paciente}} {{$atencion->paciente->apep_paciente}} {{$atencion->paciente->apem_paciente}}</td>
+                <td>{{$atencion->profesional->nom_profesional}} {{$atencion->profesional->apep_profesional}} | {{$atencion->profesional->especialidad->nom_especialidad}}</td>
+                <td>{{$atencion->fecha_atencion}} | {{$atencion->hora_inicio}} </td>
+                <td>{{$atencion->usuario->nom_usuario}} {{$atencion->usuario->apep_usuario}}</td>
+                <td>
+                    @if($atencion->estado_atencion==1)Agendado
+                    @elseif ($atencion->estado_atencion==0)Cancelada
+                    @else Atendido
+                    @endif
                 </td>
-                <td>13:00 - 13:45</td>
-                <td>13:00 - 13:45</td>
-                <td>13:00 - 13:45</td>
-                <td>13:00 - 13:45</td>
-            </tr>
-            <!-- Button trigger modal -->
+                <td>
+                    <div class="btn-group" role="group" aria-label="Ejemplo de Button Group">
+                        <a class="btn btn-warning text-white d-inline-block" href="{{route('secretaria.editHora',$atencion->id_atencion)}}"><span class="material-symbols-outlined">
+                                manufacturing
+                            </span></a>
+                        <form method="POST" action="{{ route('secretaria.atendida', ['atencionId' => $atencion->id_atencion]) }}">
+                            @csrf
+                            @method('POST')
+                            <button class="btn btn-success text-white d-inline-block" type="submit"><span class="material-symbols-outlined">
+                                    check
+                                </span></button>
+                        </form>
+                        <form method="POST" action="{{ route('secretaria.cancelada', ['atencionId' => $atencion->id_atencion]) }}">
+                            @csrf
+                            @method('POST')
+                            <button class="btn btn-danger text-white d-inline-block" type="submit"><span class="material-symbols-outlined">
+                                    block
+                                </span></button>
+                        </form>
 
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title text-center" id="exampleModalLongTitle">Agendar Hora</h5>
-
-                        </div>
-                        <div class="modal-body">
-                            <h5>Nombre del Paciente: Paciente 1</h5>
-                            <h5>Especialidad: Psicología</h5>
-                            <h5>Fecha: 08/10/2023</h5>
-
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary">Agendar Hora</button>
-                        </div>
                     </div>
-                </div>
-            </div>
+                </td>
+
+            </tr>
+            @endforeach
+
+
         </table>
     </div>
 
