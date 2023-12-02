@@ -33,7 +33,7 @@
             <div class="card-body">
 
 
-                <form action="{{route('secretaria.agendar')}}" class='mt-4' method ="POST">
+                <form action="{{route('secretaria.agendar')}}" class='mt-4' method="POST">
                     @csrf
 
 
@@ -77,23 +77,10 @@
 
                     <div class="m-3">
                         <select class="form-control" name="hora_inicio" id="hora_inicio" onchange="actualizarHoraFin()">
-                            <option value ="">-- Seleccionar Hora de Inicio --</option>
-                            <option value="9:00">9:00</option>
-                            <option value="9:45">9:45</option>
-                            <option value="10:30">10:30</option>
-                            <option value="11:15">11:15</option>
-                            <option value="12:00">12:00</option>
-                            <option value="12:45">12:45</option>
-                            <option value="13:30">13:30</option>
-                            <option value="14:15">14:15</option>
-                            <option value="15:00">15:00</option>
-                            <option value="15:45">15:45</option>
-                            <option value="16:30">16:30</option>
-                            <option value="17:15">17:15</option>
-                            <option value="18:00">18:00</option>
-                            <option value="18:45">18:45</option>
-                            <option value="19:30">19:30</option>
-                            <option value="20:15">20:15</option>
+                            <option value="">-- Seleccionar Hora de Inicio --</option>
+                            @foreach ($horas as $hora)
+                            <option value="{{$hora}}">{{$hora}}</option>
+                            @endforeach
                         </select>
 
                     </div>
@@ -114,7 +101,6 @@
 
                                 horaFinInput.value = horaFin;
                             }
-
                             actualizarHoraFin();
 
                         </script>
@@ -138,6 +124,8 @@
                     document.addEventListener('DOMContentLoaded', function() {
                         var especialidadSelect = document.getElementById('id_especialidad');
                         var profesionalSelect = document.getElementById('rut_profesional_atenciones');
+                        var fechaSelect = document.getElementById('fecha_atencion');
+                        var horasSelect = document.getElementById('hora_inicio');
 
                         especialidadSelect.addEventListener('change', function() {
                             var especialidadId = this.value;
@@ -161,6 +149,25 @@
                                     especialidadSelect.innerHTML = "<option value='" + data.id_especialidad + "'>" + data.nom_especialidad + "</option>";
                                 })
                                 .catch(error => console.error('Error:', error));
+                        });
+
+                        fechaSelect.addEventListener('change', function() {
+                            var profesionalId = profesionalSelect.value;
+                            var fechaSeleccionada = this.value;
+
+                            if (profesionalId && fechaSeleccionada) {
+                                // Realiza el fetch para obtener las horas disponibles
+                                fetch('/obtener-horas-disponibles/' + profesionalId + '/' + fechaSeleccionada)
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        console.log(data); // Imprime la respuesta en la consola
+                                        horasSelect.innerHTML = "<option value=''>-- Seleccionar Hora --</option>";
+                                        data.forEach(hora => {
+                                            horasSelect.innerHTML += "<option value='" + hora + "'>" + hora + "</option>";
+                                        });
+                                    })
+                                    .catch(error => console.error('Error:', error));
+                            }
                         });
                     });
 
@@ -207,7 +214,7 @@
                 <td>{{$atencion->profesional->nom_profesional}} {{$atencion->profesional->apep_profesional}} | {{$atencion->profesional->especialidad->nom_especialidad}}</td>
                 <td>{{$atencion->fecha_atencion}} | {{$atencion->hora_inicio}} </td>
                 <td>{{$atencion->usuario->nom_usuario}} {{$atencion->usuario->apep_usuario}}</td>
-                <td> 
+                <td>
                     @if($atencion->estado_atencion==1)Agendado
                     @elseif ($atencion->estado_atencion==0)Cancelada
                     @else Atendido
@@ -221,18 +228,18 @@
                         <form method="POST" action="{{ route('secretaria.atendida', ['atencionId' => $atencion->id_atencion]) }}">
                             @csrf
                             @method('POST')
-                        <button class="btn btn-success text-white d-inline-block" type="submit"><span class="material-symbols-outlined">
-                                check
-                            </span></button>
+                            <button class="btn btn-success text-white d-inline-block" type="submit"><span class="material-symbols-outlined">
+                                    check
+                                </span></button>
                         </form>
                         <form method="POST" action="{{ route('secretaria.cancelada', ['atencionId' => $atencion->id_atencion]) }}">
                             @csrf
                             @method('POST')
                             <button class="btn btn-danger text-white d-inline-block" type="submit"><span class="material-symbols-outlined">
-                                block
-                            </span></button>
+                                    block
+                                </span></button>
                         </form>
-                        
+
                     </div>
                 </td>
 

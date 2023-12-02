@@ -86,6 +86,7 @@ Route::get('/secretaria/listadoCitas',[AtencionesController::class,'indexListado
 Route::get('secretaria/editar/{atencion}',[AtencionesController::class,'edit'])->name('secretaria.editHora');
 Route::put('secretaria/editar/{atencion}',[AtencionesController::class,'update'])->name('secretaria.updateHora');
 
+Route::get('/obtener-horas-disponibles/{profesionalId}/{fechaSeleccionada}', [AtencionesController::class, 'obtenerHorasDisponibles']);
 
 
 //Actualización estado

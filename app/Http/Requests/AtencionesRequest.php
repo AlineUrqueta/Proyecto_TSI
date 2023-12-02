@@ -27,7 +27,7 @@ class AtencionesRequest extends FormRequest
         return [
             'rut_paciente_atenciones'=>'required',
             'rut_profesional_atenciones'=>'required',
-            'fecha_atencion'=>'required|date|before:'.$fecha_actual,
+            'fecha_atencion'=>'required|date|after:'.$fecha_actual,
             'hora_inicio'=>'required',
             'hora_fin'=>'required',
         ];
@@ -38,6 +38,7 @@ class AtencionesRequest extends FormRequest
             'rut_paciente_atenciones.required'=>'Seleccione paciente',
             'rut_profesional_atenciones.required'=>'Seleccione profesional',
             'fecha_atencion.required'=>'Indique fecha',
+            'fecha_atencion.after'=>'La fecha debe ser posterior a la actual',
             'hora_inicio.required'=>'Indique hora de inicio',
             'hora_fin.required'=>'Indique hora de fin',   
         ];
