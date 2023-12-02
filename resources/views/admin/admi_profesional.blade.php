@@ -84,6 +84,7 @@
                     @csrf
                     <div class='m-3'>
                         <input type="text" placeholder='RUT Profesional' class="form-control" id="rut_profesional" name="rut_profesional">
+                        <small class="ms-2"> Formato: 9999999-K</small>
                     </div>
 
                     <div class='m-3'>
@@ -101,9 +102,9 @@
 
                     <div class='m-3'>
                         <select class="custom-select custom-select-lg mb-3 form-control" id="id_especialidad" name="id_especialidad">
-                            <option value=""> --Ingrese especialidad-- </option>
+                            <option value=""> -- Seleccione Especialidad -- </option>
                             @foreach ($especialidades as $especialidad)
-                            <option value="{{$especialidad->id_especialidad}}">{{$especialidad->id_especialidad}} {{$especialidad->nom_especialidad}} </option>
+                            <option value="{{$especialidad->id_especialidad}}">{{$especialidad->nom_especialidad}} </option>
                             @endforeach
 
                         </select>
@@ -140,8 +141,6 @@
 
                     </div>
                     @endif
-
-
 
                 </div>
             </div>

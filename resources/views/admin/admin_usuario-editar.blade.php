@@ -41,7 +41,7 @@
                             <option value="0"> No Vigente</option>
                             @else
                             <option value="1">Vigente</option>
-                            <option value="0" selected> No Vigente</option>
+                            <option value="0"selected> No Vigente</option>
                             @endif
 
                         </select>

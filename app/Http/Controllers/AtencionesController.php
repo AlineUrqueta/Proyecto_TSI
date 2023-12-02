@@ -18,7 +18,7 @@ class AtencionesController extends Controller
      */
     public function index()
     {
-        $pacientes = Paciente::all();
+        $pacientes =Paciente::where('estado_vigente','=',1)->get();
         $profesionales = Profesional::where('estado_vigente','=',1)->get();
         $especialidades = Especialidad::has('profesionales')->get();
         $atenciones = Atencion::orderByDesc('fecha_atencion')->get();
