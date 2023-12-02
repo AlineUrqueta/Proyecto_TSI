@@ -21,7 +21,7 @@
         <table class="table table-bordered border-success"  style="width:40rem;height:auto">
             <thead >
                 <tr>
-                    <th scope="col" class="text-center">ID</th>
+                    <th scope="col" class="text-center">#</th>
                     <th scope="col" class="text-center">ESPECIALIDAD</th>
                     <th scope="col" class="text-center ">ACCIONES</th>
                 </tr>
@@ -30,7 +30,7 @@
                 @foreach ($especialidades as $especialidad )
                 <tr>
 
-                    <th>{{$especialidad->id_especialidad}}</th>
+                    <th>{{$loop->iteration}}</th>
                     <td>{{$especialidad->nom_especialidad}}</td>
 
                     <td class ="text-center">

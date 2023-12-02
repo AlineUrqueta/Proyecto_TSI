@@ -18,7 +18,7 @@ class AtencionesController extends Controller
      */
     public function index()
     {
-        $pacientes = Paciente::all();
+        $pacientes =Paciente::where('estado_vigente','=',1)->get();
         $profesionales = Profesional::where('estado_vigente','=',1)->get();
         $especialidades = Especialidad::has('profesionales')->get();
         $atenciones = Atencion::orderByDesc('fecha_atencion')->get();
@@ -69,18 +69,6 @@ class AtencionesController extends Controller
         }
     }
     
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(AtencionesRequest $request)
     {
         $fecha_atencion = Carbon::parse($request->fecha_atencion);
@@ -133,25 +121,24 @@ class AtencionesController extends Controller
         ->whereDate('fecha_atencion', '>=', Carbon::now())
         ->get();
 
+        $atencionesRealizadas = Atencion::where('estado_atencion', 3)->get();
+
         $atencionesCanceladas = Atencion::where('estado_atencion', 0)
         ->whereDate('fecha_atencion', '>=', Carbon::now())
         ->get();
 
 
-        return view('secretaria.listadoCitas',compact('atencionesAgendadas','atencionesPorConfirmar','atencionesConfirmadas','atencionesCanceladas'));
+        return view('secretaria.listadoCitas',compact('atencionesAgendadas','atencionesPorConfirmar','atencionesConfirmadas','atencionesCanceladas','atencionesRealizadas'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Atencion $atencion)
+    public function indexFiltrar()
     {
-        //
+        $atenciones = Atencion::all();
+        $profesionales = Profesional::where('estado_vigente','=',1)->get();
+        return view('secretaria.filtrarCitas',compact('atenciones','profesionales'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(Atencion $atencion)
     {   $pacientes = Paciente::all();
         $profesionales = Profesional::where('estado_vigente','=',1)->get();
@@ -159,9 +146,6 @@ class AtencionesController extends Controller
         return view('secretaria.editarHora',compact('atencion','pacientes','profesionales','especialidades'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(AtencionesRequest $request, Atencion $atencion)
     {
         $fecha_atencion = Carbon::parse($request->fecha_atencion);
@@ -182,11 +166,5 @@ class AtencionesController extends Controller
         return redirect()->route('secretaria.editarHora',compact('atencion'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Atencion $atencion)
-    {
-        //
-    }
+
 }

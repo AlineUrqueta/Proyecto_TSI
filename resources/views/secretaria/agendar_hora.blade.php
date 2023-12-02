@@ -1,28 +1,7 @@
 @extends('layouts.master')
 @section('title','Agendar Hora')
 @section('contenido')
-<style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
 
-    th,
-    td {
-        border: 1px solid #ddd;
-        text-align: center;
-        padding: 8px;
-    }
-
-    th {
-        background-color: #f2f2f2;
-    }
-
-    td {
-        background-color: #ffffff;
-    }
-
-</style>
 
 <div class="row mt-5">
     <div class="col-sm-12 col-md-4">
@@ -199,7 +178,8 @@
 
 
     <div class="col-sm-12 col-md-8">
-        <table>
+        @if(count($atenciones) !== 0)
+        <table class="table table-bordered border-success" >
             <tr>
                 <th>Paciente</th>
                 <th>Profesional | Especialidad</th>
@@ -212,7 +192,7 @@
             <tr>
                 <td>{{$atencion->paciente->nom_paciente}} {{$atencion->paciente->apep_paciente}} {{$atencion->paciente->apem_paciente}}</td>
                 <td>{{$atencion->profesional->nom_profesional}} {{$atencion->profesional->apep_profesional}} | {{$atencion->profesional->especialidad->nom_especialidad}}</td>
-                <td>{{$atencion->fecha_atencion}} | {{$atencion->hora_inicio}} </td>
+                <td>{{ strftime('%d/%m/%Y', strtotime($atencion->fecha_atencion)) }} | {{$atencion->hora_inicio}} </td>
                 <td>{{$atencion->usuario->nom_usuario}} {{$atencion->usuario->apep_usuario}}</td>
                 <td>
                     @if($atencion->estado_atencion==1)Agendado
@@ -248,6 +228,9 @@
 
 
         </table>
+        @else
+            <div class="alert alert-danger"> No hay horas agendadas! </div>
+        @endif
     </div>
 
 
@@ -255,4 +238,4 @@
 
 
 
-    @endsection
+@endsection

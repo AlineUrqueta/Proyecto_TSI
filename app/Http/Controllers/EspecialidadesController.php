@@ -56,7 +56,7 @@ class EspecialidadesController extends Controller
     {
         $especialidad->nom_especialidad = $request->nom_especialidad;
         $especialidad->save();
-        return redirect() -> route('especialidad.edit',compact('especialidad'));
+        return redirect() -> route('especialidad.edit',compact('especialidad'))->with('editarCorrecto', 'Edición realizada');
     }
 
     /**

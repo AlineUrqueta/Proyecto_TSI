@@ -6,7 +6,7 @@
     <div class="col-md-4">
         <div class="card" style="width: auto; height: auto;">
             <div class="card-header text-center">
-                <h4>Editar de Especialidad {{$especialidad->nom_especialidad}}</h4>
+                <h4>Editar de Especialidad </h4>
             </div>
             <div class="card-body">
 
@@ -15,7 +15,14 @@
                     @csrf
                     @method('put')
                     <div class='m-3'>
-                        <input type="text" placeholder='Nombre especialidad' id='nom_especialidad' name='nom_especialidad' class="form-control">
+                        <input type="text" placeholder='Nombre especialidad' id='nom_especialidad' name='nom_especialidad' class="form-control" value = "{{$especialidad->nom_especialidad}}">
+                    </div>
+                    
+
+
+                    <div class='me-3 mt-4 text-end'>
+                        <a href="{{route('especialidad.index')}}" class="btn btn-outline-dark me-2">Menu Principal</a>
+                        <button type='submit' class='btn btn-success '>Editar </button>
                     </div>
                     <div class='m-3'>
                         @if ($errors->any())
@@ -26,14 +33,12 @@
                                 @endforeach
                             </ul>
                         </div>
+                        @else
+                        @if(session('editarCorrecto'))
+                            <div class="alert alert-success">{{ session('editarCorrecto') }}</div>
+                        @endif
                         @endif
 
-                    </div>
-
-
-                    <div class='me-3 mt-4 text-end'>
-                        <a href="{{route('especialidad.index')}}" class="btn btn-outline-dark me-2">Menu Principal</a>
-                        <button type='submit' class='btn btn-success '>Editar </button>
                     </div>
 
 

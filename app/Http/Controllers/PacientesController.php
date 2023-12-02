@@ -29,7 +29,7 @@ class PacientesController extends Controller
 
     public function search(Request $request){
         $buscar = $request->buscar;
-        $pacientes = Paciente::where('apep_paciente', 'LIKE', "%$buscar%")->orWhere('rut_paciente', 'LIKE', "%$buscar%");
+        $pacientes = Paciente::where('apep_paciente', 'LIKE', "%$buscar%")->orWhere('rut_paciente', 'LIKE', "%$buscar%")->get();
         return view('pacientes.index', compact('pacientes'));
     }
 
