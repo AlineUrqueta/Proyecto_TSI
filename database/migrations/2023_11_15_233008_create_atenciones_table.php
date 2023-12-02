@@ -21,8 +21,8 @@ return new class extends Migration
             $table->foreign('rut_profesional_atenciones')->references('rut_profesional')->on('profesionales');
 
             $table->date('fecha_atencion');
-            $table->time('hora_inicio');
-            $table->time('hora_fin');
+            $table->string('hora_inicio');
+            $table->string('hora_fin');
 
             $table->string('email_usuario',50);
             $table->foreign('email_usuario')->references('email')->on('usuarios');

@@ -33,14 +33,12 @@
             <div class="card-body">
 
 
-                <form action="{{route('secretaria.agendar')}}" class='mt-4' method ="POST">
+                <form action="{{route('secretaria.agendar')}}" class='mt-4' method="POST">
                     @csrf
 
 
                     <div class='m-3'>
-
-
-                        <select class="custom-select custom-select-lg mb-3 form-control" id='rut_paciente' name='rut_paciente'>
+                        <select class="custom-select custom-select-lg mb-3 form-control" id='rut_paciente_atenciones' name='rut_paciente_atenciones'>
                             <option value="">-- Seleccionar Paciente --</option>
                             @foreach ( $pacientes as $paciente )
 
@@ -62,7 +60,7 @@
                     </div>
 
                     <div class='m-3'>
-                        <select class="custom-select custom-select-lg mb-3 form-control" id='rut_profesional' name='rut_profesional'>
+                        <select class="custom-select custom-select-lg mb-3 form-control" id='rut_profesional_atenciones' name='rut_profesional_atenciones'>
                             <option value="">-- Seleccionar Profesional --</option>
                             @foreach ( $profesionales as $profesional )
 
@@ -72,7 +70,7 @@
                     </div>
 
                     <div class="m-3">
-                        <input type="date" class="form-control" id="fecha_atencion" name="fecha_atencion" value="{{ now()->format('Y-m-d') }}" min="{{ now()->format('Y-m-d') }}" max="{{ now()->addYear()->format('Y-m-d') }}">
+                        <input type="date" class="form-control" id="fecha_atencion" name="fecha_atencion" value="{{ now()->format('Y-m-d') }}" min=" {{ now()->format('Y-m-d') }}" max="2024-01-01">
                     </div>
 
                     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -80,14 +78,9 @@
                     <div class="m-3">
 
                         <select class="form-control" name="hora_inicio" id="hora_inicio" onchange="actualizarHoraFin()">
-                            @php
-                                $todasLasHoras = [
-                                    '9:00', '9:45', '10:30', '11:15', '12:00', '12:45','13:30', '14:15', '15:00', '15:45', '16:30', '17:15','18:00', '18:45', '19:30', '20:15'
-                                ];
-                                
-                            @endphp
-                            @foreach ($todasLasHoras as $hora)
-                                <option value="{{$hora}}">{{$hora}}</option>
+                            <option value="">-- Seleccionar Hora de Inicio --</option>
+                            @foreach ($horas as $hora)
+                            <option value="{{$hora}}">{{$hora}}</option>
                             @endforeach
                         </select>
                         {{-- <select class="form-control" name="hora_inicio" id="hora_inicio" onchange="actualizarHoraFin()">
@@ -110,7 +103,7 @@
                     </div>
 
                     <div class="m-3">
-                        <input type="text" class="form-control" name="hora_fin" id="hora_fin" value="" readonly>
+                        <input type="text" class="form-control" name="hora_fin" id="hora_fin" value="00:00" readonly>
                         <script>
                             function actualizarHoraFin() {
                                 var horaInicioSelect = document.getElementById('hora_inicio');
@@ -125,7 +118,6 @@
 
                                 horaFinInput.value = horaFin;
                             }
-
                             actualizarHoraFin();
 
                         </script>
@@ -135,11 +127,10 @@
 
 
 
-                    <div class='me-3 mt-4 text-end'>
-                        <a href="{{route('secretaria.index')}}" class="btn btn-outline-dark me-2 ">Menu Principal</a>
-                        <a href="{{route('secretaria.agendar')}}" class="btn btn-warning me-2 text-white">Limpiar</a>
+                    <div class='m-2 text-end'>
+                        <a href="{{route('secretaria.index')}}" class="btn btn-outline-dark  me-2">Menu Principal</a>
 
-                        <button type='submit' class='btn btn-success '>Agendar Hora</button>
+                        <button type='submit' class='btn btn-success me-2 '>Agendar Hora</button>
                     </div>
 
 
@@ -149,7 +140,9 @@
                 <script>
                     document.addEventListener('DOMContentLoaded', function() {
                         var especialidadSelect = document.getElementById('id_especialidad');
-                        var profesionalSelect = document.getElementById('rut_profesional');
+                        var profesionalSelect = document.getElementById('rut_profesional_atenciones');
+                        var fechaSelect = document.getElementById('fecha_atencion');
+                        var horasSelect = document.getElementById('hora_inicio');
 
                         especialidadSelect.addEventListener('change', function() {
                             var especialidadId = this.value;
@@ -173,6 +166,25 @@
                                     especialidadSelect.innerHTML = "<option value='" + data.id_especialidad + "'>" + data.nom_especialidad + "</option>";
                                 })
                                 .catch(error => console.error('Error:', error));
+                        });
+
+                        fechaSelect.addEventListener('change', function() {
+                            var profesionalId = profesionalSelect.value;
+                            var fechaSeleccionada = this.value;
+
+                            if (profesionalId && fechaSeleccionada) {
+                                // Realiza el fetch para obtener las horas disponibles
+                                fetch('/obtener-horas-disponibles/' + profesionalId + '/' + fechaSeleccionada)
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        console.log(data); // Imprime la respuesta en la consola
+                                        horasSelect.innerHTML = "<option value=''>-- Seleccionar Hora --</option>";
+                                        data.forEach(hora => {
+                                            horasSelect.innerHTML += "<option value='" + hora + "'>" + hora + "</option>";
+                                        });
+                                    })
+                                    .catch(error => console.error('Error:', error));
+                            }
                         });
                     });
 
@@ -219,7 +231,7 @@
                 <td>{{$atencion->profesional->nom_profesional}} {{$atencion->profesional->apep_profesional}} | {{$atencion->profesional->especialidad->nom_especialidad}}</td>
                 <td>{{$atencion->fecha_atencion}} | {{$atencion->hora_inicio}} </td>
                 <td>{{$atencion->usuario->nom_usuario}} {{$atencion->usuario->apep_usuario}}</td>
-                <td> 
+                <td>
                     @if($atencion->estado_atencion==1)Agendado
                     @elseif ($atencion->estado_atencion==0)Cancelada
                     @else Atendido
@@ -227,24 +239,24 @@
                 </td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Ejemplo de Button Group">
-                        <button class="btn btn-warning text-white d-inline-block"><span class="material-symbols-outlined">
+                        <a class="btn btn-warning text-white d-inline-block" href="{{route('secretaria.editHora',$atencion->id_atencion)}}"><span class="material-symbols-outlined">
                                 manufacturing
-                            </span></button>
+                            </span></a>
                         <form method="POST" action="{{ route('secretaria.atendida', ['atencionId' => $atencion->id_atencion]) }}">
                             @csrf
                             @method('POST')
-                        <button class="btn btn-success text-white d-inline-block" type="submit"><span class="material-symbols-outlined">
-                                check
-                            </span></button>
+                            <button class="btn btn-success text-white d-inline-block" type="submit"><span class="material-symbols-outlined">
+                                    check
+                                </span></button>
                         </form>
                         <form method="POST" action="{{ route('secretaria.cancelada', ['atencionId' => $atencion->id_atencion]) }}">
                             @csrf
                             @method('POST')
                             <button class="btn btn-danger text-white d-inline-block" type="submit"><span class="material-symbols-outlined">
-                                block
-                            </span></button>
+                                    block
+                                </span></button>
                         </form>
-                        
+
                     </div>
                 </td>
 

@@ -18,12 +18,12 @@
         @if (count($especialidades) === 0)
         <div class="alert alert-danger">No hay especialidades registradas</div>
         @else
-        <table class="table table-bordered border-success" style="width:40rem;height:auto">
-            <thead>
+        <table class="table table-bordered border-success"  style="width:40rem;height:auto">
+            <thead >
                 <tr>
                     <th scope="col" class="text-center">ID</th>
                     <th scope="col" class="text-center">ESPECIALIDAD</th>
-                    <th scope="col" class="text-center">ACCIONES</th>
+                    <th scope="col" class="text-center ">ACCIONES</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,7 +32,8 @@
 
                     <th>{{$especialidad->id_especialidad}}</th>
                     <td>{{$especialidad->nom_especialidad}}</td>
-                    <td>
+
+                    <td class ="text-center">
                         <!-- Button trigger modal -->
                         <div class="text-center">
                             @if ($especialidad->profesionales->count() === 0)
