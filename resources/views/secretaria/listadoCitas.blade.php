@@ -62,9 +62,36 @@
                             <form method="POST" action="{{ route('secretaria.cancelada', ['atencionId' => $atencion->id_atencion]) }}">
                                 @csrf
                                 @method('POST')
-                                <button class="btn btn-danger text-white d-inline-block" type="submit"><span class="material-symbols-outlined">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-danger text-white d-inline-block" data-toggle="modal" data-target="#modalCancelarAgenda{{$atencion->id_atencion}}">
+                                    <span class="material-symbols-outlined">
                                         block
-                                    </span></button>
+                                    </span>
+                                </button>
+                                
+                                <!-- Modal -->
+                                <div class="modal fade" id="modalCancelarAgenda{{$atencion->id_atencion}}" tabindex="-1" role="dialog" aria-labelledby="modalCancelarAtencionTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Cancelar Atención</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                ¿Desea cancelar la atención de {{$atencion->paciente->nom_paciente}} {{$atencion->paciente->apep_paciente}}?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+                                                <button class='btn btn-success' type="submit">OK</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </form>
 
                         </div>
@@ -112,9 +139,35 @@
                             <form method="POST" action="{{ route('secretaria.cancelada', ['atencionId' => $atencion->id_atencion]) }}">
                                 @csrf
                                 @method('POST')
-                                <button class="btn btn-danger text-white d-inline-block" type="submit"><span class="material-symbols-outlined">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-danger text-white d-inline-block" data-toggle="modal" data-target="#modalCancelarPorConf{{$atencion->id_atencion}}">
+                                    <span class="material-symbols-outlined">
                                         block
-                                    </span></button>
+                                    </span>
+                                </button>
+                                
+                                <!-- Modal -->
+                                <div class="modal fade" id="modalCancelarPorConf{{$atencion->id_atencion}}" tabindex="-1" role="dialog" aria-labelledby="modalCancelarAtencionTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Cancelar Atención</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                ¿Desea cancelar la atención de {{$atencion->paciente->nom_paciente}} {{$atencion->paciente->apep_paciente}}?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+                                                <button class='btn btn-success' type="submit">OK</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
 
                         </div>
@@ -159,9 +212,35 @@
                             <form method="POST" action="{{ route('secretaria.cancelada', ['atencionId' => $atencion->id_atencion]) }}">
                                 @csrf
                                 @method('POST')
-                                <button class="btn btn-danger text-white d-inline-block" type="submit"><span class="material-symbols-outlined">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-danger text-white d-inline-block" data-toggle="modal" data-target="#modalCancelarConf{{$atencion->id_atencion}}">
+                                    <span class="material-symbols-outlined">
                                         block
-                                    </span></button>
+                                    </span>
+                                </button>
+                                
+                                <!-- Modal -->
+                                <div class="modal fade" id="modalCancelarConf{{$atencion->id_atencion}}" tabindex="-1" role="dialog" aria-labelledby="modalCancelarAtencionTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Cancelar Atención</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                ¿Desea cancelar la atención de {{$atencion->paciente->nom_paciente}} {{$atencion->paciente->apep_paciente}}?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+                                                <button class='btn btn-success' type="submit">OK</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
 
                         </div>
