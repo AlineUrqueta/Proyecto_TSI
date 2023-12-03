@@ -24,11 +24,11 @@
                     <div class='m-3'>
                         <select class="custom-select custom-select-lg mb-3 form-control" id='id_especialidad' name='id_especialidad'>
                             @foreach ( $especialidades as $especialidad )
-                            
+
                             <option value="{{ $especialidad->id_especialidad }}" {{ $atencion->profesional->id_especialidad == $especialidad->id_especialidad ? 'selected' : '' }}>
                                 {{ $especialidad->nom_especialidad }}
                             </option>
-                            
+
 
                             @endforeach
                             {{dd($atencion->profesional->id_especialidad == $especialidad->id_especialidad ? 'selected' : '' )}}
@@ -183,3 +183,48 @@
 
 
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Confirmar -->
+<button type="button" class="btn btn-danger text-white d-inline-block" data-toggle="modal" data-target="#modalConfirmarAtencion{{$atencion->id_atencion}}">
+    <span class="material-symbols-outlined">
+        block
+    </span>
+</button>
+
+<!-- Modal Confirmar-->
+<div class="modal fade" id="modalConfirmarAtencion{{$atencion->id_atencion}}" tabindex="-1" role="dialog" aria-labelledby="modalConfirmarAtencionTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Cancelar Atención</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ¿Desea confirmar la atención de {{$atencion->paciente->nom_paciente}} {{$atencion->paciente->apep_paciente}}?
+                <br>
+                Fecha: {{$atencion->fecha_atencion}} Hora: {{$atencion->hora_inicio}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+                <button class='btn btn-success' type="submit">Confirmar</button>
+
+            </div>
+        </div>
+    </div>
+</div>

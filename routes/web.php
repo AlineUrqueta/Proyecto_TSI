@@ -84,13 +84,16 @@ Route::get('/obtener-especialidad/{profesionalId}', [AtencionesController::class
 Route::get('/secretaria/listadoCitas',[AtencionesController::class,'indexListado'])->name('secretaria.listadoCitas');
 Route::get('/secretaria/filtrar',[AtencionesController::class,'indexFiltrar'])->name('secretaria.filtrar');
 
-Route::get('secretaria/editar/{atencion}',[AtencionesController::class,'edit'])->name('secretaria.editHora');
+Route::get('secretaria/editar/{atencion}',[AtencionesController::class,'editView'])->name('secretaria.editHora');
 Route::put('secretaria/editar/{atencion}',[AtencionesController::class,'update'])->name('secretaria.updateHora');
 
-Route::get('/obtener-horas-disponibles/{profesionalId}/{fechaSeleccionada}', [AtencionesController::class, 'obtenerHorasDisponibles']);
+Route::get('/obtener-horas-disponibles/{profesionalId}/{fechaSeleccionada}/{pacienteSeleccionado}', [AtencionesController::class, 'obtenerHorasDisponibles']);
 
 
 //Actualización estado
 Route::post('/secretaria/agendar/atendida/{atencionId}',[AtencionesController::class,'horaAtendida'])->name('secretaria.atendida');
 Route::post('/secretaria/agendar/cancelada/{atencionId}',[AtencionesController::class,'horaCancelada'])->name('secretaria.cancelada');
+//Descartar horas tomadas
+Route::get('/horas-ocupadas/{fecha}',[AtencionesController::class,'obtenerHoras'])->name('secretaria.obtenerHoras');
+
 

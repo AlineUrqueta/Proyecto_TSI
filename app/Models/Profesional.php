@@ -24,4 +24,9 @@ class Profesional extends Model
     {
         return $this->hasMany(Horario::class,'rut_profesional');
     }
+
+    public function atenciones()
+    {
+        return $this->hasMany(Atencion::class, 'rut_profesional_atenciones');
+    }
 }

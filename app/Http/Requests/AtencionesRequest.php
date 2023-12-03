@@ -25,7 +25,7 @@ class AtencionesRequest extends FormRequest
     {
         $fecha_actual = Carbon::now();
         return [
-            'rut_paciente_atenciones'=>'required',
+            'rut_paciente_atenciones'=>'sometimes|required',
             'rut_profesional_atenciones'=>'required',
             'fecha_atencion'=>'required|date|after:'.$fecha_actual,
             'hora_inicio'=>'required',
