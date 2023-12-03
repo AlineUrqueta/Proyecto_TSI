@@ -59,10 +59,10 @@
                         const picker = document.getElementById('fecha_atencion');
                         picker.addEventListener('input', function(e) {
                             var diaSeleccionado = new Date(this.value).getUTCDay();
-                            if (diaSeleccionado === 0) {
+                            if (diaSeleccionado === 0 || diaSeleccionado === 6) {
                                 e.preventDefault();
                                 this.value = '';
-                                alert('No se atiende los domingos');
+                                alert('No se atiende los fines de semana');
                             }
                         });
                     </script>
