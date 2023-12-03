@@ -146,16 +146,16 @@
 
                     <td>
                         <div class="btn-group" role="group" aria-label="Ejemplo de Button Group">
-                            <a href="{{route('secretaria.editHora',['atencion'=>$atencion->id_atencion])}}" class="btn btn-warning text-white d-inline-block"><span class="material-symbols-outlined">
+                            {{-- <a href="{{route('secretaria.editHora',['atencion'=>$atencion->id_atencion])}}" class="btn btn-warning text-white d-inline-block"><span class="material-symbols-outlined">
                                     manufacturing
-                                </span></a>
-                            {{-- <form method="POST" action="{{ route('secretaria.atendida', ['atencionId' => $atencion->id_atencion]) }}">
+                                </span></a> --}}
+                            <form method="POST" action="{{ route('secretaria.atendida', ['atencionId' => $atencion->id_atencion]) }}">
                             @csrf
                             @method('POST')
                             <button class="btn btn-success text-white d-inline-block" type="submit"><span class="material-symbols-outlined">
                                     check
                                 </span></button>
-                            </form> --}}
+                            </form>
                             <form method="POST" action="{{ route('secretaria.cancelada', ['atencionId' => $atencion->id_atencion]) }}">
                                 @csrf
                                 @method('POST')

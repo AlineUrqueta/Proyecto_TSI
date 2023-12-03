@@ -105,7 +105,8 @@
 
 
                     <div class='m-2 text-end'>
-                        <a href="{{route('secretaria.index')}}" class="btn btn-outline-dark  me-2">Menu Principal</a>
+                        <a href="{{route('secretaria.agendar')}}" class="btn btn-warning me-1 text-white">Limpiar</a>
+                        <a href="{{route('secretaria.index')}}" class="btn btn-outline-dark  me-1">Menu Principal</a>
 
                         <button type='submit' class='btn btn-success me-2 '>Agendar Hora</button>
                     </div>
@@ -118,6 +119,7 @@
                     document.addEventListener('DOMContentLoaded', function() {
                         var especialidadSelect = document.getElementById('id_especialidad');
                         var profesionalSelect = document.getElementById('rut_profesional_atenciones');
+                        var pacienteSelect = document.getElementById('rut_paciente_atenciones'); // aca
                         var fechaSelect = document.getElementById('fecha_atencion');
                         var horasSelect = document.getElementById('hora_inicio');
 
@@ -148,10 +150,11 @@
                         fechaSelect.addEventListener('change', function() {
                             var profesionalId = profesionalSelect.value;
                             var fechaSeleccionada = this.value;
+                            var pacienteSeleccionado = pacienteSelect.value;
 
-                            if (profesionalId && fechaSeleccionada) {
+                            if (profesionalId && fechaSeleccionada && pacienteSeleccionado ) {
                                 // Realiza el fetch para obtener las horas disponibles
-                                fetch('/obtener-horas-disponibles/' + profesionalId + '/' + fechaSeleccionada)
+                                fetch('/obtener-horas-disponibles/' + profesionalId + '/' + fechaSeleccionada +'/'+ pacienteSeleccionado)
                                     .then(response => response.json())
                                     .then(data => {
                                         console.log(data); // Imprime la respuesta en la consola
@@ -211,6 +214,7 @@
                 <td>
                     @if($atencion->estado_atencion==1)Agendado
                     @elseif ($atencion->estado_atencion==0)Cancelada
+                    @elseif($atencion->estado_atencion ==2)Confimada
                     @else Atendido
                     @endif
                 </td>

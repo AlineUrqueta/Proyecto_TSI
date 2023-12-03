@@ -87,7 +87,7 @@ Route::get('/secretaria/filtrar',[AtencionesController::class,'indexFiltrar'])->
 Route::get('secretaria/editar/{atencion}',[AtencionesController::class,'editView'])->name('secretaria.editHora');
 Route::put('secretaria/editar/{atencion}',[AtencionesController::class,'update'])->name('secretaria.updateHora');
 
-Route::get('/obtener-horas-disponibles/{profesionalId}/{fechaSeleccionada}', [AtencionesController::class, 'obtenerHorasDisponibles']);
+Route::get('/obtener-horas-disponibles/{profesionalId}/{fechaSeleccionada}/{pacienteSeleccionado}', [AtencionesController::class, 'obtenerHorasDisponibles']);
 
 
 //Actualización estado

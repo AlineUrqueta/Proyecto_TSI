@@ -49,19 +49,30 @@ class AtencionesController extends Controller
         }
     }
 
-    public function obtenerHorasDisponibles($profesionalId, $fechaSeleccionada)
+    public function obtenerHorasDisponibles($profesionalId, $fechaSeleccionada,$pacienteSeleccionado)
     {
         try {
-            $atenciones = Atencion::where('rut_profesional_atenciones', $profesionalId) //Agendadas
-                    ->whereDate('fecha_atencion', $fechaSeleccionada)
-                    ->where('estado_atencion', 1)
-                    ->pluck('hora_inicio');
+            // $atenciones = Atencion::where('rut_profesional_atenciones', $profesionalId)
+            // ->whereDate('fecha_atencion', $fechaSeleccionada)
+            // ->whereIn('estado_atencion', [1, 2, 3])
+            // ->pluck('hora_inicio');
 
-            //Todas las horas        
-            $horas = array("9:00", "9:45", "10:30", "11:15", "12:00", "12:45", "13:30", "14:15", "15:00", "15:45", "16:30", "17:15", "18:00", "18:45", "19:30", "20:15");
+            // $horas = array("9:00", "9:45", "10:30", "11:15", "12:00", "12:45", "13:30", "14:15", "15:00", "15:45", "16:30", "17:15", "18:00", "18:45", "19:30", "20:15");
+
             
-            //todas menos las agendadas
-            $horasDisponibles = array_diff($horas, $atenciones->toArray());
+            $atencionesMedico = Atencion::where('rut_profesional_atenciones', $profesionalId)
+            ->whereDate('fecha_atencion', $fechaSeleccionada)
+            ->whereIn('estado_atencion', [1, 2, 3])
+            ->pluck('hora_inicio');
+
+            $atencionesPaciente = Atencion::where('rut_paciente_atenciones', $pacienteSeleccionado)
+                ->whereDate('fecha_atencion', $fechaSeleccionada)
+                ->whereIn('estado_atencion', [1, 2, 3])
+                ->pluck('hora_inicio');
+
+            $horas = array("9:00", "9:45", "10:30", "11:15", "12:00", "12:45", "13:30", "14:15", "15:00", "15:45", "16:30", "17:15", "18:00", "18:45", "19:30", "20:15");
+
+            $horasDisponibles = array_diff($horas, $atencionesMedico->toArray(), $atencionesPaciente->toArray());
 
             return response()->json(array_values($horasDisponibles));
         } catch (\Exception $e) {
@@ -93,7 +104,7 @@ class AtencionesController extends Controller
         $atencion = Atencion::where('id_atencion', $atencionId)->first();
         if($atencion->estado_atencion == 1){
             $atencion->estado_atencion = 2;
-        }else if ($atencion->estado_atencion == 2){
+        }else{
             $atencion->estado_atencion = 3;
         }
         
@@ -110,26 +121,19 @@ class AtencionesController extends Controller
 
     public function indexListado()
     {
-        $atencionesAgendadas = Atencion::where('estado_atencion',"LIKE",1)->whereDate('fecha_atencion', '>=', Carbon::now())->get();
+        $atencionesAgendadas = Atencion::where('estado_atencion',"=",1)->whereDate('fecha_atencion', '>=', Carbon::now())->get();
         
-
-        // $atencionesPorConfirmar = Atencion::where('estado_atencion', 1)
-        //     ->whereDate('fecha_atencion', '>=', Carbon::now()->addDays(3))
-        //     ->get();
-        $fechaFormateada = Carbon::now()->addDays()->format('Y-m-d');
+        $fechaFormateada = Carbon::now()->addDays(3)->format('Y-m-d');
         $atencionesPorConfirmar = Atencion::where('estado_atencion', 1)
         ->whereDate('fecha_atencion', '=', $fechaFormateada)
         ->get();
         
-        
-
-        $atencionesConfirmadas = Atencion::where('estado_atencion', 2)
-        ->whereDate('fecha_atencion', '=', Carbon::now())
+        $atencionesConfirmadas = Atencion::where('estado_atencion',"=",2)
         ->get();
 
-        $atencionesRealizadas = Atencion::where('estado_atencion', 3)->get();
+        $atencionesRealizadas = Atencion::where('estado_atencion',"=", 3)->get();
 
-        $atencionesCanceladas = Atencion::where('estado_atencion', 0)->get();
+        $atencionesCanceladas = Atencion::where('estado_atencion',"=", 0)->get();
         
 
 
@@ -139,36 +143,37 @@ class AtencionesController extends Controller
     public function indexFiltrar()
     {
         $atenciones = Atencion::all();
-        $profesionales = Profesional::where('estado_vigente','=',1)->get();
+        $profesionales = Profesional::where('estado_vigente', 1)
+    ->whereHas('atenciones', function ($query) {
+        $query->where('estado_atencion', 1);
+    })
+    ->get();
+
         return view('secretaria.filtrarCitas',compact('atenciones','profesionales'));
     }
 
 
     public function editView(Atencion $atencion)
-    {   $pacientes = Paciente::all();
+    {  
         $profesionales = Profesional::where('estado_vigente','=',1)->get();
         $especialidades = Especialidad::all();
-        return view('secretaria.editarAtencion',compact('atencion','pacientes','profesionales','especialidades'));
+        $horas = array("9:00", "9:45", "10:30", "11:15", "12:00", "12:45", "13:30", "14:15", "15:00", "15:45", "16:30", "17:15", "18:00", "18:45", "19:30", "20:15");
+        return view('secretaria.editarAtencion',compact('atencion','profesionales','especialidades','horas'));
     }
 
     public function update(AtencionesRequest $request, Atencion $atencion)
     {
         $fecha_atencion = Carbon::parse($request->fecha_atencion);
-        $hora_inicio = $request->hora_inicio;
-        $hora_fin = $request -> hora_fin;
-
-        $atencion = new Atencion;
-        $atencion->rut_paciente_atenciones = $request->rut_paciente;
-        $atencion->rut_profesional_atenciones = $request->rut_profesional;
-        
+        $atencion->rut_paciente_atenciones = $request->rut_paciente_atenciones;
+        $atencion->rut_profesional_atenciones = $request->rut_profesional_atenciones;
         $atencion->fecha_atencion = $fecha_atencion;
-        $atencion->hora_inicio = $hora_inicio;
-        $atencion->hora_fin = $hora_fin;
+        $atencion->hora_inicio = $request->hora_inicio;
+        $atencion->hora_fin = $request -> hora_fin;
         $atencion->email_usuario = auth()->user()->email;
         $atencion->estado_atencion = 1;
         $atencion->save();
 
-        return redirect()->route('secretaria.editarHora',compact('atencion'));
+        return redirect()->route('secretaria.editHora',compact('atencion'))->with('editarCorrecto', 'Atención actualizada!');
     }
 
 

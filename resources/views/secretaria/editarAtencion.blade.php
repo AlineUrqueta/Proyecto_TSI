@@ -10,33 +10,35 @@
             </div>
             <div class="card-body">
 
-                
+
                 <form action="{{route('secretaria.updateHora',$atencion->id_atencion)}}" class='mt-4' method='POST'>
                     @csrf
                     @method('put')
                     <div class='m-3'>
-                        <input type="text" placeholder='Nombre del paciente' id='paciente' name='paciente' class="form-control" value="{{$atencion->paciente->nom_paciente}} {{$atencion->paciente->apep_paciente}} {{$atencion->paciente->apem_paciente}}" disabled>
+                        <input type="text" placeholder='Nombre paciente' id='rut_paciente_atenciones' name='rut_paciente_atenciones' class="form-control" value="{{$atencion->paciente->rut_paciente}}" readonly>
+                        <input type="text" placeholder='' class="form-control mt-3" value="{{$atencion->paciente->nom_paciente}} {{$atencion->paciente->apep_paciente}} {{$atencion->paciente->apem_paciente}}" readonly>
                     </div>
 
                     <div class='m-3'>
                         <select class="custom-select custom-select-lg mb-3 form-control" id='id_especialidad' name='id_especialidad'>
-                            <option value="">{{$atencion->profesional->especialidad->nom_especialidad}}</option>
-                            @foreach ( $especialidades as $especialidad )
-
-                            <option value="{{$especialidad->id_especialidad}}">{{$especialidad->nom_especialidad}}</option>
+                            @foreach ($especialidades as $especialidad)
+                            <option value="{{$especialidad->id_especialidad}}" {{ $atencion->profesional->especialidad->nom_especialidad == $especialidad->nom_especialidad ? 'selected' : '' }}>
+                                {{$especialidad->nom_especialidad}}
+                            </option>
                             @endforeach
                         </select>
                     </div>
 
                     <div class='m-3'>
                         <select class="custom-select custom-select-lg mb-3 form-control" id='rut_profesional_atenciones' name='rut_profesional_atenciones'>
-                            <option value="">{{$atencion->profesional->nom_profesional}} {{$atencion->profesional->apep_profesional}} {{$atencion->profesional->apem_profesional}}</option>
-                            @foreach ( $profesionales as $profesional )
-
-                            <option value="{{$profesional->rut_profesional}}">{{$profesional->nom_profesional}} {{$profesional->apep_profesional}} {{$profesional->apem_profesional}}</option>
+                            @foreach ($profesionales as $profesional)
+                            <option value="{{$profesional->rut_profesional}}" {{ $atencion->profesional->rut_profesional == $profesional->rut_profesional ? 'selected' : '' }}>
+                                {{$profesional->nom_profesional}} {{$profesional->apep_profesional}} {{$profesional->apem_profesional}}
+                            </option>
                             @endforeach
                         </select>
                     </div>
+
 
                     <div class="m-3">
                         <input type="date" class="form-control" id="fecha_atencion" name="fecha_atencion" value="{{$atencion->fecha_atencion}}" min=" {{ now()->format('Y-m-d') }}" max="2024-01-01">
@@ -45,17 +47,15 @@
                     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
                     <div class="m-3">
-                        @php
-                            $horas = array("9:00", "9:45", "10:30", "11:15", "12:00", "12:45", "13:30", "14:15", "15:00", "15:45", "16:30", "17:15", "18:00", "18:45", "19:30", "20:15");
-                        @endphp
                         <select class="form-control" name="hora_inicio" id="hora_inicio" onchange="actualizarHoraFin()">
-                            <option value="">{{$atencion->hora_inicio}}</option>
                             @foreach ($horas as $hora)
-                            <option value="{{$hora}}">{{$hora}}</option>
+                            <option value="{{$hora}}" {{ $atencion->hora_inicio == $hora ? 'selected' : '' }}>
+                                {{$hora}}
+                            </option>
                             @endforeach
                         </select>
-                         
                     </div>
+
 
                     <div class="m-3">
                         <input type="text" class="form-control" name="hora_fin" id="hora_fin" value="00:00" readonly>
@@ -82,7 +82,7 @@
 
                     <!-- Button trigger modal -->
                     <div class='me-3 mt-4 text-end'>
-                        <a href="{{route('secretaria.listadoCitas')}}" class = "btn btn-primary">Volver a Listado</a>
+                        <a href="{{route('secretaria.listadoCitas')}}" class="btn btn-primary">Volver a Listado</a>
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
                             Editar</button>
                     </div>
@@ -178,6 +178,11 @@
                             @endforeach
                         </ul>
                     </div>
+                    @else
+                        @if(session('editarCorrecto'))
+                            <div class="alert alert-success">{{ session('editarCorrecto') }}</div>
+                        @endif
+                    
                     @endif
                 </div>
             </div>
