@@ -1,37 +1,26 @@
 @extends('layouts.master')
-@section('title','Agendar Hora')
+@section('title','Editar Atención')
 @section('contenido')
+<div class="row mt-5 ">
 
-
-<div class="row mt-5">
-    <div class="col-sm-12 col-md-4">
-        <div class="card" style="width: auto; height: auto;">
+    <div class="col-md-5 col-sm-12 mx-auto ">
+        <div class="card" style="width: 45rem; height: auto;">
             <div class="card-header text-center">
-                <h4>Agendar hora médica</h4>
+                <h4>Editar Atención</h4>
             </div>
             <div class="card-body">
 
-
-                <form action="{{route('secretaria.agendar')}}" class='mt-4' method="POST">
+                
+                <form action="{{route('secretaria.updateHora',$atencion->id_atencion)}}" class='mt-4' method='POST'>
                     @csrf
-
-
+                    @method('put')
                     <div class='m-3'>
-                        <select class="custom-select custom-select-lg mb-3 form-control" id='rut_paciente_atenciones' name='rut_paciente_atenciones'>
-                            <option value="">-- Seleccionar Paciente --</option>
-                            @foreach ( $pacientes as $paciente )
-                                @if($paciente->estado_vigente==1)
-                                    <option value="{{$paciente->rut_paciente}}">{{$paciente->nom_paciente}} {{$paciente->apep_paciente}} {{$paciente->apem_paciente}}</option>
-                                @endif
-                            @endforeach
-
-                        </select>
+                        <input type="text" placeholder='Nombre del paciente' id='paciente' name='paciente' class="form-control" value="{{$atencion->paciente->nom_paciente}} {{$atencion->paciente->apep_paciente}} {{$atencion->paciente->apem_paciente}}" disabled>
                     </div>
-
 
                     <div class='m-3'>
                         <select class="custom-select custom-select-lg mb-3 form-control" id='id_especialidad' name='id_especialidad'>
-                            <option value="">-- Seleccionar Especialidad --</option>
+                            <option value="">{{$atencion->profesional->especialidad->nom_especialidad}}</option>
                             @foreach ( $especialidades as $especialidad )
 
                             <option value="{{$especialidad->id_especialidad}}">{{$especialidad->nom_especialidad}}</option>
@@ -41,7 +30,7 @@
 
                     <div class='m-3'>
                         <select class="custom-select custom-select-lg mb-3 form-control" id='rut_profesional_atenciones' name='rut_profesional_atenciones'>
-                            <option value="">-- Seleccionar Profesional --</option>
+                            <option value="">{{$atencion->profesional->nom_profesional}} {{$atencion->profesional->apep_profesional}} {{$atencion->profesional->apem_profesional}}</option>
                             @foreach ( $profesionales as $profesional )
 
                             <option value="{{$profesional->rut_profesional}}">{{$profesional->nom_profesional}} {{$profesional->apep_profesional}} {{$profesional->apem_profesional}}</option>
@@ -50,33 +39,22 @@
                     </div>
 
                     <div class="m-3">
-                        <input type="date" class="form-control" id="fecha_atencion" name="fecha_atencion" value="{{ now()->format('Y-m-d') }}" min=" {{ now()->format('Y-m-d') }}" max="2024-01-01">
+                        <input type="date" class="form-control" id="fecha_atencion" name="fecha_atencion" value="{{$atencion->fecha_atencion}}" min=" {{ now()->format('Y-m-d') }}" max="2024-01-01">
                     </div>
 
                     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-                    <script>
-                        const picker = document.getElementById('fecha_atencion');
-                        picker.addEventListener('input', function(e) {
-                            var diaSeleccionado = new Date(this.value).getUTCDay();
-                            if (diaSeleccionado === 0) {
-                                e.preventDefault();
-                                this.value = '';
-                                alert('No se atiende los domingos');
-                            }
-                        });
-                    </script>
-
                     <div class="m-3">
-
+                        @php
+                            $horas = array("9:00", "9:45", "10:30", "11:15", "12:00", "12:45", "13:30", "14:15", "15:00", "15:45", "16:30", "17:15", "18:00", "18:45", "19:30", "20:15");
+                        @endphp
                         <select class="form-control" name="hora_inicio" id="hora_inicio" onchange="actualizarHoraFin()">
-                            <option value="">-- Seleccionar Hora de Inicio --</option>
+                            <option value="">{{$atencion->hora_inicio}}</option>
                             @foreach ($horas as $hora)
                             <option value="{{$hora}}">{{$hora}}</option>
                             @endforeach
                         </select>
-                        
-
+                         
                     </div>
 
                     <div class="m-3">
@@ -102,15 +80,36 @@
 
 
 
-
-
-                    <div class='m-2 text-end'>
-                        <a href="{{route('secretaria.index')}}" class="btn btn-outline-dark  me-2">Menu Principal</a>
-
-                        <button type='submit' class='btn btn-success me-2 '>Agendar Hora</button>
+                    <!-- Button trigger modal -->
+                    <div class='me-3 mt-4 text-end'>
+                        <a href="{{route('secretaria.listadoCitas')}}" class = "btn btn-primary">Volver a Listado</a>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
+                            Editar</button>
                     </div>
 
 
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Editar Atención</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    ¿Desea editar la hora de {{$atencion->paciente->nom_paciente}} {{$atencion->paciente->apep_paciente}}?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+                                    <button class='btn btn-success' type="submit">Editar</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </form>
 
@@ -169,7 +168,6 @@
 
 
 
-
                 <div class='m-3'>
                     @if ($errors->any())
                     <div class="alert alert-danger">
@@ -181,50 +179,19 @@
                         </ul>
                     </div>
                     @endif
-
                 </div>
             </div>
 
+
+
+
+
+
         </div>
-
     </div>
 
+</div>
 
-
-
-    <div class="col-sm-12 col-md-8">
-        @if(count($atenciones) !== 0)
-        <table class="table table-bordered border-success" >
-            <tr>
-                <th>Paciente</th>
-                <th>Profesional | Especialidad</th>
-                <th>Fecha | Hora </th>
-                <th>Secretaria</th>
-                <th>Estado</th>
-            </tr>
-            @foreach ($atenciones as $atencion)
-            <tr>
-                <td>{{$atencion->paciente->nom_paciente}} {{$atencion->paciente->apep_paciente}} {{$atencion->paciente->apem_paciente}}</td>
-                <td>{{$atencion->profesional->nom_profesional}} {{$atencion->profesional->apep_profesional}} | {{$atencion->profesional->especialidad->nom_especialidad}}</td>
-                <td>{{ strftime('%d/%m/%Y', strtotime($atencion->fecha_atencion)) }} | {{$atencion->hora_inicio}} </td>
-                <td>{{$atencion->usuario->nom_usuario}} {{$atencion->usuario->apep_usuario}}</td>
-                <td>
-                    @if($atencion->estado_atencion==1)Agendado
-                    @elseif ($atencion->estado_atencion==0)Cancelada
-                    @else Atendido
-                    @endif
-                </td>
-                
-
-            </tr>
-            @endforeach
-
-
-        </table>
-        @else
-            <div class="alert alert-danger"> No hay horas agendadas! </div>
-        @endif
-    </div>
 
 
 @endsection

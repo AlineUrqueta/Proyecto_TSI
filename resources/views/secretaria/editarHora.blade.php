@@ -154,18 +154,18 @@
 
                 <div class='m-3'>
                     @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <p>Por favor solucione los siguientes errores: </p>
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+                        <div class="alert alert-danger">
+                            <p>Por favor solucione los siguientes errores: </p>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
                     @else
-                    @if(session('editarCorrecto'))
-                    <div class="alert alert-success">{{ session('editarCorrecto') }}</div>
-                    @endif
+                        @if(session('editarCorrecto'))
+                            <div class="alert alert-success">{{ session('editarCorrecto') }}</div>
+                        @endif
                     @endif
                 </div>
             </div>

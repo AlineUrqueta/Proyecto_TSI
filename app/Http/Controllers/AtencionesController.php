@@ -98,14 +98,14 @@ class AtencionesController extends Controller
         }
         
         $atencion->save();
-        return redirect()->route('secretaria.agendar');
+        return redirect()->route('secretaria.listadoCitas');
     }
 
     public function horaCancelada($atencionId){
         $atencion = Atencion::where('id_atencion', $atencionId)->first();
         $atencion->estado_atencion = 0;
         $atencion->save();
-        return redirect()->route('secretaria.agendar');
+        return redirect()->route('secretaria.listadoCitas');
     }
 
     public function indexListado()
@@ -139,18 +139,18 @@ class AtencionesController extends Controller
     }
 
 
-    public function edit(Atencion $atencion)
+    public function editView(Atencion $atencion)
     {   $pacientes = Paciente::all();
         $profesionales = Profesional::where('estado_vigente','=',1)->get();
         $especialidades = Especialidad::all();
-        return view('secretaria.editarHora',compact('atencion','pacientes','profesionales','especialidades'));
+        return view('secretaria.editarAtencion',compact('atencion','pacientes','profesionales','especialidades'));
     }
 
     public function update(AtencionesRequest $request, Atencion $atencion)
     {
         $fecha_atencion = Carbon::parse($request->fecha_atencion);
-        $hora_inicio = Carbon::parse($request->hora_inicio);
-        $hora_fin = Carbon::parse($request -> hora_fin);
+        $hora_inicio = $request->hora_inicio;
+        $hora_fin = $request -> hora_fin;
 
         $atencion = new Atencion;
         $atencion->rut_paciente_atenciones = $request->rut_paciente;
