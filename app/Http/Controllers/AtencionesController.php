@@ -93,8 +93,8 @@ class AtencionesController extends Controller
         $atencion = Atencion::where('id_atencion', $atencionId)->first();
         if($atencion->estado_atencion == 1){
             $atencion->estado_atencion = 2;
-        }else{
-            $atencion->estado_atencion = 1;
+        }else if ($atencion->estado_atencion == 2){
+            $atencion->estado_atencion = 3;
         }
         
         $atencion->save();
@@ -113,19 +113,24 @@ class AtencionesController extends Controller
         $atencionesAgendadas = Atencion::where('estado_atencion',"LIKE",1)->whereDate('fecha_atencion', '>=', Carbon::now())->get();
         
 
+        // $atencionesPorConfirmar = Atencion::where('estado_atencion', 1)
+        //     ->whereDate('fecha_atencion', '>=', Carbon::now()->addDays(3))
+        //     ->get();
+        $fechaFormateada = Carbon::now()->addDays()->format('Y-m-d');
         $atencionesPorConfirmar = Atencion::where('estado_atencion', 1)
-            ->whereDate('fecha_atencion', '>=', Carbon::now()->addDays(3))
-            ->get();
+        ->whereDate('fecha_atencion', '=', $fechaFormateada)
+        ->get();
+        
+        
 
         $atencionesConfirmadas = Atencion::where('estado_atencion', 2)
-        ->whereDate('fecha_atencion', '>=', Carbon::now())
+        ->whereDate('fecha_atencion', '=', Carbon::now())
         ->get();
 
         $atencionesRealizadas = Atencion::where('estado_atencion', 3)->get();
 
-        $atencionesCanceladas = Atencion::where('estado_atencion', 0)
-        ->whereDate('fecha_atencion', '>=', Carbon::now())
-        ->get();
+        $atencionesCanceladas = Atencion::where('estado_atencion', 0)->get();
+        
 
 
         return view('secretaria.listadoCitas',compact('atencionesAgendadas','atencionesPorConfirmar','atencionesConfirmadas','atencionesCanceladas','atencionesRealizadas'));
