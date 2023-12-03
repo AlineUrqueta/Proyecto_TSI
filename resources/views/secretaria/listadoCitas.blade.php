@@ -55,27 +55,61 @@
                             <form method="POST" action="{{ route('secretaria.atendida', ['atencionId' => $atencion->id_atencion]) }}">
                                 @csrf
                                 @method('POST')
-                                <button class="btn btn-success text-white d-inline-block" type="submit"><span class="material-symbols-outlined">
+                                {{-- <button class="btn btn-success text-white d-inline-block" type="submit"><span class="material-symbols-outlined">
                                         check
-                                    </span></button>
+                                    </span></button> --}}
+                                <!-- Confirmar -->
+                                <button type="button" class="btn btn-success text-white d-inline-block" data-toggle="modal" data-target="#modalConfirmarAtencion{{$atencion->id_atencion}}">
+                                    <span class="material-symbols-outlined">
+                                        check
+                                    </span>
+                                </button>
+
+                                <!-- Modal Confirmar-->
+                                <div class="modal fade" id="modalConfirmarAtencion{{$atencion->id_atencion}}" tabindex="-1" role="dialog" aria-labelledby="modalConfirmarAtencionTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Confirmar Atención</h5>
+                                                <button class = "btn btn-secondary" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                ¿Desea confirmar la atención de {{$atencion->paciente->nom_paciente}} {{$atencion->paciente->apep_paciente}}?
+                                                <br>
+                                                Fecha: {{$atencion->fecha_atencion}}
+                                                <br>
+                                                Hora: {{$atencion->hora_inicio}}
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+                                                <button class='btn btn-success' type="submit">Confirmar</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </form>
                             <form method="POST" action="{{ route('secretaria.cancelada', ['atencionId' => $atencion->id_atencion]) }}">
                                 @csrf
                                 @method('POST')
-                                <!-- Button trigger modal -->
+                                <!-- Cancelar -->
                                 <button type="button" class="btn btn-danger text-white d-inline-block" data-toggle="modal" data-target="#modalCancelarAgenda{{$atencion->id_atencion}}">
                                     <span class="material-symbols-outlined">
                                         block
                                     </span>
                                 </button>
-                                
+
                                 <!-- Modal -->
                                 <div class="modal fade" id="modalCancelarAgenda{{$atencion->id_atencion}}" tabindex="-1" role="dialog" aria-labelledby="modalCancelarAtencionTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLongTitle">Cancelar Atención</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <button type="button" class = "btn btn-secondary" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
@@ -85,7 +119,7 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 
-                                                <button class='btn btn-success' type="submit">OK</button>
+                                                <button class='btn btn-danger' type="submit">OK</button>
 
                                             </div>
                                         </div>
@@ -145,7 +179,7 @@
                                         block
                                     </span>
                                 </button>
-                                
+
                                 <!-- Modal -->
                                 <div class="modal fade" id="modalCancelarPorConf{{$atencion->id_atencion}}" tabindex="-1" role="dialog" aria-labelledby="modalCancelarAtencionTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -200,14 +234,14 @@
                     <td>
                         <div class="btn-group" role="group" aria-label="Ejemplo de Button Group">
                             {{-- <a href="{{route('secretaria.editHora',['atencion'=>$atencion->id_atencion])}}" class="btn btn-warning text-white d-inline-block"><span class="material-symbols-outlined">
-                                    manufacturing
-                                </span></a> --}}
+                                manufacturing
+                            </span></a> --}}
                             <form method="POST" action="{{ route('secretaria.atendida', ['atencionId' => $atencion->id_atencion]) }}">
-                            @csrf
-                            @method('POST')
-                            <button class="btn btn-success text-white d-inline-block" type="submit"><span class="material-symbols-outlined">
-                                    check
-                                </span></button>
+                                @csrf
+                                @method('POST')
+                                <button class="btn btn-success text-white d-inline-block" type="submit"><span class="material-symbols-outlined">
+                                        check
+                                    </span></button>
                             </form>
                             <form method="POST" action="{{ route('secretaria.cancelada', ['atencionId' => $atencion->id_atencion]) }}">
                                 @csrf
@@ -218,7 +252,7 @@
                                         block
                                     </span>
                                 </button>
-                                
+
                                 <!-- Modal -->
                                 <div class="modal fade" id="modalCancelarConf{{$atencion->id_atencion}}" tabindex="-1" role="dialog" aria-labelledby="modalCancelarAtencionTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">

@@ -173,7 +173,7 @@
                                     .then(response => response.json())
                                     .then(data => {
                                         console.log(data); // Imprime la respuesta en la consola
-                                        horasSelect.innerHTML = "<option value=''>"+ horasSelect.value +"</option>";
+                                        horasSelect.innerHTML = "<option value='" + horasSelect.value + "'>"+ horasSelect.value +"</option>";
                                         data.forEach(hora => {
                                             horasSelect.innerHTML += "<option value='" + hora + "'>" + hora + "</option>";
                                         });
