@@ -20,9 +20,9 @@
                         <select class="custom-select custom-select-lg mb-3 form-control" id='rut_paciente_atenciones' name='rut_paciente_atenciones'>
                             <option value="">-- Seleccionar Paciente --</option>
                             @foreach ( $pacientes as $paciente )
-                                @if($paciente->estado_vigente==1)
-                                    <option value="{{$paciente->rut_paciente}}">{{$paciente->nom_paciente}} {{$paciente->apep_paciente}} {{$paciente->apem_paciente}}</option>
-                                @endif
+                            @if($paciente->estado_vigente==1)
+                            <option value="{{$paciente->rut_paciente}}">{{$paciente->nom_paciente}} {{$paciente->apep_paciente}} {{$paciente->apem_paciente}}</option>
+                            @endif
                             @endforeach
 
                         </select>
@@ -63,8 +63,13 @@
                                 e.preventDefault();
                                 this.value = '';
                                 alert('No se atiende los domingos');
+                            } else if (diaSeleccionado === 6) {
+                                e.preventDefault();
+                                this.value = '';
+                                alert('No se atiende los sábados');
                             }
                         });
+
                     </script>
 
                     <div class="m-3">
@@ -75,7 +80,7 @@
                             <option value="{{$hora}}">{{$hora}}</option>
                             @endforeach
                         </select>
-                        
+
 
                     </div>
 
@@ -152,9 +157,9 @@
                             var fechaSeleccionada = this.value;
                             var pacienteSeleccionado = pacienteSelect.value;
 
-                            if (profesionalId && fechaSeleccionada && pacienteSeleccionado ) {
+                            if (profesionalId && fechaSeleccionada && pacienteSeleccionado) {
                                 // Realiza el fetch para obtener las horas disponibles
-                                fetch('/obtener-horas-disponibles/' + profesionalId + '/' + fechaSeleccionada +'/'+ pacienteSeleccionado)
+                                fetch('/obtener-horas-disponibles/' + profesionalId + '/' + fechaSeleccionada + '/' + pacienteSeleccionado)
                                     .then(response => response.json())
                                     .then(data => {
                                         console.log(data); // Imprime la respuesta en la consola
@@ -197,7 +202,7 @@
 
     <div class="col-sm-12 col-md-8">
         @if(count($atenciones) !== 0)
-        <table class="table table-bordered border-success" >
+        <table class="table table-bordered border-success">
             <tr>
                 <th>Paciente</th>
                 <th>Profesional | Especialidad</th>
@@ -218,7 +223,7 @@
                     @else Atendido
                     @endif
                 </td>
-                
+
 
             </tr>
             @endforeach
@@ -226,9 +231,9 @@
 
         </table>
         @else
-            <div class="alert alert-danger"> No hay horas agendadas! </div>
+        <div class="alert alert-danger"> No hay horas agendadas! </div>
         @endif
     </div>
 
 
-@endsection
+    @endsection
