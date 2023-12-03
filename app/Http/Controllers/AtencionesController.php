@@ -125,7 +125,7 @@ class AtencionesController extends Controller
         
         $fechaFormateada = Carbon::now()->addDays(3)->format('Y-m-d');
         $atencionesPorConfirmar = Atencion::where('estado_atencion', 1)
-        ->whereDate('fecha_atencion', '=', $fechaFormateada)
+        ->whereDate('fecha_atencion', '<=', $fechaFormateada)
         ->get();
         
         $atencionesConfirmadas = Atencion::where('estado_atencion',"=",2)
@@ -136,7 +136,7 @@ class AtencionesController extends Controller
         $atencionesCanceladas = Atencion::where('estado_atencion',"=", 0)->get();
         
 
-
+        //dd($fechaFormateada);
         return view('secretaria.listadoCitas',compact('atencionesAgendadas','atencionesPorConfirmar','atencionesConfirmadas','atencionesCanceladas','atencionesRealizadas'));
     }
 
