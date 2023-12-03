@@ -142,7 +142,7 @@
 
 
         <div class="col-12" id="porConfirmarTable" style="display: none;">
-            <h4>Por confirmar (3 dias)</h4>
+            <h4>Por confirmar (3 días)</h4>
             <table class="table table-bordered border-success">
                 <tr>
                     <th>Paciente</th>

@@ -21,7 +21,7 @@ class AtencionesController extends Controller
         $pacientes =Paciente::where('estado_vigente','=',1)->get();
         $profesionales = Profesional::where('estado_vigente','=',1)->get();
         $especialidades = Especialidad::has('profesionales')->get();
-        $atenciones = Atencion::orderByDesc('fecha_atencion')->get();
+        $atenciones = Atencion::orderBy('estado_atencion')->get();
         $horas = array("9:00", "9:45", "10:30", "11:15", "12:00", "12:45", "13:30", "14:15", "15:00", "15:45", "16:30", "17:15", "18:00", "18:45", "19:30", "20:15");
         return view('secretaria.agendar_hora',compact('pacientes','profesionales','especialidades','atenciones','horas'));
     }
@@ -128,12 +128,12 @@ class AtencionesController extends Controller
         ->whereDate('fecha_atencion', '<=', $fechaFormateada)
         ->get();
         
-        $atencionesConfirmadas = Atencion::where('estado_atencion',"=",2)
-        ->get();
+        $fechaActual = Carbon::now()->format('Y-m-d');
+        $atencionesConfirmadas = Atencion::where('estado_atencion',"=",2)->orderBy('fecha_atencion')->get();
 
-        $atencionesRealizadas = Atencion::where('estado_atencion',"=", 3)->get();
+        $atencionesRealizadas = Atencion::where('estado_atencion',"=", 3)->orderBy('fecha_atencion')->get();
 
-        $atencionesCanceladas = Atencion::where('estado_atencion',"=", 0)->get();
+        $atencionesCanceladas = Atencion::where('estado_atencion',"=", 0)->orderByDesc('fecha_atencion')->get();
         
 
         //dd($fechaFormateada);
