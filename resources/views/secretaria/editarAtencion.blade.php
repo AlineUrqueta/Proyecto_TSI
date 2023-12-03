@@ -1,25 +1,28 @@
 @extends('layouts.master')
 @section('title','Editar Atención')
 @section('contenido')
-<div class="row mt-5 ">
+<div class="row h-100 justify-content-center align-items-center mt-4 ">
 
-    <div class="col-md-5 col-sm-12 mx-auto ">
-        <div class="card" style="width: 45rem; height: auto;">
+    <div class="col-md-5 col-sm-12">
+        <div class="card" style="width: auto; height: auto;">
             <div class="card-header text-center">
                 <h4>Editar Atención</h4>
             </div>
             <div class="card-body">
 
 
-                <form action="{{route('secretaria.updateHora',$atencion->id_atencion)}}" class='mt-4' method='POST'>
+                <form action="{{route('secretaria.updateHora',$atencion->id_atencion)}}" method='POST'>
                     @csrf
                     @method('put')
                     <div class='m-3'>
-                        <input type="text" placeholder='Nombre paciente' id='rut_paciente_atenciones' name='rut_paciente_atenciones' class="form-control" value="{{$atencion->paciente->rut_paciente}}" readonly>
-                        <input type="text" placeholder='' class="form-control mt-3" value="{{$atencion->paciente->nom_paciente}} {{$atencion->paciente->apep_paciente}} {{$atencion->paciente->apem_paciente}}" readonly>
+                        <small>Rut Paciente</small>
+                        <input type="text" placeholder='Nombre paciente' id='rut_paciente_atenciones' name='rut_paciente_atenciones' class="form-control mb-3" value="{{$atencion->paciente->rut_paciente}}" readonly>
+                        <small class="mt-3">Nombre Paciente</small>
+                        <input type="text" placeholder='' class="form-control" value="{{$atencion->paciente->nom_paciente}} {{$atencion->paciente->apep_paciente}} {{$atencion->paciente->apem_paciente}}" readonly>
                     </div>
 
                     <div class='m-3'>
+                        <small>Especialidad</small>
                         <select class="custom-select custom-select-lg mb-3 form-control" id='id_especialidad' name='id_especialidad'>
                             @foreach ($especialidades as $especialidad)
                             <option value="{{$especialidad->id_especialidad}}" {{ $atencion->profesional->especialidad->nom_especialidad == $especialidad->nom_especialidad ? 'selected' : '' }}>
@@ -30,6 +33,7 @@
                     </div>
 
                     <div class='m-3'>
+                        <small>Profesional</small>
                         <select class="custom-select custom-select-lg mb-3 form-control" id='rut_profesional_atenciones' name='rut_profesional_atenciones'>
                             @foreach ($profesionales as $profesional)
                             <option value="{{$profesional->rut_profesional}}" {{ $atencion->profesional->rut_profesional == $profesional->rut_profesional ? 'selected' : '' }}>
@@ -41,12 +45,14 @@
 
 
                     <div class="m-3">
+                        <small>Fecha Atención</small>
                         <input type="date" class="form-control" id="fecha_atencion" name="fecha_atencion" value="{{$atencion->fecha_atencion}}" min=" {{ now()->format('Y-m-d') }}" max="2024-01-01">
                     </div>
 
                     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
                     <div class="m-3">
+                        <small>Hora Inicio</small>
                         <select class="form-control" name="hora_inicio" id="hora_inicio" onchange="actualizarHoraFin()">
                             @foreach ($horas as $hora)
                             <option value="{{$hora}}" {{ $atencion->hora_inicio == $hora ? 'selected' : '' }}>
@@ -58,6 +64,7 @@
 
 
                     <div class="m-3">
+                        <small>Hora Termino</small>
                         <input type="text" class="form-control" name="hora_fin" id="hora_fin" value="00:00" readonly>
                         <script>
                             function actualizarHoraFin() {
@@ -117,9 +124,17 @@
                     document.addEventListener('DOMContentLoaded', function() {
                         var especialidadSelect = document.getElementById('id_especialidad');
                         var profesionalSelect = document.getElementById('rut_profesional_atenciones');
+                        var pacienteSelect = document.getElementById('rut_paciente_atenciones');
                         var fechaSelect = document.getElementById('fecha_atencion');
                         var horasSelect = document.getElementById('hora_inicio');
 
+                        // Obtener valores iniciales
+                        var especialidadId = especialidadSelect.value;
+                        var profesionalId = profesionalSelect.value;
+                        var fechaSeleccionada = fechaSelect.value;
+                        var pacienteSeleccionado = pacienteSelect.value;
+
+                        // Evento de cambio de especialidad
                         especialidadSelect.addEventListener('change', function() {
                             var especialidadId = this.value;
 
@@ -134,6 +149,7 @@
                                 .catch(error => console.error('Error:', error));
                         });
 
+                        // Evento de cambio de profesional
                         profesionalSelect.addEventListener('change', function() {
                             var profesionalId = this.value;
                             fetch('/obtener-especialidad/' + profesionalId)
@@ -144,13 +160,14 @@
                                 .catch(error => console.error('Error:', error));
                         });
 
+                        // Evento de cambio de fecha
                         fechaSelect.addEventListener('change', function() {
                             var profesionalId = profesionalSelect.value;
                             var fechaSeleccionada = this.value;
 
-                            if (profesionalId && fechaSeleccionada) {
+                            if (profesionalId && fechaSeleccionada && pacienteSeleccionado) {
                                 // Realiza el fetch para obtener las horas disponibles
-                                fetch('/obtener-horas-disponibles/' + profesionalId + '/' + fechaSeleccionada)
+                                fetch('/obtener-horas-disponibles/' + profesionalId + '/' + fechaSeleccionada + '/' + pacienteSeleccionado)
                                     .then(response => response.json())
                                     .then(data => {
                                         console.log(data); // Imprime la respuesta en la consola
@@ -162,6 +179,9 @@
                                     .catch(error => console.error('Error:', error));
                             }
                         });
+
+                        // Al cargar la página, ejecutar el evento de cambio de fecha para obtener las horas disponibles iniciales
+                        fechaSelect.dispatchEvent(new Event('change'));
                     });
 
                 </script>
@@ -179,10 +199,10 @@
                         </ul>
                     </div>
                     @else
-                        @if(session('editarCorrecto'))
-                            <div class="alert alert-success">{{ session('editarCorrecto') }}</div>
-                        @endif
-                    
+                    @if(session('editarCorrecto'))
+                    <div class="alert alert-success">{{ session('editarCorrecto') }}</div>
+                    @endif
+
                     @endif
                 </div>
             </div>
